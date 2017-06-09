@@ -1,6 +1,6 @@
-﻿using GestionCaisse_MVVM.Exceptions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Core;
+using GestionCaisse_MVVM.Exceptions;
 
 namespace GestionCaisse_MVVM.Model.Services
 {

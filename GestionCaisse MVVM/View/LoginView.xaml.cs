@@ -1,11 +1,11 @@
-﻿using GestionCaisse_MVVM.ViewModel;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Windows;
+using GestionCaisse_MVVM.ViewModel;
 
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
-    /// Logique d'interaction pour LoginView.xaml
+    ///     Logique d'interaction pour LoginView.xaml
     /// </summary>
     public partial class LoginView : Window
     {
@@ -15,11 +15,11 @@ namespace GestionCaisse_MVVM.View
 
             EncryptConfigSection("GestionCaisse.exe");
 
-            var vm = new LoginViewModel()
+            var vm = new LoginViewModel
             {
-                Close = () => this.Close(),
-                Show = () => this.Show(),
-                Hide = () => this.Hide()
+                Close = () => Close(),
+                Show = () => Show(),
+                Hide = () => Hide()
             };
 
             DataContext = vm;
@@ -28,7 +28,7 @@ namespace GestionCaisse_MVVM.View
         }
 
         /// <summary>
-        /// Encrypte le connectionString d'une section de App.config
+        ///     Encrypte le connectionString d'une section de App.config
         /// </summary>
         /// <param name="appName">Le nom du fichier de l'application</param>
         /// <example>EncryptConfigSection(MonApplication.exe);</example>
@@ -36,8 +36,8 @@ namespace GestionCaisse_MVVM.View
         {
             try
             {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(appName);
-                ConnectionStringsSection section = (ConnectionStringsSection)config.GetSection("connectionStrings");
+                var config = ConfigurationManager.OpenExeConfiguration(appName);
+                var section = (ConnectionStringsSection) config.GetSection("connectionStrings");
 
                 if (!section.SectionInformation.IsProtected)
                 {
@@ -47,7 +47,8 @@ namespace GestionCaisse_MVVM.View
             }
             catch
             {
-                MessageBox.Show("Impossible de lire le fichier de configuration !", "Fichier de configuration invalide !", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Impossible de lire le fichier de configuration !",
+                    "Fichier de configuration invalide !", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
             }
         }

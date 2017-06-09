@@ -1,7 +1,7 @@
-﻿using GestionCaisse_MVVM.Model.Entities;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
+using GestionCaisse_MVVM.Model.Entities;
 
 namespace GestionCaisse_MVVM.Validation
 {

@@ -1,10 +1,10 @@
-﻿using GestionCaisse_MVVM.ViewModel;
-using System.Windows;
+﻿using System.Windows;
+using GestionCaisse_MVVM.ViewModel;
 
-namespace GestionCaisse_MVVM
+namespace GestionCaisse_MVVM.View
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    ///     Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindowView : Window
     {
@@ -12,9 +12,9 @@ namespace GestionCaisse_MVVM
         {
             InitializeComponent();
 
-            var vm = new MainWindowViewModel()
+            var vm = new MainWindowViewModel
             {
-                Close = () => this.Close()
+                Close = () => Close()
             };
 
             DataContext = vm;

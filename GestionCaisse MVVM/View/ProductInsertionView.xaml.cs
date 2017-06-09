@@ -1,11 +1,11 @@
-﻿using GestionCaisse_MVVM.ViewModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using GestionCaisse_MVVM.ViewModel;
 
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
-    /// Logique d'interaction pour ProductInsertionView.xaml
+    ///     Logique d'interaction pour ProductInsertionView.xaml
     /// </summary>
     public partial class ProductInsertionView : Window
     {
@@ -13,9 +13,9 @@ namespace GestionCaisse_MVVM.View
         {
             InitializeComponent();
 
-            var vm = new ProductInsertionViewModel()
+            var vm = new ProductInsertionViewModel
             {
-                Close = () => this.Close()
+                Close = () => Close()
             };
 
             DataContext = vm;
@@ -24,7 +24,7 @@ namespace GestionCaisse_MVVM.View
         }
 
         /// <summary>
-        /// Unselect a product of the ListView if it is out of stock
+        ///     Unselect a product of the ListView if it is out of stock
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -33,13 +33,11 @@ namespace GestionCaisse_MVVM.View
             var listView = sender as ListView;
             if (listView == null) return;
 
-            Product p = listView.SelectedItem as Product;
+            var p = listView.SelectedItem as Product;
             if (p == null) return;
 
-            if(p.Quantity == 0)
-            {
+            if (p.Quantity == 0)
                 listView.UnselectAll();
-            }
         }
     }
 }

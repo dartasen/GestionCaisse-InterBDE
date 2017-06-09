@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBEntities.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DBEntities.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="bde">
           <Key>
             <PropertyRef Name="idBde" />
@@ -121,7 +125,10 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DBEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DBEntities" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="BDE">
           <Key>
             <PropertyRef Name="idBDE" />
@@ -129,7 +136,7 @@
           <Property Name="idBDE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Rate" Type="Double" Nullable="false" />
-          </EntityType>
+        </EntityType>
         <EntityType Name="History">
           <Key>
             <PropertyRef Name="IdSale" />
@@ -140,7 +147,7 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="IdBuyingBDE" Type="Int32" Nullable="false" />
           <Property Name="SaleDate" Type="DateTime" Nullable="false" />
-          </EntityType>
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="IDProduct" />
@@ -151,19 +158,20 @@
           <Property Name="BuyingPrice" Type="Double" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Category" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
-          </EntityType>
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
           <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PersonnalPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonnalPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false"
+                    Nullable="false" />
           <Property Name="BadgeID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="IdBDE" Type="Int32" Nullable="false" />
           <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          </EntityType>
+        </EntityType>
         <Association Name="HistoriqueIdBDEInexistant">
           <End Role="bde" Type="DBEntities.BDE" Multiplicity="1" />
           <End Role="historique" Type="DBEntities.History" Multiplicity="*" />
@@ -233,7 +241,7 @@
             <End Role="utilisateur" EntitySet="Users" />
             <End Role="historique" EntitySet="History" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

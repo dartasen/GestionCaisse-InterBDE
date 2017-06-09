@@ -1,33 +1,18 @@
-﻿using GestionCaisse_MVVM.Exceptions;
-using GestionCaisse_MVVM.Model.Entities;
-using System;
+﻿using System;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
+using GestionCaisse_MVVM.Exceptions;
+using GestionCaisse_MVVM.Model.Entities;
 
 namespace GestionCaisse_MVVM.Model.Services
 {
     public class LoginService
     {
-        #region Singleton
-        private static LoginService _instance;
-
-        public static LoginService Instance
-        {
-            get
-            {
-                if (_instance == null) _instance = new LoginService();
-                return _instance;
-            }
-        }
-
-        private LoginService() { }
-        #endregion
-
-        private LoginContext _loginContext = new LoginContext();
+        private readonly LoginContext _loginContext = new LoginContext();
 
         public LoginContext GetLoginContext()
         {
@@ -36,8 +21,8 @@ namespace GestionCaisse_MVVM.Model.Services
 
         public User Login(string username, SecureString password)
         {
-            IntPtr passwordBSTR = default(IntPtr);
-            string insecurePassword = "";
+            var passwordBSTR = default(IntPtr);
+            var insecurePassword = "";
 
             try
             {
@@ -55,15 +40,16 @@ namespace GestionCaisse_MVVM.Model.Services
         private User IsUserAuthorizedToLogIn(string username, string plainTextPassword)
         {
             if (username == null || plainTextPassword == null) return null;
-            string convertedPassword = CalculateMD5Hash(plainTextPassword);
+            var convertedPassword = CalculateMD5Hash(plainTextPassword);
 
             try
             {
-                using (DBConnection context = new DBConnection())
+                using (var context = new DBConnection())
                 {
-                    return ((Func<User>)(() =>
+                    return ((Func<User>) (() =>
                     {
-                        User user = context.Users.FirstOrDefault(x => x.Name.Equals(username) && x.PersonnalPassword.Equals(convertedPassword));
+                        var user = context.Users.FirstOrDefault(x => x.Name.Equals(username) &&
+                                                                     x.PersonnalPassword.Equals(convertedPassword));
                         if (user == null) return null;
                         return !user.IsActive ? null : user;
                     }))();
@@ -86,11 +72,28 @@ namespace GestionCaisse_MVVM.Model.Services
             var sb = new StringBuilder();
 
             foreach (var t in hash)
-            {
                 sb.Append(t.ToString("X2"));
-            }
 
             return sb.ToString();
         }
+
+        #region Singleton
+
+        private static LoginService _instance;
+
+        public static LoginService Instance
+        {
+            get
+            {
+                if (_instance == null) _instance = new LoginService();
+                return _instance;
+            }
+        }
+
+        private LoginService()
+        {
+        }
+
+        #endregion
     }
 }

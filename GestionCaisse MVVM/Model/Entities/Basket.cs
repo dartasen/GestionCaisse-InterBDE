@@ -8,18 +8,21 @@ namespace GestionCaisse_MVVM.Model.Entities
 {
     public class Basket : INotifyPropertyChanged
     {
-        private ObservableCollection<BasketProduct> _products;
+        private readonly ObservableCollection<BasketProduct> _products;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string p = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+        public Basket()
+        {
+            _products = new ObservableCollection<BasketProduct>();
+        }
 
-        public IEnumerable<BasketProduct> Products { get { return _products; } }
+        public IEnumerable<BasketProduct> Products => _products;
 
         public string SnacksPrice
         {
             get
             {
-                return _products.Where(x => x.Product.Category.Equals("snack")).Sum(x => x.Quantity * x.Product.Price) + " €";
+                return _products.Where(x => x.Product.Category.Equals("snack")).Sum(x => x.Quantity * x.Product.Price) +
+                       " €";
             }
         }
 
@@ -27,21 +30,21 @@ namespace GestionCaisse_MVVM.Model.Entities
         {
             get
             {
-                return _products.Where(x => x.Product.Category.Equals("boisson")).Sum(x => x.Quantity * x.Product.Price) + " €";
+                return _products.Where(x => x.Product.Category.Equals("boisson"))
+                           .Sum(x => x.Quantity * x.Product.Price) + " €";
             }
         }
 
         public string TotalPrice
         {
-            get
-            {
-                return _products.Sum(x => x.Quantity * x.Product.Price) + " €";
-            }
+            get { return _products.Sum(x => x.Quantity * x.Product.Price) + " €"; }
         }
 
-        public Basket()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string p = null)
         {
-            _products = new ObservableCollection<BasketProduct>();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
 
         public void AddBasketProduct(BasketProduct basketProductToAdd)
@@ -52,7 +55,7 @@ namespace GestionCaisse_MVVM.Model.Entities
 
             _products.Add(basketProductToAdd);
             NotifyProperties();
-            
+
             //TODO Add exceptions
         }
 

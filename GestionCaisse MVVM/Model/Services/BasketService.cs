@@ -1,36 +1,22 @@
-﻿using GestionCaisse_MVVM.Exceptions;
-using GestionCaisse_MVVM.Model.Entities;
-using System;
+﻿using System;
 using System.Data.Entity.Core;
 using System.Linq;
+using GestionCaisse_MVVM.Exceptions;
+using GestionCaisse_MVVM.Model.Entities;
 
 namespace GestionCaisse_MVVM.Model.Services
 {
     public class BasketService
     {
-        #region Singleton
-        private static BasketService _instance;
-        public static BasketService Instance
-        {
-            get
-            {
-                if (_instance == null) _instance = new BasketService();
-                return _instance;
-            }
-        }
-
-        private BasketService() { }
-        #endregion
-
-        private Basket _basket = new Basket();
+        private readonly Basket _basket = new Basket();
 
         public Basket GetBasket()
         {
             return _basket;
         }
-        
+
         /// <summary>
-        /// Register the sell of products to the DB
+        ///     Register the sell of products to the DB
         /// </summary>
         public bool ValidateSell()
         {
@@ -40,11 +26,11 @@ namespace GestionCaisse_MVVM.Model.Services
 
             try
             {
-                using (DBConnection context = new DBConnection())
+                using (var context = new DBConnection())
                 {
-                    foreach (BasketProduct bp in GetBasket().Products)
+                    foreach (var bp in GetBasket().Products)
                     {
-                        context.History.Add(new History()
+                        context.History.Add(new History
                         {
                             IdUser = loginService.User.IdUser,
                             IdProduct = bp.Product.IDProduct,
@@ -64,5 +50,24 @@ namespace GestionCaisse_MVVM.Model.Services
                 throw new ConnectionFailedException(ex.Message, ex);
             }
         }
+
+        #region Singleton
+
+        private static BasketService _instance;
+
+        public static BasketService Instance
+        {
+            get
+            {
+                if (_instance == null) _instance = new BasketService();
+                return _instance;
+            }
+        }
+
+        private BasketService()
+        {
+        }
+
+        #endregion
     }
 }

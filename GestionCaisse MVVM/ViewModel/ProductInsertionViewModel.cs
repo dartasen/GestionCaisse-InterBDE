@@ -1,34 +1,50 @@
-﻿using GestionCaisse_MVVM.Exceptions;
-using GestionCaisse_MVVM.Model.Entities;
-using GestionCaisse_MVVM.Model.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
+using GestionCaisse_MVVM.Exceptions;
+using GestionCaisse_MVVM.Model.Entities;
+using GestionCaisse_MVVM.Model.Services;
 
 namespace GestionCaisse_MVVM.ViewModel
 {
     public class ProductInsertionViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        public ProductInsertionViewModel()
+        {
+            _SelectedProduct = new BasketProduct(null, 1);
+
+            var basketService = BasketService.Instance;
+
+            InsertProductToBasket = new RelayCommand(() =>
+            {
+                basketService.GetBasket().AddBasketProduct(SelectedProduct);
+                Close();
+            }, o => true);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string p = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+
+        private void OnPropertyChanged([CallerMemberName] string p = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+        }
 
         #region Command
-        private ICommand _insertProductToBasket;
 
-        public ICommand InsertProductToBasket
-        {
-            get { return _insertProductToBasket; }
-        }
+        public ICommand InsertProductToBasket { get; }
+
         #endregion
 
         #region Properties
+
         private BasketProduct _SelectedProduct;
 
         public BasketProduct SelectedProduct
         {
-            get { return _SelectedProduct; }
+            get => _SelectedProduct;
             set
             {
                 _SelectedProduct = value;
@@ -40,19 +56,19 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public int Quantity
         {
-            get { return _quantity; }
+            get => _quantity;
             set
             {
                 _quantity = value;
                 OnPropertyChanged();
-            }          
+            }
         }
 
         public IEnumerable<Product> Products
         {
             get
             {
-                IEnumerable<Product> products = Enumerable.Empty<Product>();
+                var products = Enumerable.Empty<Product>();
 
                 try
                 {
@@ -61,27 +77,16 @@ namespace GestionCaisse_MVVM.ViewModel
                 catch (ConnectionFailedException ex)
                 {
                     var dialogService = new DialogService();
-                    dialogService.ShowInformationWindow("Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                        "Connexion impossible !", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    dialogService.ShowInformationWindow(
+                        "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                        "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
                     Close();
                 }
 
                 return products;
             }
         }
+
         #endregion
-
-        public ProductInsertionViewModel()
-        {
-            _SelectedProduct = new BasketProduct(null, 1);
-
-            var basketService = BasketService.Instance;
-
-            _insertProductToBasket = new RelayCommand(() =>
-           {
-               basketService.GetBasket().AddBasketProduct(SelectedProduct);
-               Close();
-           }, o => true);
-        }
     }
 }
