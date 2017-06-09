@@ -1,0 +1,99 @@
+﻿<Window x:Class="GestionCaisse_MVVM.View.ProductInsertionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converter="clr-namespace:GestionCaisse_MVVM.Converters"
+        xmlns:templates="clr-namespace:GestionCaisse_MVVM.TemplateSelector"
+        mc:Ignorable="d"
+        Title="Insertion d'un produit" Height="300" Width="300"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="300" MinWidth="300"
+        Icon="../Assets/panier_ajouter.png"
+        RenderOptions.BitmapScalingMode="HighQuality">
+    <Window.Resources>
+        <converter:ResultToBrushConverter x:Key="ResultToBrushConverter"/>
+        <templates:InsertProductDataTemplateSelector x:Key="TemplateSelector"/>
+
+        <DataTemplate x:Key="SimpleItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{Binding Name}" FontWeight="Bold"/>
+                <TextBlock Grid.Row="1"
+                           Text="{Binding Quantity}"
+                           Foreground="{Binding Quantity, Converter={StaticResource ResultToBrushConverter}}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OutOfSaleItemTemplate">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Column="0"
+                       Grid.RowSpan="2"
+                       Source="../Assets/warning.png"
+                       Height="25"
+                       Width="25"/>
+
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Name}"
+                           TextDecorations="Strikethrough"
+                           FontWeight="Bold"/>
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="À cours de stock !"
+                           Foreground="Red"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+
+    <DockPanel>
+        <Button DockPanel.Dock="Bottom" Content="Valider"
+                Command="{Binding InsertProductToBasket}"
+                CommandParameter="{Binding SelectedProduct}"/>
+
+        <Border Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListView
+                    x:Name="ProductsListViewBox"
+                    Grid.Row="0"
+                    SelectionChanged="ListView_SelectionChanged"
+                    SelectionMode="Single"
+                    ItemTemplateSelector="{StaticResource TemplateSelector}"    
+                    ItemsSource="{Binding Products}"
+                    SelectedItem="{Binding SelectedProduct.Product, Mode=TwoWay}">
+                </ListView>
+
+                <TextBox Grid.Row="1" 
+                         Padding="0 7.5 0 7.5"
+                         TextAlignment="Center"
+                         Text="{Binding SelectedProduct.Quantity, 
+                                Mode=TwoWay,
+                                UpdateSourceTrigger=PropertyChanged}"
+                         SelectionLength="1"/>
+            </Grid>
+        </Border>
+    </DockPanel>
+
+</Window>

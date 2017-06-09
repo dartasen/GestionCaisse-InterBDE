@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBEntities.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bde">
+          <Key>
+            <PropertyRef Name="idBde" />
+          </Key>
+          <Property Name="idBde" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="taux" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="historique">
+          <Key>
+            <PropertyRef Name="idVente" />
+          </Key>
+          <Property Name="idVente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUtilisateur" Type="int" />
+          <Property Name="idProduit" Type="int" Nullable="false" />
+          <Property Name="quantite" Type="int" Nullable="false" />
+          <Property Name="idBDEAcheteur" Type="int" Nullable="false" />
+          <Property Name="dateVente" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="produit">
+          <Key>
+            <PropertyRef Name="idProduit" />
+          </Key>
+          <Property Name="idProduit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prix" Type="double" Nullable="false" />
+          <Property Name="prixAchat" Type="double" Nullable="false" />
+          <Property Name="quantite" Type="int" Nullable="false" />
+          <Property Name="categorie" Type="varchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="utilisateur">
+          <Key>
+            <PropertyRef Name="idUtilisateur" />
+          </Key>
+          <Property Name="idUtilisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="codePersonnel" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="codeBadge" Type="varchar" MaxLength="45" />
+          <Property Name="idBde" Type="int" Nullable="false" />
+          <Property Name="admin" Type="bool" Nullable="false" />
+          <Property Name="active" Type="bool" Nullable="false" />
+        </EntityType>
+        <Association Name="HistoriqueIdBDEInexistant">
+          <End Role="bde" Type="Self.bde" Multiplicity="1" />
+          <End Role="historique" Type="Self.historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bde">
+              <PropertyRef Name="idBde" />
+            </Principal>
+            <Dependent Role="historique">
+              <PropertyRef Name="idBDEAcheteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HistoriqueIdProduitInexistant">
+          <End Role="produit" Type="Self.produit" Multiplicity="1" />
+          <End Role="historique" Type="Self.historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produit">
+              <PropertyRef Name="idProduit" />
+            </Principal>
+            <Dependent Role="historique">
+              <PropertyRef Name="idProduit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HistoriqueIdUtilisateurInexistant">
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="0..1" />
+          <End Role="historique" Type="Self.historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="utilisateur">
+              <PropertyRef Name="idUtilisateur" />
+            </Principal>
+            <Dependent Role="historique">
+              <PropertyRef Name="idUtilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UtilisateurIdBDEInexistant">
+          <End Role="bde" Type="Self.bde" Multiplicity="1" />
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bde">
+              <PropertyRef Name="idBde" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="idBde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBEntitiesStoreContainer">
+          <EntitySet Name="bde" EntityType="Self.bde" Schema="bde" store:Type="Tables" />
+          <EntitySet Name="historique" EntityType="Self.historique" Schema="bde" store:Type="Tables" />
+          <EntitySet Name="produit" EntityType="Self.produit" Schema="bde" store:Type="Tables" />
+          <EntitySet Name="utilisateur" EntityType="Self.utilisateur" Schema="bde" store:Type="Tables" />
+          <AssociationSet Name="HistoriqueIdBDEInexistant" Association="Self.HistoriqueIdBDEInexistant">
+            <End Role="bde" EntitySet="bde" />
+            <End Role="historique" EntitySet="historique" />
+          </AssociationSet>
+          <AssociationSet Name="HistoriqueIdProduitInexistant" Association="Self.HistoriqueIdProduitInexistant">
+            <End Role="produit" EntitySet="produit" />
+            <End Role="historique" EntitySet="historique" />
+          </AssociationSet>
+          <AssociationSet Name="HistoriqueIdUtilisateurInexistant" Association="Self.HistoriqueIdUtilisateurInexistant">
+            <End Role="utilisateur" EntitySet="utilisateur" />
+            <End Role="historique" EntitySet="historique" />
+          </AssociationSet>
+          <AssociationSet Name="UtilisateurIdBDEInexistant" Association="Self.UtilisateurIdBDEInexistant">
+            <End Role="bde" EntitySet="bde" />
+            <End Role="utilisateur" EntitySet="utilisateur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BDE">
+          <Key>
+            <PropertyRef Name="idBDE" />
+          </Key>
+          <Property Name="idBDE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="IdSale" />
+          </Key>
+          <Property Name="IdSale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="IdBuyingBDE" Type="Int32" Nullable="false" />
+          <Property Name="SaleDate" Type="DateTime" Nullable="false" />
+          </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="BuyingPrice" Type="Double" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonnalPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BadgeID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="IdBDE" Type="Int32" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          </EntityType>
+        <Association Name="HistoriqueIdBDEInexistant">
+          <End Role="bde" Type="DBEntities.BDE" Multiplicity="1" />
+          <End Role="historique" Type="DBEntities.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bde">
+              <PropertyRef Name="idBDE" />
+            </Principal>
+            <Dependent Role="historique">
+              <PropertyRef Name="IdBuyingBDE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UtilisateurIdBDEInexistant">
+          <End Role="bde" Type="DBEntities.BDE" Multiplicity="1" />
+          <End Role="utilisateur" Type="DBEntities.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bde">
+              <PropertyRef Name="idBDE" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="IdBDE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HistoriqueIdProduitInexistant">
+          <End Role="produit" Type="DBEntities.Product" Multiplicity="1" />
+          <End Role="historique" Type="DBEntities.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produit">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="historique">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HistoriqueIdUtilisateurInexistant">
+          <End Role="utilisateur" Type="DBEntities.User" Multiplicity="0..1" />
+          <End Role="historique" Type="DBEntities.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="utilisateur">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="historique">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BDEs" EntityType="DBEntities.BDE" />
+          <EntitySet Name="History" EntityType="DBEntities.History" />
+          <EntitySet Name="Products" EntityType="DBEntities.Product" />
+          <EntitySet Name="Users" EntityType="DBEntities.User" />
+          <AssociationSet Name="HistoriqueIdBDEInexistant" Association="Self.HistoriqueIdBDEInexistant">
+            <End Role="bde" EntitySet="BDEs" />
+            <End Role="historique" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="UtilisateurIdBDEInexistant" Association="Self.UtilisateurIdBDEInexistant">
+            <End Role="bde" EntitySet="BDEs" />
+            <End Role="utilisateur" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="HistoriqueIdProduitInexistant" Association="Self.HistoriqueIdProduitInexistant">
+            <End Role="produit" EntitySet="Products" />
+            <End Role="historique" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="HistoriqueIdUtilisateurInexistant" Association="Self.HistoriqueIdUtilisateurInexistant">
+            <End Role="utilisateur" EntitySet="Users" />
+            <End Role="historique" EntitySet="History" />
+          </AssociationSet>
+          </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBEntitiesStoreContainer" CdmEntityContainer="DBConnection">
+          <EntitySetMapping Name="BDEs">
+            <EntityTypeMapping TypeName="DBEntities.BDE">
+              <MappingFragment StoreEntitySet="bde">
+                <ScalarProperty Name="idBDE" ColumnName="idBde" />
+                <ScalarProperty Name="Name" ColumnName="nom" />
+                <ScalarProperty Name="Rate" ColumnName="taux" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History">
+            <EntityTypeMapping TypeName="DBEntities.History">
+              <MappingFragment StoreEntitySet="historique">
+                <ScalarProperty Name="IdSale" ColumnName="idVente" />
+                <ScalarProperty Name="IdUser" ColumnName="idUtilisateur" />
+                <ScalarProperty Name="IdProduct" ColumnName="idProduit" />
+                <ScalarProperty Name="Quantity" ColumnName="quantite" />
+                <ScalarProperty Name="IdBuyingBDE" ColumnName="idBDEAcheteur" />
+                <ScalarProperty Name="SaleDate" ColumnName="dateVente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DBEntities.Product">
+              <MappingFragment StoreEntitySet="produit">
+                <ScalarProperty Name="IDProduct" ColumnName="idProduit" />
+                <ScalarProperty Name="Name" ColumnName="nom" />
+                <ScalarProperty Name="Price" ColumnName="prix" />
+                <ScalarProperty Name="BuyingPrice" ColumnName="prixAchat" />
+                <ScalarProperty Name="Quantity" ColumnName="quantite" />
+                <ScalarProperty Name="Category" ColumnName="categorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DBEntities.User">
+              <MappingFragment StoreEntitySet="utilisateur">
+                <ScalarProperty Name="IdUser" ColumnName="idUtilisateur" />
+                <ScalarProperty Name="Name" ColumnName="nom" />
+                <ScalarProperty Name="PersonnalPassword" ColumnName="codePersonnel" />
+                <ScalarProperty Name="BadgeID" ColumnName="codeBadge" />
+                <ScalarProperty Name="IdBDE" ColumnName="idBde" />
+                <ScalarProperty Name="IsAdmin" ColumnName="admin" />
+                <ScalarProperty Name="IsActive" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
