@@ -72,6 +72,7 @@
                                 Command="{Binding InsertProduct}" />
 
                         <!--Tableau-->
+                        <!--TODO Actualiser la quantité-->
                         <DataGrid ItemsSource="{Binding Basket.Products}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"

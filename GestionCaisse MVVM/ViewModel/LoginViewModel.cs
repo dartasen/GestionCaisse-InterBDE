@@ -13,6 +13,41 @@ namespace GestionCaisse_MVVM.ViewModel
     {
         private readonly LoginService _loginService = LoginService.Instance;
 
+        #region Commands
+
+        public ICommand CheckAndTryToLogin { get; }
+
+        public ICommand Quit { get; }
+
+        #endregion
+
+        #region Properties
+
+        private string _username;
+        private SecureString _password;
+
+        public string Username
+        {
+            get => _username;
+            set
+            {
+                _username = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public SecureString Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         public LoginViewModel()
         {
             var dialogService = new DialogService();
@@ -56,40 +91,5 @@ namespace GestionCaisse_MVVM.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
-
-        #region Commands
-
-        public ICommand CheckAndTryToLogin { get; }
-
-        public ICommand Quit { get; }
-
-        #endregion
-
-        #region Properties
-
-        private string _username;
-        private SecureString _password;
-
-        public string Username
-        {
-            get => _username;
-            set
-            {
-                _username = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public SecureString Password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged();
-            }
-        }
-
-        #endregion
     }
 }

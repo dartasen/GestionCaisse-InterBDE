@@ -50,10 +50,32 @@ namespace GestionCaisse_MVVM.Model.Entities
         public void AddBasketProduct(BasketProduct basketProductToAdd)
         {
             if (basketProductToAdd.Product == null) return;
-            if (basketProductToAdd.Quantity <= 0) return;
-            if (basketProductToAdd.Quantity > basketProductToAdd.Product.Quantity) return;
 
-            _products.Add(basketProductToAdd);
+            var idProduct = basketProductToAdd.Product.IDProduct;
+            var quantityToAdd = basketProductToAdd.Quantity;
+
+            if (quantityToAdd <= 0) return;
+            if (quantityToAdd > basketProductToAdd.Product.Quantity) return;
+
+            //If the product is already on the basket
+            if (_products.Select(x => x.Product.IDProduct).Contains(idProduct))
+            {
+                //var firstOrDefault = _products.FirstOrDefault(x => x.Product.IDProduct == idProduct);
+                //if (firstOrDefault != null)
+                //    firstOrDefault.Quantity += quantityToAdd;
+                for (int i = 0; i < _products.Count; i++)
+                {
+                    if (_products[i].Product.IDProduct == idProduct)
+                    {
+                        _products[i].Quantity += 1;
+                    }
+                }
+            }
+            else
+            {
+                _products.Add(basketProductToAdd);
+            }
+
             NotifyProperties();
 
             //TODO Add exceptions

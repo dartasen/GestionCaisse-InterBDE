@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using GestionCaisse_MVVM.Exceptions;
 using GestionCaisse_MVVM.Model.Entities;
@@ -12,25 +13,8 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class ProductInsertionViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        public ProductInsertionViewModel()
-        {
-            _SelectedProduct = new BasketProduct(null, 1);
-
-            var basketService = BasketService.Instance;
-
-            InsertProductToBasket = new RelayCommand(() =>
-            {
-                basketService.GetBasket().AddBasketProduct(SelectedProduct);
-                Close();
-            }, o => true);
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string p = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
-        }
+        private void OnPropertyChanged([CallerMemberName] string p = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
 
         #region Command
 
@@ -39,6 +23,14 @@ namespace GestionCaisse_MVVM.ViewModel
         #endregion
 
         #region Properties
+        public AutoCompleteFilterPredicate<object> PersonFilter
+        {
+            get
+            {
+                return (searchText, obj) =>
+                    (obj as Product).Name.ToLower().Contains(searchText.ToLower());
+            }
+        }
 
         private BasketProduct _SelectedProduct;
 
@@ -88,5 +80,18 @@ namespace GestionCaisse_MVVM.ViewModel
         }
 
         #endregion
+
+        public ProductInsertionViewModel()
+        {
+            _SelectedProduct = new BasketProduct(null, 1);
+
+            var basketService = BasketService.Instance;
+
+            InsertProductToBasket = new RelayCommand(() =>
+            {
+                basketService.GetBasket().AddBasketProduct(SelectedProduct);
+                Close();
+            }, o => true);
+        }      
     }
 }

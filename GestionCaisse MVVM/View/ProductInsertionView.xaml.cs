@@ -20,7 +20,7 @@ namespace GestionCaisse_MVVM.View
 
             DataContext = vm;
 
-            ProductsListViewBox.Focus();
+            AutoCompleteBox.Focus();
         }
 
         /// <summary>
@@ -38,6 +38,18 @@ namespace GestionCaisse_MVVM.View
 
             if (p.Quantity == 0)
                 listView.UnselectAll();
+        }
+
+        private void AutoCompleteBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var autocompleteBox = sender as AutoCompleteBox;
+            if (autocompleteBox == null) return;
+
+            var selectedItem = autocompleteBox.SelectedItem as Product;
+            if (selectedItem == null) return;
+
+            if (selectedItem.Quantity == 0)
+                autocompleteBox.SelectedItem = null;
         }
     }
 }
