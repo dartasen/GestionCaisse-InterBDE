@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Windows;
+using System.Windows.Input;
 using GestionCaisse_MVVM.ViewModel;
 
 namespace GestionCaisse_MVVM.View
@@ -50,6 +51,14 @@ namespace GestionCaisse_MVVM.View
                 MessageBox.Show("Impossible de lire le fichier de configuration !",
                     "Fichier de configuration invalide !", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
+            }
+        }
+
+        private void OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.Equals(Key.Enter))
+            {
+                ((LoginViewModel) DataContext).CheckAndTryToLogin.Execute(null);
             }
         }
     }

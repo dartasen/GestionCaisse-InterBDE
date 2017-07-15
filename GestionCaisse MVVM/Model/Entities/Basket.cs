@@ -8,6 +8,7 @@ namespace GestionCaisse_MVVM.Model.Entities
 {
     public class Basket : INotifyPropertyChanged
     {
+        //TODO Gérer les changements de quantité dans l'UI
         private readonly ObservableCollection<BasketProduct> _products;
 
         public Basket()
@@ -21,8 +22,8 @@ namespace GestionCaisse_MVVM.Model.Entities
         {
             get
             {
-                return _products.Where(x => x.Product.Category.Equals("snack")).Sum(x => x.Quantity * x.Product.Price) +
-                       " €";
+                return _products.Where(x => x.Product.Category.Equals("snack"))
+                    .Sum(x => x.Quantity * x.Product.Price) + " €";
             }
         }
 
@@ -37,7 +38,12 @@ namespace GestionCaisse_MVVM.Model.Entities
 
         public string TotalPrice
         {
-            get { return _products.Sum(x => x.Quantity * x.Product.Price) + " €"; }
+            get
+            {
+                double promotion = _products.Where(x => x.Product.Price >= 0.70).Sum(x => x.Quantity) / 2 * 0.20;
+
+                return _products.Sum(x => x.Quantity * x.Product.Price) - promotion + " €";
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -47,6 +53,7 @@ namespace GestionCaisse_MVVM.Model.Entities
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
 
+        //TODO Ajouter exceptions quand l'ajout n'est pas correcte
         public void AddBasketProduct(BasketProduct basketProductToAdd)
         {
             if (basketProductToAdd.Product == null) return;
@@ -60,14 +67,11 @@ namespace GestionCaisse_MVVM.Model.Entities
             //If the product is already on the basket
             if (_products.Select(x => x.Product.IDProduct).Contains(idProduct))
             {
-                //var firstOrDefault = _products.FirstOrDefault(x => x.Product.IDProduct == idProduct);
-                //if (firstOrDefault != null)
-                //    firstOrDefault.Quantity += quantityToAdd;
-                for (int i = 0; i < _products.Count; i++)
+                foreach (BasketProduct t in _products)
                 {
-                    if (_products[i].Product.IDProduct == idProduct)
+                    if (t.Product.IDProduct == idProduct)
                     {
-                        _products[i].Quantity += 1;
+                        t.Quantity += quantityToAdd;
                     }
                 }
             }
@@ -77,8 +81,18 @@ namespace GestionCaisse_MVVM.Model.Entities
             }
 
             NotifyProperties();
+        }
 
-            //TODO Add exceptions
+        public void RemoveProduct(BasketProduct basketProduct)
+        {
+            if (basketProduct == null) return;
+            _products.Remove(basketProduct);
+            NotifyProperties();
+        }
+
+        public void UpdateQuantity(Product product, int quantity)
+        {
+            
         }
 
         public void ResetBasket()

@@ -21,6 +21,8 @@ namespace GestionCaisse_MVVM.ViewModel
 
             InsertProduct = new RelayCommand(() => dialogService.ShowProductInsertPage(), actionToCheckExecute: o => true);
             ResetBasket = new RelayCommand(() => _basketService.GetBasket().ResetBasket(), o => true);
+            DeleteBasketProduct = new RelayCommand(() => _basketService.GetBasket().RemoveProduct(_currentBasketProduct), o => true);
+            ShowAdministrationWindow = new RelayCommand(() => dialogService.ShowAdministrationWindow(), o => true);
             ValidateSell = new RelayCommand(() =>
             {
                 try
@@ -57,18 +59,10 @@ namespace GestionCaisse_MVVM.ViewModel
                 _basketService.GetBasket().ResetBasket();
                 Close();
             }, o => true);
-
-            //TODO Sélectionner le BDE de l'utilisateur par défaut
-            //=> WORKAROUND
-            _selectedBDE = LoginService.Instance.GetLoginContext().BuyingBDE;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string p = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
-        }
+        private void OnPropertyChanged([CallerMemberName] string p = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
 
         #region Commands
 
@@ -80,6 +74,9 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public ICommand Logout { get; }
 
+        public ICommand DeleteBasketProduct { get; }
+
+        public ICommand ShowAdministrationWindow { get; }
         #endregion
 
         #region Properties
@@ -108,6 +105,14 @@ namespace GestionCaisse_MVVM.ViewModel
             }
         }
 
+        private BasketProduct _currentBasketProduct;
+
+        public BasketProduct CurrentBasketProduct
+        {
+            get { return _currentBasketProduct; }
+            set { _currentBasketProduct = value; }
+        }
+
         private BDE _selectedBDE;
 
         public BDE SelectedBDE
@@ -120,7 +125,7 @@ namespace GestionCaisse_MVVM.ViewModel
             }
         }
 
-        public string CurrentUser => _loginService.GetLoginContext().User.Name;
+        public string CurrentUser => $"{_loginService.GetLoginContext().User.Name} ({_loginService.GetLoginContext().BuyingBDE.Name})";
 
         #endregion
     }

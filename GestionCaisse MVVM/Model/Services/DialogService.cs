@@ -28,6 +28,17 @@ namespace GestionCaisse_MVVM.Model.Services
         }
 
         /// <summary>
+        ///     Display AdministrationView
+        /// </summary>
+        public void ShowAdministrationWindow()
+        {
+            var createType = Type.GetType("GestionCaisse_MVVM.View.AdministrationView, GestionCaisse");
+            var window = (Window) Activator.CreateInstance(createType);
+
+            window.ShowDialog();
+        }
+
+        /// <summary>
         ///     Display a quick MessageBox fully customizable
         /// </summary>
         /// <param name="message">Message to display</param>

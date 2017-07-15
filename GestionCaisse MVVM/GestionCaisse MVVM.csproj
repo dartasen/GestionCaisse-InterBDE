@@ -97,6 +97,8 @@
     <Compile Include="History.cs">
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Entities\AdministrationFeature.cs" />
+    <Compile Include="Model\Entities\AutoCompleteFocusableBox.cs" />
     <Compile Include="Model\Entities\BasketProduct.cs" />
     <Compile Include="Model\Entities\Basket.cs" />
     <Compile Include="Model\Events\BasketProductAddedEventArgs.cs" />
@@ -109,21 +111,34 @@
     <Compile Include="Product.cs">
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="SampleData\SampleDataSource\SampleDataSource.xaml.cs" />
     <Compile Include="TemplateSelector\InsertProductDataTemplateSelector.cs" />
     <Compile Include="User.cs">
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Validation\ItemBasketValidationRule.cs" />
+    <Compile Include="ViewModel\AdministrationViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ProductInsertionViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AdministrationView.xaml.cs">
+      <DependentUpon>AdministrationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProductInsertionView.xaml.cs">
       <DependentUpon>ProductInsertionView.xaml</DependentUpon>
     </Compile>
+    <Page Include="SampleData\SampleDataSource\SampleDataSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AdministrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,6 +201,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="SampleData\SampleDataSource\SampleDataSource.xsd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -202,6 +218,11 @@
       <DependentUpon>AppDBModel.edmx</DependentUpon>
       <LastGenOutput>AppDBModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Assets\administration\accountant.png" />
+    <Resource Include="Assets\administration\barcode.png" />
+    <Resource Include="Assets\administration\hierarchical-structure.png" />
+    <Resource Include="Assets\administration\history.png" />
+    <Resource Include="Assets\administration\synthese.png" />
     <Resource Include="Assets\forbidden.png" />
     <Resource Include="Assets\warning.png" />
     <Resource Include="Assets\administration.png" />

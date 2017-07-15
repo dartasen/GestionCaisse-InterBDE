@@ -8,7 +8,8 @@
         WindowStartupLocation="CenterScreen"
         MinHeight="287" MinWidth="583"
         Icon="../Assets/panier.png"
-        RenderOptions.BitmapScalingMode="HighQuality">
+        RenderOptions.BitmapScalingMode="HighQuality"
+        Loaded="MainWindowView_OnLoaded">
 
     <DockPanel>
         <!--Titre-->
@@ -22,7 +23,10 @@
         <!--Barre de status-->
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <Button x:Name="AdministrationButton" Height="20" Width="20">
+                <Button x:Name="AdministrationButton" 
+                        Height="20"
+                        Width="20"
+                        Command="{Binding ShowAdministrationWindow}">
                     <StackPanel>
                         <Image Source="../Assets/administration.png" />
                     </StackPanel>
@@ -77,7 +81,9 @@
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
                                   ColumnWidth="*"
-                                  IsReadOnly="True"
+                                  SelectionMode="Single"
+                                  SelectedItem="{Binding CurrentBasketProduct}"
+                                  PreviewKeyDown="UIElement_OnPreviewKeyDown"
                                   CanUserReorderColumns="False"
                                   AlternatingRowBackground="Gainsboro">
 
@@ -86,6 +92,7 @@
                                                     Binding="{Binding Product.Name}"
                                                     IsReadOnly="True" />
                                 <DataGridTextColumn Header="Quantité"
+                                                    IsReadOnly="True"
                                                     Binding="{Binding Quantity, 
                                                               Mode=TwoWay, 
                                                               UpdateSourceTrigger=LostFocus}" />
@@ -100,7 +107,8 @@
                         <TextBlock Text="BDE de l'acheteur :" FontSize="15"
                                    FontWeight="Bold" />
 
-                        <ComboBox ItemsSource="{Binding BDEs}"
+                        <ComboBox x:Name="ComboBox"
+                                  ItemsSource="{Binding BDEs}"
                                   SelectedItem="{Binding SelectedBDE, 
                                                  Mode=TwoWay, 
                                                  UpdateSourceTrigger=PropertyChanged}"
@@ -129,7 +137,7 @@
                             <StackPanel Grid.Column="0">
                                 <TextBlock FontSize="14" Text="Boisson(s) : " />
                                 <TextBlock FontSize="14" Text="Snack(s) : " />
-                                <TextBlock FontSize="14" Text="Total : " />
+                                <TextBlock FontSize="14" Text="Total (avec promo) : " />
                             </StackPanel>
 
                             <!--Prix totaux-->

@@ -46,13 +46,15 @@
 
                 <TextBox x:Name="usernameTextBox"
                          Padding="0 2 0 0"
+                         PreviewKeyDown="OnPreviewKeyDown"
                          Text="{Binding Username,
                                 Mode=TwoWay}" />
 
                 <TextBlock Margin="0 5 0 0"
                            Text="Mot de passe : " />
 
-                <PasswordBox Padding="0 2 0 0">
+                <PasswordBox Padding="0 2 0 0"
+                             PreviewKeyDown="OnPreviewKeyDown">
                     <i:Interaction.Behaviors>
                         <behaviors:PasswordBoxBindingBehavior Password="{Binding Password}" />
                     </i:Interaction.Behaviors>

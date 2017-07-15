@@ -1,0 +1,64 @@
+﻿<Window x:Class="GestionCaisse_MVVM.View.AdministrationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestionCaisse_MVVM.View"
+        RenderOptions.BitmapScalingMode="HighQuality"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/administration.png"
+        Title="Panneau d'administration"
+        Height="770" Width="1160"
+        MinHeight="770" MinWidth="1160">
+    <Window.Resources>
+        <DataTemplate x:Key="ItemPanelDataTemplate">
+            <Grid Margin="0 0 10 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Height="30"
+                       Width="30"
+                       Source="{Binding ImagePath}"/>
+
+                <TextBlock Grid.Column="1"
+                           FontSize="14"
+                           Padding="5 0 0 0"
+                           VerticalAlignment="Center"
+                           Text="{Binding Name}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel>
+        <!--Menu des fonctionnalités-->
+        <ListBox DockPanel.Dock="Left"
+                 ItemsSource="{Binding Features}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0"
+                               Height="30"
+                               Width="30"
+                               Source="{Binding ImagePath}"/>
+
+                        <TextBlock Grid.Column="1"
+                                   FontSize="14"
+                                   Padding="5 0 0 0"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding Name}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <UserControl>
+
+        </UserControl>
+    </DockPanel>
+</Window>
