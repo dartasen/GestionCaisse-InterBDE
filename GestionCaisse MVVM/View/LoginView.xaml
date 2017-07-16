@@ -9,7 +9,7 @@
         Height="200" Width="530"
         MinHeight="200" MinWidth="530"
         Icon="../Assets/cadenas.png"
-        Title="Connexion à l'application"
+        Title="{Binding WindowName}"
         RenderOptions.BitmapScalingMode="HighQuality"
         WindowStartupLocation="CenterScreen">
 

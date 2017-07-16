@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows;
+using System.Windows.Threading;
 using GestionCaisse_MVVM.Exceptions;
 using GestionCaisse_MVVM.Model.Entities;
 
@@ -76,6 +79,8 @@ namespace GestionCaisse_MVVM.Model.Services
 
             return sb.ToString();
         }
+
+        public bool IsTimerActive;
 
         #region Singleton
 

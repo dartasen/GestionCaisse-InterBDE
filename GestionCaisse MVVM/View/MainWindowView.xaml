@@ -26,6 +26,8 @@
                 <Button x:Name="AdministrationButton" 
                         Height="20"
                         Width="20"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
                         Command="{Binding ShowAdministrationWindow}">
                     <StackPanel>
                         <Image Source="../Assets/administration.png" />
@@ -47,6 +49,35 @@
                     <TextBlock Grid.Column="1"
                                FontSize="14"
                                Text="{Binding CurrentUser}" />
+                </Grid>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Text="Temps restant : "
+                               FontSize="14"/>
+
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding Countdown}" 
+                               FontSize="14"/>
+
+                    <Button Grid.Column="2"
+                            Height="20"
+                            Width="20"
+                            Margin="3 0 0 0"
+                            BorderBrush="Transparent"
+                            Background="Transparent"
+                            Command="{Binding RefreshSessionDelay}">
+                        <StackPanel>
+                            <Image Source="../Assets/refresh.png" />
+                        </StackPanel>
+                    </Button>
                 </Grid>
             </StatusBarItem>
         </StatusBar>

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security;
 using System.Windows;
@@ -46,10 +48,15 @@ namespace GestionCaisse_MVVM.ViewModel
             }
         }
 
+        public string WindowName
+        {
+            get => $"Connexion à l'application (v.{AppInformations.Version})";
+        }
+
         #endregion
 
         public LoginViewModel()
-        {
+        {          
             var dialogService = new DialogService();
 
             CheckAndTryToLogin = new RelayCommand(() =>

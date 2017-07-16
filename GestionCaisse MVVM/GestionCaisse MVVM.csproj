@@ -13,6 +13,21 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,6 +70,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -63,6 +79,7 @@
     <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -103,11 +120,13 @@
     <Compile Include="Model\Entities\Basket.cs" />
     <Compile Include="Model\Events\BasketProductAddedEventArgs.cs" />
     <Compile Include="Model\Entities\LoginContext.cs" />
+    <Compile Include="Model\Services\AppInformations.cs" />
     <Compile Include="Model\Services\BasketService.cs" />
     <Compile Include="Model\Services\BDEService.cs" />
     <Compile Include="Model\Services\DialogService.cs" />
     <Compile Include="Model\Services\LoginService.cs" />
     <Compile Include="Model\Services\ProductService.cs" />
+    <Compile Include="Model\Services\UserService.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
@@ -118,12 +137,22 @@
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdministrationViewModel.cs" />
+    <Compile Include="ViewModel\BDEDuesViewModel.cs" />
+    <Compile Include="ViewModel\HistoryViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ProductInsertionViewModel.cs" />
+    <Compile Include="ViewModel\ProductManagementViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\UserManagementViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AdministrationView.xaml.cs">
       <DependentUpon>AdministrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BDEDuesUserControl.xaml.cs">
+      <DependentUpon>BDEDuesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HistoryUserControl.xaml.cs">
+      <DependentUpon>HistoryUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -131,11 +160,28 @@
     <Compile Include="View\ProductInsertionView.xaml.cs">
       <DependentUpon>ProductInsertionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ProductManagementUserControl.xaml.cs">
+      <DependentUpon>ProductManagementUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SynthesisUserControl.xaml.cs">
+      <DependentUpon>SynthesisUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserManagementUserControl.xaml.cs">
+      <DependentUpon>UserManagementUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="SampleData\SampleDataSource\SampleDataSource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\AdministrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BDEDuesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HistoryUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,6 +213,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\ProductInsertionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductManagementUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SynthesisUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserManagementUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,7 +264,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="AppDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -218,11 +287,12 @@
       <DependentUpon>AppDBModel.edmx</DependentUpon>
       <LastGenOutput>AppDBModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Assets\refresh.png" />
     <Resource Include="Assets\administration\accountant.png" />
     <Resource Include="Assets\administration\barcode.png" />
     <Resource Include="Assets\administration\hierarchical-structure.png" />
     <Resource Include="Assets\administration\history.png" />
-    <Resource Include="Assets\administration\synthese.png" />
+    <Resource Include="Assets\administration\synthesis.png" />
     <Resource Include="Assets\forbidden.png" />
     <Resource Include="Assets\warning.png" />
     <Resource Include="Assets\administration.png" />

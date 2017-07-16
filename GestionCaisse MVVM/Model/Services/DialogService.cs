@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using GestionCaisse_MVVM.Exceptions;
 
 namespace GestionCaisse_MVVM.Model.Services
 {
@@ -11,7 +12,7 @@ namespace GestionCaisse_MVVM.Model.Services
         public void ShowProductInsertPage()
         {
             var createType = Type.GetType("GestionCaisse_MVVM.View.ProductInsertionView, GestionCaisse");
-            var window = (Window) Activator.CreateInstance(createType);
+            var window = (Window)Activator.CreateInstance(createType);
 
             window.ShowDialog();
         }
@@ -22,9 +23,18 @@ namespace GestionCaisse_MVVM.Model.Services
         public void ShowMainWindow()
         {
             var createType = Type.GetType("GestionCaisse_MVVM.View.MainWindowView, GestionCaisse");
-            var window = (Window) Activator.CreateInstance(createType);
 
-            window.ShowDialog();
+            try
+            {
+                var window = (Window)Activator.CreateInstance(createType);
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowInformationWindow(
+                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -33,9 +43,18 @@ namespace GestionCaisse_MVVM.Model.Services
         public void ShowAdministrationWindow()
         {
             var createType = Type.GetType("GestionCaisse_MVVM.View.AdministrationView, GestionCaisse");
-            var window = (Window) Activator.CreateInstance(createType);
 
-            window.ShowDialog();
+            try
+            {
+                var window = (Window)Activator.CreateInstance(createType);
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowInformationWindow(
+                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>

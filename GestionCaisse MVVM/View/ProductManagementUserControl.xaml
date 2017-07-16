@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="GestionCaisse_MVVM.View.ProductManagementUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GestionCaisse_MVVM.View"
+             mc:Ignorable="d" 
+             Background="White"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <DockPanel>
+        <DataGrid ItemsSource="{Binding Products,
+                                Mode=TwoWay,
+                                UpdateSourceTrigger=PropertyChanged}"
+                  AlternatingRowBackground="Gainsboro"
+                  ColumnWidth="*"
+                  IsReadOnly="True"
+                  
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id Produit"
+                                    Binding="{Binding IDProduct}"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Nom"
+                                    Binding="{Binding Name}"
+                                    IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Prix de vente"
+                                    Binding="{Binding Price}" />
+
+                <DataGridTextColumn Header="Prix d'achat"
+                                    Binding="{Binding BuyingPrice}" />
+
+                <DataGridTextColumn Header="Quantité en stock"
+                                    Binding="{Binding Quantity}" />
+
+                <DataGridTextColumn Header="Catégorie"
+                                    Binding="{Binding Category}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

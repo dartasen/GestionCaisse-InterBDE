@@ -12,6 +12,7 @@
         WindowStartupLocation="CenterScreen"
         MinHeight="300" MinWidth="300"
         Icon="../Assets/panier_ajouter.png"
+        Closed="ProductInsertionView_OnClosed"
         RenderOptions.BitmapScalingMode="HighQuality">
     <Window.Resources>
         <converter:ResultToBrushConverter x:Key="ResultToBrushConverter" />

@@ -10,28 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GestionCaisse_MVVM.Model.Services;
 using GestionCaisse_MVVM.ViewModel;
 
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
-    /// Interaction logic for AdministrationView.xaml
+    /// Interaction logic for HistoryUserControl.xaml
     /// </summary>
-    public partial class AdministrationView : Window
+    public partial class HistoryUserControl : UserControl
     {
-        public AdministrationView()
+        public HistoryUserControl()
         {
             InitializeComponent();
-
-            var vm = new AdministrationViewModel();
-            DataContext = vm;
-        }
-
-        private void AdministrationView_OnClosed(object sender, EventArgs e)
-        {
-            LoginService.Instance.IsTimerActive = true;
+            DataContext = new HistoryViewModel();
         }
     }
 }

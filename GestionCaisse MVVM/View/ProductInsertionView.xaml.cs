@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GestionCaisse_MVVM.Model.Services;
 using GestionCaisse_MVVM.ViewModel;
 
 namespace GestionCaisse_MVVM.View
@@ -58,6 +60,11 @@ namespace GestionCaisse_MVVM.View
             var vm = DataContext as ProductInsertionViewModel;
             if (vm.InsertProductToBasket.CanExecute(null))
                 vm.InsertProductToBasket.Execute(null);
+        }
+
+        private void ProductInsertionView_OnClosed(object sender, EventArgs e)
+        {
+            LoginService.Instance.IsTimerActive = true;
         }
     }
 }

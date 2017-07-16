@@ -9,56 +9,40 @@
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/administration.png"
         Title="Panneau d'administration"
+        Closed="AdministrationView_OnClosed"
         Height="770" Width="1160"
         MinHeight="770" MinWidth="1160">
-    <Window.Resources>
-        <DataTemplate x:Key="ItemPanelDataTemplate">
-            <Grid Margin="0 0 10 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0"
-                       Height="30"
-                       Width="30"
-                       Source="{Binding ImagePath}"/>
 
-                <TextBlock Grid.Column="1"
-                           FontSize="14"
-                           Padding="5 0 0 0"
-                           VerticalAlignment="Center"
-                           Text="{Binding Name}"/>
-            </Grid>
-        </DataTemplate>
-    </Window.Resources>
-
-    <DockPanel>
-        <!--Menu des fonctionnalités-->
-        <ListBox DockPanel.Dock="Left"
-                 ItemsSource="{Binding Features}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0"
+    <Border Padding="5">
+        <DockPanel>
+            <!--Menu des fonctionnalités-->
+            <ListBox DockPanel.Dock="Left"
+                 SelectedItem="{Binding SelectedAdministrationFeature}"
+                 ItemsSource="{Binding Features}"
+                 Margin="0 0 5 0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0"
                                Height="30"
                                Width="30"
                                Source="{Binding ImagePath}"/>
 
-                        <TextBlock Grid.Column="1"
+                            <TextBlock Grid.Column="1"
                                    FontSize="14"
                                    Padding="5 0 0 0"
                                    VerticalAlignment="Center"
                                    Text="{Binding Name}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <UserControl>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
-        </UserControl>
-    </DockPanel>
+            <UserControl Content="{Binding SelectedAdministrationFeature.UserControl}"/>
+        </DockPanel>
+    </Border>
 </Window>
