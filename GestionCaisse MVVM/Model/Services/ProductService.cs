@@ -55,21 +55,6 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
-        public static void UpdateHistoryWithUserModifications(List<HistoryQueryResult> dataToCommit)
-        {
-            try
-            {
-                using (var context = new DBConnection())
-                {
-                    
-                }
-            }
-            catch (EntityException ex)
-            {
-                throw new ConnectionFailedException(ex.Message, ex);
-            }
-        }
-
         public class HistoryQueryResult : History
         {
             public string Username { get; set; }
