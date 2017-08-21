@@ -49,24 +49,11 @@
                                UpdateSourceTrigger=PropertyChanged}"/>
 
         </Grid>
-        
-        <Grid DockPanel.Dock="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0" 
-                    Content="Réinitialiser"
-                    Margin="0 0 2 0"
-                    Command="{Binding ResetUserModifications}"/>    
 
-            <Button Grid.Column="1" 
-                    IsEnabled="False"
-                    Content="Valider les changements"
-                    Margin= "2 0 0 0"
-                    Command="{Binding ResetUserModifications}"/>
-        </Grid>
+        <Button DockPanel.Dock="Bottom"
+                Content="Réinitialiser"
+                Margin="0 0 2 0"
+                Command="{Binding ResetUserModifications}"/>
 
         <DataGrid ItemsSource="{Binding History,
                                 Mode=TwoWay,
