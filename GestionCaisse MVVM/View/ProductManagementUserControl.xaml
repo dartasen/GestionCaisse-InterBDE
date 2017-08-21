@@ -8,22 +8,40 @@
              Background="White"
              d:DesignHeight="300" d:DesignWidth="300">
     <DockPanel>
-        <DataGrid ItemsSource="{Binding Products,
-                                Mode=TwoWay,
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" 
+                    Margin="2 0 0 0"
+                    Command="{Binding ResetChanges}"
+                    DockPanel.Dock="Top" 
+                    Content="Réinitialiser"/>
+
+            <Button Grid.Column="1" 
+                    Margin="0 0 2 0"
+                    Command="{Binding SaveChanges}"
+                    DockPanel.Dock="Top" 
+                    Content="Valider les changements"/>
+        </Grid>
+
+        <DataGrid ItemsSource="{Binding Products.View,
                                 UpdateSourceTrigger=PropertyChanged}"
                   AlternatingRowBackground="Gainsboro"
                   ColumnWidth="*"
-                  IsReadOnly="True"
+                  CanUserAddRows="True"
                   
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id Produit"
                                     Binding="{Binding IDProduct}"
-                                    IsReadOnly="True" />
+                                    IsReadOnly="False" />
 
                 <DataGridTextColumn Header="Nom"
                                     Binding="{Binding Name}"
-                                    IsReadOnly="True" />
+                                    IsReadOnly="False" />
 
                 <DataGridTextColumn Header="Prix de vente"
                                     Binding="{Binding Price}" />
