@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,7 @@ namespace GestionCaisse_MVVM.Model.Services
                             BadgeID = user.BadgeID,
                             BDEName = bde.Name,
                             IsAdmin = user.IsAdmin,
-                            IsActive =  user.IsActive
+                            IsActive = user.IsActive
                         };
 
                     return query.ToList();
@@ -38,6 +39,37 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
+        }
+
+        public static IEnumerable<UserRankQueryResult> RankUsersBySellsForCurrentMonth()
+        {
+            DateTime beginningOfTheMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            try
+            {
+                using (var context = new DBConnection())
+                { 
+                    var query = 
+                        context.History
+                        .GroupBy(x => x.IdUser)
+                        .Select(y => new UserRankQueryResult()
+                        {
+                            Username = context.Users.FirstOrDefault(name => name.IdUser == (context.Users.FirstOrDefault().IdUser)).Name,
+                            Quantity = y.Count()
+                        });
+                    return query.ToList();
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
+            return null;
+        }
+
+        public class UserRankQueryResult
+        {
+            public string Username { get; set; }
+            public int Quantity { get; set; }
         }
 
         public class UserQueryResult : User

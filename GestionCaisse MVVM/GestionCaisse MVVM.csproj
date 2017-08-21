@@ -143,6 +143,7 @@
     <Compile Include="ViewModel\ProductInsertionViewModel.cs" />
     <Compile Include="ViewModel\ProductManagementViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\SynthesisViewModel.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AdministrationView.xaml.cs">

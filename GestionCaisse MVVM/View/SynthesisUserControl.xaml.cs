@@ -21,10 +21,10 @@ namespace GestionCaisse_MVVM.View
     /// </summary>
     public partial class SynthesisUserControl : UserControl
     {
-        public SynthesisUserControl(AdministrationViewModel vm)
+        public SynthesisUserControl()
         {
             InitializeComponent();
-            DataContext = vm;
+            DataContext = new SynthesisViewModel();
         }
     }
 }
