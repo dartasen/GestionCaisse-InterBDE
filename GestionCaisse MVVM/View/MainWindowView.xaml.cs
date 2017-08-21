@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using GestionCaisse_MVVM.Model.Services;
 using GestionCaisse_MVVM.ViewModel;
 
@@ -20,6 +21,31 @@ namespace GestionCaisse_MVVM.View
             };
 
             DataContext = vm;
+
+            Test();
+        }
+
+        public void Test()
+        {
+            var vm = DataContext as MainWindowViewModel;
+            if (vm == null) return;
+            string bde = LoginService.Instance.GetLoginContext().BuyingBDE.Name;
+            BrushConverter bc = new BrushConverter();
+            switch (bde)
+            {
+                case "Informatique":
+                    Background = (Brush)bc.ConvertFrom("#D3D3D3");
+                    break;
+                case "Biologie":
+                    Background = (Brush)bc.ConvertFrom("#74FFA6"); 
+                    break; 
+                case "RT":
+                    Background = (Brush)bc.ConvertFrom("#FFA8E0"); 
+                    break;
+                default:
+                    Background = Brushes.White;
+                    break;
+            }
         }
 
         private void MainWindowView_OnLoaded(object sender, RoutedEventArgs e)

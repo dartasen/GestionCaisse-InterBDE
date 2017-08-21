@@ -8,7 +8,7 @@ namespace GestionCaisse_MVVM.Model.Services
 {
     public class AppInformations
     {
-        public static readonly string Version = "0.8";
+        public static readonly string Version = "0.9";
         public static readonly int DefaultSessionDelay = 300; //in seconds
     }
 }

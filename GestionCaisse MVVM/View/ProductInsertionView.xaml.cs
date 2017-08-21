@@ -53,6 +53,7 @@ namespace GestionCaisse_MVVM.View
                 autocompleteBox.SelectedItem = null;
         }
 
+        // Enabling pressing "Enter" key instead of hitting the button
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (!e.Key.Equals(Key.Enter)) return;
@@ -62,9 +63,21 @@ namespace GestionCaisse_MVVM.View
                 vm.InsertProductToBasket.Execute(null);
         }
 
+        // Re-activate the timer when closing
         private void ProductInsertionView_OnClosed(object sender, EventArgs e)
         {
             LoginService.Instance.IsTimerActive = true;
+        }
+
+        /// <summary>
+        ///     Enable double-clicking instead of hitting validation button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var vm = DataContext as ProductInsertionViewModel;
+            if (vm != null) vm.InsertProductToBasket.Execute(vm.SelectedProduct);
         }
     }
 }

@@ -98,6 +98,7 @@
                 <ListView
                     SelectionChanged="ListView_SelectionChanged"
                     SelectionMode="Single"
+                    MouseDoubleClick="Control_OnMouseDoubleClick"
                     ItemTemplateSelector="{StaticResource TemplateSelector}"
                     ItemsSource="{Binding Products}"
                     IsSynchronizedWithCurrentItem="True"
