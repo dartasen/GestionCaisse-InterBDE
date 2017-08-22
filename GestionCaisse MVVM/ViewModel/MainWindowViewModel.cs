@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 using GestionCaisse_MVVM.Exceptions;
@@ -20,6 +21,8 @@ namespace GestionCaisse_MVVM.ViewModel
         public MainWindowViewModel()
         {
             var dialogService = new DialogService();
+
+            UpdateUserSellsSmiley();
 
             InsertProduct = new RelayCommand(() =>
             {
@@ -59,6 +62,8 @@ namespace GestionCaisse_MVVM.ViewModel
                             MessageBoxButton.OK,
                             MessageBoxImage.Hand);
                     }
+
+                    UpdateUserSellsSmiley();
                 }
                 catch (ConnectionFailedException ex)
                 {
@@ -171,7 +176,24 @@ namespace GestionCaisse_MVVM.ViewModel
             }
         }
 
-        public void StartTimer()
+        private int _sellsMadeToday;
+
+        public int SellsMadeToday
+        {
+            get { return _sellsMadeToday; }
+            set { _sellsMadeToday = value; OnPropertyChanged(); }
+        }
+        public IValueConverter ValueConverter { get; set; }
+
+        #endregion
+
+        private void UpdateUserSellsSmiley()
+        {
+            _sellsMadeToday = UserService.SellsMadeByUserToday(_loginService.GetLoginContext().User);
+            OnPropertyChanged(nameof(SellsMadeToday));
+        }
+
+        private void StartTimer()
         {
             Timer = new DispatcherTimer();
             Timer.Interval = new TimeSpan(0, 0, 1);
@@ -194,10 +216,8 @@ namespace GestionCaisse_MVVM.ViewModel
                     DialogService dialogService = new DialogService();
                     dialogService.ShowInformationWindow("La session a expiré, reconnectez-vous !", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
                     Logout.Execute(null);
-                } 
+                }
             }
         }
-
-        #endregion
     }
 }

@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converter="clr-namespace:GestionCaisse_MVVM.Converters"
         mc:Ignorable="d"
         Title="Gestion Caisse Inter-BDE" Height="287" Width="583"
         WindowStartupLocation="CenterScreen"
@@ -11,16 +12,11 @@
         RenderOptions.BitmapScalingMode="HighQuality"
         Loaded="MainWindowView_OnLoaded">
 
+    <Window.Resources>
+        <converter:SellsScoreToSmileyImageConverter x:Key="SellsScoreToSmileyImageConverter"/>
+    </Window.Resources>
+    
     <DockPanel>
-        <!--Titre-->
-        <TextBlock DockPanel.Dock="Top"
-                   Margin="0 0 0 5"
-                   Text="Gestion Caisse Inter-BDE"
-                   FontSize="18"
-                   FontFamily="Verdana"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center" />
-
         <!--Barre de status-->
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
@@ -96,11 +92,6 @@
 
                     <!--Titre, Tableau et Ajout Items-->
                     <DockPanel Grid.Column="0" Margin="0 0 10 0">
-                        <!--Titre-->
-                        <TextBlock DockPanel.Dock="Top"
-                                   Text="Panier : "
-                                   FontSize="15"
-                                   FontWeight="Bold" />
 
                         <!--Ajout Item-->
                         <Button DockPanel.Dock="Bottom"
@@ -109,7 +100,6 @@
                                 Command="{Binding InsertProduct}" />
 
                         <!--Tableau-->
-                        <!--TODO Actualiser la quantité-->
                         <DataGrid ItemsSource="{Binding Basket.Products}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
@@ -134,66 +124,10 @@
                     </DockPanel>
 
                     <!--BDE, Totaux et Boutons-->
-                    <StackPanel Grid.Column="1" Margin="10 0 0 0">
-
-                        <!--BDE-->
-                        <TextBlock Text="BDE de l'acheteur :" FontSize="15"
-                                   FontWeight="Bold" />
-
-                        <ComboBox x:Name="ComboBox"
-                                  ItemsSource="{Binding BDEs}"
-                                  SelectedItem="{Binding SelectedBDE, 
-                                                 Mode=TwoWay, 
-                                                 UpdateSourceTrigger=PropertyChanged}"
-                                  IsSynchronizedWithCurrentItem="True"
-                                  Margin="0 4 0 0">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-
-                        </ComboBox>
-
-                        <!--Label Total-->
-                        <TextBlock Text="Total :" FontSize="15"
-                                   FontWeight="Bold"
-                                   Margin="0 10" />
-                        <!--Totaux-->
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <!--Labels totaux-->
-                            <StackPanel Grid.Column="0">
-                                <TextBlock FontSize="14" Text="Boisson(s) : " />
-                                <TextBlock FontSize="14" Text="Snack(s) : " />
-                                <TextBlock FontSize="14" Text="Total (avec promo) : " />
-                            </StackPanel>
-
-                            <!--Prix totaux-->
-                            <StackPanel Grid.Column="1">
-                                <TextBlock x:Name="DrinksTotalTextBlock"
-                                           FontSize="14"
-                                           Text="{Binding Basket.DrinksPrice}" />
-
-                                <TextBlock x:Name="SnacksTotalTextBlock"
-                                           FontSize="14"
-                                           Text="{Binding Basket.SnacksPrice}" />
-
-                                <TextBlock x:Name="TotalTextBlock"
-                                           FontSize="14"
-                                           Foreground="OrangeRed"
-                                           FontWeight="ExtraBold"
-                                           Text="{Binding Basket.TotalPrice}" />
-                            </StackPanel>
-
-                        </Grid>
+                    <DockPanel Grid.Column="1" Margin="10 0 0 0">
 
                         <!--Bouttons-->
-                        <Grid Margin="0 15 0 0">
+                        <Grid DockPanel.Dock="Bottom" Margin="0 15 0 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
@@ -220,9 +154,92 @@
                                     Content="_Valider" />
                         </Grid>
 
-                    </StackPanel>
+                        <StackPanel>
+
+                            <!--BDE-->
+                            <TextBlock Text="BDE de l'acheteur :" FontSize="15"
+                                       FontWeight="Bold" />
+
+                            <ComboBox x:Name="ComboBox"
+                                      ItemsSource="{Binding BDEs}"
+                                      SelectedItem="{Binding SelectedBDE, 
+                                                 Mode=TwoWay, 
+                                                 UpdateSourceTrigger=PropertyChanged}"
+                                      IsSynchronizedWithCurrentItem="True"
+                                      Margin="0 4 0 0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+
+                            </ComboBox>
+
+                            <!--Label Total-->
+                            <TextBlock Text="Total :" FontSize="15"
+                                       FontWeight="Bold"
+                                       Margin="0 10" />
+                            <!--Totaux-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--Labels totaux-->
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock FontSize="14" Text="Boisson(s) : " />
+                                    <TextBlock FontSize="14" Text="Snack(s) : " />
+                                    <TextBlock FontSize="14" Text="Total (avec promotion) : " />
+                                </StackPanel>
+
+                                <!--Prix totaux-->
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock x:Name="DrinksTotalTextBlock"
+                                               FontSize="14"
+                                               Text="{Binding Basket.DrinksPrice}" />
+
+                                    <TextBlock x:Name="SnacksTotalTextBlock"
+                                               FontSize="14"
+                                               Text="{Binding Basket.SnacksPrice}" />
+
+                                    <TextBlock x:Name="TotalTextBlock"
+                                               FontSize="14"
+                                               Foreground="OrangeRed"
+                                               FontWeight="ExtraBold"
+                                               Text="{Binding Basket.TotalPrice}" />
+                                </StackPanel>
+
+                            </Grid>
+                            
+                            <Grid Margin="0 12 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Grid.Column="0"
+                                           FontSize="14"
+                                           Text="Nombre de ventes aujourd'hui : "/>
+
+                                <TextBlock Grid.Column="1"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Text="{Binding SellsMadeToday,
+                                                  UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <Image Grid.Column="2"
+                                       Margin="2 0 0 0"
+                                       Width="20"
+                                       Height="20"
+                                       Source="{Binding SellsMadeToday,
+                                                                                       Converter={StaticResource SellsScoreToSmileyImageConverter}}"/>
+                            </Grid>
+                        </StackPanel>
+                    </DockPanel>
                 </Grid>
             </DockPanel>
         </Border>
     </DockPanel>
-</Window>
+</Window>   

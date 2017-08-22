@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="Behaviors\PasswordBoxBindingBehavior.cs" />
     <Compile Include="Converters\ResultToBrushConverter.cs" />
+    <Compile Include="Converters\SellsScoreToSmileyImageConverter.cs" />
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
     <Compile Include="History.cs">
       <DependentUpon>AppDBModel.tt</DependentUpon>
@@ -289,6 +290,18 @@
       <LastGenOutput>AppDBModel.cs</LastGenOutput>
     </Content>
     <Content Include="Assets\extra\sentences.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\smileys\happy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\smileys\in-love.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\smileys\really-happy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\smileys\very-happy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Assets\inter_bde_logo.png" />

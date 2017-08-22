@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Core;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using GestionCaisse_MVVM.Exceptions;
@@ -63,7 +64,22 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
-            return null;
+        }
+
+        public static int SellsMadeByUserToday(User user)
+        {
+            try
+            {
+                using (var context = new DBConnection())
+                {
+                    var query = context.History.Count(x => x.IdUser == user.IdUser);
+                    return query;
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
         }
 
         public class UserRankQueryResult
