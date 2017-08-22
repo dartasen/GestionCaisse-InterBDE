@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -14,6 +16,7 @@ namespace GestionCaisse_MVVM.ViewModel
     public class LoginViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly LoginService _loginService = LoginService.Instance;
+        private Random random;
 
         #region Commands
 
@@ -48,6 +51,15 @@ namespace GestionCaisse_MVVM.ViewModel
             }
         }
 
+        private string _randomedSentence;
+
+        public string RandomedSentence
+        {
+            get { return _randomedSentence; }
+            set { _randomedSentence = value; OnPropertyChanged(); }
+        }
+
+
         public string WindowName
         {
             get => $"Connexion à l'application (v.{AppInformations.Version})";
@@ -56,8 +68,10 @@ namespace GestionCaisse_MVVM.ViewModel
         #endregion
 
         public LoginViewModel()
-        {          
+        {
+            random = new Random();
             var dialogService = new DialogService();
+            _randomedSentence = GetRandomASentence();
 
             CheckAndTryToLogin = new RelayCommand(() =>
             {
@@ -79,6 +93,7 @@ namespace GestionCaisse_MVVM.ViewModel
                             "Erreur de connexion",
                             MessageBoxButton.OK,
                             MessageBoxImage.Error);
+                        Password = null;
                     }
                 }
                 catch (ConnectionFailedException ex)
@@ -87,9 +102,27 @@ namespace GestionCaisse_MVVM.ViewModel
                         "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
                         "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+
+                RandomedSentence = GetRandomASentence();
             }, o => true);
 
             Quit = new RelayCommand(() => Close(), o => true);
+        }
+
+        private string GetRandomASentence()
+        {
+            try
+            {
+                string[] allLines = File.ReadAllLines(@"Assets\extra\sentences.txt");
+
+                int randomedNumber = random.Next(0, allLines.Length);
+
+                return allLines[randomedNumber];
+            }
+            catch (IOException)
+            {
+                return @"Fichier 'Assets\extra\sentences.txt' illisible\introuvable !";
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

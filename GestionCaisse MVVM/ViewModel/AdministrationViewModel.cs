@@ -11,17 +11,17 @@ namespace GestionCaisse_MVVM.ViewModel
         {
             Features = new List<AdministrationFeature>();
             LoadFeatures();
-            SelectedAdministrationFeature = Features[1];
+            SelectedAdministrationFeature = Features[0];
         }
 
         private void LoadFeatures()
         {
-            Features.Add(new AdministrationFeature()
-            {
-                Name = "Synthèse",
-                ImagePath = "/Assets/administration/synthesis.png",
-                UserControl = new SynthesisUserControl()
-            });
+            //Features.Add(new AdministrationFeature()
+            //{
+            //    Name = "Synthèse",
+            //    ImagePath = "/Assets/administration/synthesis.png",
+            //    UserControl = new SynthesisUserControl()
+            //});
 
             Features.Add(new AdministrationFeature()
             {

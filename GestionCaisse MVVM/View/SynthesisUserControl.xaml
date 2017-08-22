@@ -7,25 +7,7 @@
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="300" d:DesignWidth="300">
-    <DockPanel Background="Gray">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-            </Grid.RowDefinitions>
-
-            <!--<TextBlock Text="Synthèse Application"
-                       FontSize="17"
-                       FontWeight="ExtraBold"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Grid.ColumnSpan="2"/>-->
-        </Grid>
+    <DockPanel Background="SlateGray">
+   
     </DockPanel>
 </UserControl>

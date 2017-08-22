@@ -50,11 +50,6 @@
 
         </Grid>
 
-        <Button DockPanel.Dock="Bottom"
-                Content="Réinitialiser"
-                Margin="0 0 2 0"
-                Command="{Binding ResetUserModifications}"/>
-
         <DataGrid ItemsSource="{Binding History,
                                 Mode=TwoWay,
                                 UpdateSourceTrigger=PropertyChanged}"

@@ -10,5 +10,6 @@ namespace GestionCaisse_MVVM.Model.Services
     {
         public static readonly string Version = "0.9";
         public static readonly int DefaultSessionDelay = 300; //in seconds
+        public static readonly int DefaultSessionDelayForSuperusers = 900; //in seconds
     }
 }

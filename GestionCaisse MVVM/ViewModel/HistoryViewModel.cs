@@ -24,8 +24,6 @@ namespace GestionCaisse_MVVM.ViewModel
             _dateFrom = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             _dateTo = DateTime.Now;
             UpdateHistory();
-
-            ResetUserModifications = new RelayCommand(UpdateHistory, o => true);
         }
 
         private void UpdateHistory()
@@ -59,10 +57,6 @@ namespace GestionCaisse_MVVM.ViewModel
             get => _dateTo;
             set { _dateTo = value; OnPropertyChanged(); UpdateHistory(); }
         }
-        #endregion
-
-        #region Commands
-        public ICommand ResetUserModifications { get; }
         #endregion
     }
 }

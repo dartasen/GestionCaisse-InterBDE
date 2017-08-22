@@ -6,60 +6,79 @@
         xmlns:behaviors="clr-namespace:GestionCaisse_MVVM.Behaviors"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Height="200" Width="530"
-        MinHeight="200" MinWidth="530"
+        Height="280" Width="580"
+        ResizeMode="NoResize"
         Icon="../Assets/cadenas.png"
         Title="{Binding WindowName}"
         RenderOptions.BitmapScalingMode="HighQuality"
         WindowStartupLocation="CenterScreen">
 
-    <Border Padding="12">
-        <DockPanel>
-            <TextBlock DockPanel.Dock="Top"
-                       Text="Authentification Caisse Inter-BDE"
-                       FontSize="15"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"
-                       Margin="0 0 0 7" />
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Bottom">
+            <TextBlock HorizontalAlignment="Center" Text="{Binding RandomedSentence}"/>
+        </DockPanel>
 
-            <Grid DockPanel.Dock="Bottom">
+        <Border Padding="12">
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0"
-                        Margin="0 0 5 0"
-                        Content="Quitter"
-                        Command="{Binding Quit}" />
+                <Image Grid.Column="0"
+                       Source="../Assets/inter_bde_logo.png">
+                </Image>
 
-                <Button Grid.Column="1"
-                        Margin="5 0 0 0"
-                        Content="Connexion"
-                        Command="{Binding CheckAndTryToLogin}" />
-            </Grid>
+                <DockPanel Grid.Column="1">
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="Gestion Caisse Inter-BDE"
+                               FontSize="17"
+                               FontWeight="Bold"
+                               FontFamily="Verdana"
+                               HorizontalAlignment="Center"
+                               Margin="0 20 0 15"/>
 
-            <StackPanel>
+                    <Grid DockPanel.Dock="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                <TextBlock Margin="0 5 0 0"
-                           Text="Utilisateur : " />
+                        <Button Grid.Column="0"
+                                Margin="0 0 5 0"
+                                Content="Quitter"
+                                Command="{Binding Quit}" />
 
-                <TextBox x:Name="usernameTextBox"
-                         Padding="0 2 0 0"
-                         PreviewKeyDown="OnPreviewKeyDown"
-                         Text="{Binding Username,
+                        <Button Grid.Column="1"
+                                Margin="5 0 0 0"
+                                Content="Connexion"
+                                Command="{Binding CheckAndTryToLogin}" />
+                    </Grid>
+
+                    <StackPanel>
+
+                        <TextBlock Margin="0 5 0 0"
+                                   Text="Utilisateur : " />
+
+                        <TextBox x:Name="usernameTextBox"
+                                 Padding="0 2 0 0"
+                                 Margin="0 0 0 15"
+                                 PreviewKeyDown="OnPreviewKeyDown"
+                                 Text="{Binding Username,
                                 Mode=TwoWay}" />
 
-                <TextBlock Margin="0 5 0 0"
-                           Text="Mot de passe : " />
+                        <TextBlock Margin="0 5 0 0"
+                                   Text="Mot de passe : " />
 
-                <PasswordBox Padding="0 2 0 0"
-                             PreviewKeyDown="OnPreviewKeyDown">
-                    <i:Interaction.Behaviors>
-                        <behaviors:PasswordBoxBindingBehavior Password="{Binding Password}" />
-                    </i:Interaction.Behaviors>
-                </PasswordBox>
-            </StackPanel>
-        </DockPanel>
-    </Border>
+                        <PasswordBox Padding="0 2 0 0"
+                                     PreviewKeyDown="OnPreviewKeyDown">
+                            <i:Interaction.Behaviors>
+                                <behaviors:PasswordBoxBindingBehavior Password="{Binding Password}" />
+                            </i:Interaction.Behaviors>
+                        </PasswordBox>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+        </Border>
+    </DockPanel>
 </Window>

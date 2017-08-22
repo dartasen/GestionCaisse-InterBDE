@@ -288,6 +288,10 @@
       <DependentUpon>AppDBModel.edmx</DependentUpon>
       <LastGenOutput>AppDBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Assets\extra\sentences.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Assets\inter_bde_logo.png" />
     <Resource Include="Assets\refresh.png" />
     <Resource Include="Assets\administration\accountant.png" />
     <Resource Include="Assets\administration\barcode.png" />

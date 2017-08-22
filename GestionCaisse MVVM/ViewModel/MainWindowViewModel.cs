@@ -69,7 +69,11 @@ namespace GestionCaisse_MVVM.ViewModel
                 }
             }, o => true);
 
-            RefreshSessionDelay = new RelayCommand(() => { _timer = AppInformations.DefaultSessionDelay; OnPropertyChanged(nameof(Countdown)); }, o => true);
+            RefreshSessionDelay = new RelayCommand(() =>
+            {
+                _timer = _loginService.GetLoginContext().User.IsAdmin ? AppInformations.DefaultSessionDelayForSuperusers : AppInformations.DefaultSessionDelay;
+                OnPropertyChanged(nameof(Countdown));
+            }, o => true);
 
             Logout = new RelayCommand(() =>
             {
@@ -82,7 +86,7 @@ namespace GestionCaisse_MVVM.ViewModel
                 Close();
             }, o => true);
 
-            _timer = AppInformations.DefaultSessionDelay;
+            _timer = _loginService.GetLoginContext().User.IsAdmin ? AppInformations.DefaultSessionDelayForSuperusers : AppInformations.DefaultSessionDelay;
             StartTimer();
         }
 
