@@ -16,6 +16,7 @@ namespace GestionCaisse_MVVM.Model.Services
     public class LoginService
     {
         private readonly LoginContext _loginContext = new LoginContext();
+        public static Action ShowLoginWindow;
 
         public LoginContext GetLoginContext()
         {

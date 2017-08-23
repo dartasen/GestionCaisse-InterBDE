@@ -52,7 +52,7 @@
         <DataGrid ItemsSource="{Binding BDEDues,
                                 Mode=TwoWay,
                                 UpdateSourceTrigger=PropertyChanged}"
-                  AlternatingRowBackground="Gainsboro"
+                  AlternatingRowBackground="LightBlue"
                   ColumnWidth="*"
                   IsReadOnly="True"
                   AutoGenerateColumns="False">

@@ -31,7 +31,7 @@
 
         <DataGrid ItemsSource="{Binding Products.View,
                                 UpdateSourceTrigger=PropertyChanged}"
-                  AlternatingRowBackground="Gainsboro"
+                  AlternatingRowBackground="LightBlue"
                   ColumnWidth="*"
                   CanUserAddRows="True"
                   

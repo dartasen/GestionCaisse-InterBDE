@@ -73,6 +73,7 @@ namespace GestionCaisse_MVVM.ViewModel
             var dialogService = new DialogService();
             _randomedSentence = GetRandomASentence();
 
+            LoginService.ShowLoginWindow = () => { Show(); };
             CheckAndTryToLogin = new RelayCommand(() =>
             {
                 try
@@ -85,6 +86,7 @@ namespace GestionCaisse_MVVM.ViewModel
                         _loginService.GetLoginContext().BuyingBDE = BDEService.GetBDEs()
                             .Where(x => x.idBDE == user.IdBDE).FirstOrDefault();
                         Password = null; //Makes the password box empty
+                        Hide();
                         dialogService.ShowMainWindow();
                     }
                     else

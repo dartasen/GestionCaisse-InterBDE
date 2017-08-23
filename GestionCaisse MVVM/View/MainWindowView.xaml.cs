@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using GestionCaisse_MVVM.Model.Services;
@@ -63,6 +64,11 @@ namespace GestionCaisse_MVVM.View
         {
             if (e.Key.Equals(Key.Delete))
                 ((MainWindowViewModel)DataContext).DeleteBasketProduct.Execute(null);
+        }
+
+        private void MainWindowView_OnClosed(object sender, EventArgs e)
+        {
+            ((MainWindowViewModel)DataContext).Logout.Execute(null);
         }
     }
 }

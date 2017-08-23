@@ -11,7 +11,7 @@
         <DataGrid ItemsSource="{Binding Users,
                                 Mode=TwoWay,
                                 UpdateSourceTrigger=PropertyChanged}"
-                  AlternatingRowBackground="Gainsboro"
+                  AlternatingRowBackground="LightBlue"
                   ColumnWidth="*"
                   IsReadOnly="True"
                   
@@ -25,11 +25,11 @@
                                     Binding="{Binding Name}"
                                     IsReadOnly="True" />
 
-                <DataGridTextColumn Header="Mot de passe (MD5)"
+                <!--<DataGridTextColumn Header="Mot de passe (MD5)"
                                     Binding="{Binding PersonnalPassword}" />
                 
                 <DataGridTextColumn Header="Code Badge"
-                                    Binding="{Binding BadgeID}" />
+                                    Binding="{Binding BadgeID}" />-->
                 
                 <DataGridTextColumn Header="Nom du BDE"
                                     Binding="{Binding BDEName}" />

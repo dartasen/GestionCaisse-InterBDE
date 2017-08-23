@@ -22,7 +22,6 @@ namespace GestionCaisse_MVVM.Converters
                 if (convertedValue >= 15) smiley = "in-love";
                 else if (convertedValue >= 10 && convertedValue < 15) smiley = "really-happy";
                 else if (convertedValue >= 5 && convertedValue < 10) smiley = "very-happy";
-                else if (convertedValue >= 2 && convertedValue < 5) smiley = "really-happy";
                 else smiley = "happy";
 
                 var image = new BitmapImage(new Uri($"pack://application:,,,/Assets/smileys/{smiley}.png"));

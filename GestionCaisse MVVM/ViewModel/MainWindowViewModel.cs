@@ -88,6 +88,7 @@ namespace GestionCaisse_MVVM.ViewModel
                     Timer.Stop();
                 }
                 catch { }
+                LoginService.ShowLoginWindow();
                 Close();
             }, o => true);
 

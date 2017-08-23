@@ -72,7 +72,10 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    var query = context.History.Count(x => x.IdUser == user.IdUser);
+                    var query = context.History.Count(x => x.IdUser == user.IdUser 
+                                                           && x.SaleDate.Day == DateTime.Now.Day 
+                                                           && x.SaleDate.Month == DateTime.Now.Month 
+                                                           && x.SaleDate.Year == DateTime.Now.Year);
                     return query;
                 }
             }
