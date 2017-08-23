@@ -9,7 +9,7 @@
         xmlns:entities="clr-namespace:GestionCaisse_MVVM.Model.Entities"
         mc:Ignorable="d"
         Title="Insertion d'un produit" Height="300" Width="300"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         MinHeight="300" MinWidth="300"
         Icon="../Assets/panier_ajouter.png"
         Closed="ProductInsertionView_OnClosed"

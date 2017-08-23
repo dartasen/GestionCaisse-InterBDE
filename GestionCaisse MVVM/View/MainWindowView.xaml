@@ -46,6 +46,7 @@
 
                     <TextBlock Grid.Column="1"
                                FontSize="14"
+                               FontWeight="DemiBold"
                                Text="{Binding CurrentUser}" />
                 </Grid>
             </StatusBarItem>
@@ -63,7 +64,9 @@
 
                     <TextBlock Grid.Column="1"
                                Text="{Binding Countdown}" 
-                                
+                               Foreground="OrangeRed"
+                               FontWeight="DemiBold"
+                               VerticalAlignment="Center"
                                FontSize="14"/>
 
                     <Button Grid.Column="2"
