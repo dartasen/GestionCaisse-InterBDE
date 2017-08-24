@@ -292,6 +292,9 @@
     <Content Include="Assets\extra\sentences.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\smileys\fireworks.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\smileys\happy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
