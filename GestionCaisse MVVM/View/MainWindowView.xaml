@@ -8,7 +8,7 @@
         Title="Gestion Caisse Inter-BDE" Height="287" Width="583"
         WindowStartupLocation="CenterScreen"
         MinHeight="287" MinWidth="590"
-        Icon="../Assets/panier.png"
+        Icon="../Assets/plastic-cup.png"
         RenderOptions.BitmapScalingMode="HighQuality"
         Loaded="MainWindowView_OnLoaded"
         Closed="MainWindowView_OnClosed">

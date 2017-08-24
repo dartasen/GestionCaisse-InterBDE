@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Height="280" Width="580"
         ResizeMode="NoResize"
-        Icon="../Assets/cadenas.png"
+        Icon="../Assets/plastic-cup.png"
         Title="{Binding WindowName}"
         RenderOptions.BitmapScalingMode="HighQuality"
         WindowStartupLocation="CenterScreen">

@@ -292,6 +292,7 @@
     <Content Include="Assets\extra\sentences.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\plastic-cup.png" />
     <Content Include="Assets\smileys\fireworks.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -317,7 +318,6 @@
     <Resource Include="Assets\forbidden.png" />
     <Resource Include="Assets\warning.png" />
     <Resource Include="Assets\administration.png" />
-    <Resource Include="Assets\cadenas.png" />
     <Resource Include="Assets\database.png" />
     <Resource Include="Assets\datepicker.png" />
     <Resource Include="Assets\panier.png" />
