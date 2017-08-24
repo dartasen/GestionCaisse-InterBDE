@@ -16,7 +16,7 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    return context.Products.OrderBy(x => x.Category).ThenBy(x => x.Name).ToList();
+                    return context.Products.OrderBy(x => x.Name).ToList();
                 }
             }
             catch (EntityException ex)

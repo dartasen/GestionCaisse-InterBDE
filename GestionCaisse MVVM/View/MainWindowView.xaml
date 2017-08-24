@@ -28,7 +28,7 @@
                         Background="Transparent"
                         Command="{Binding ShowAdministrationWindow}">
                     <StackPanel>
-                        <Image Source="../Assets/administration.png" />
+                        <Image Source="../Assets/maintenance.png" />
                     </StackPanel>
                 </Button>
             </StatusBarItem>

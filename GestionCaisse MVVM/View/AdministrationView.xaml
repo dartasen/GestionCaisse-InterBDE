@@ -7,7 +7,7 @@
         RenderOptions.BitmapScalingMode="HighQuality"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Icon="/Assets/administration.png"
+        Icon="/Assets/maintenance.png"
         Title="Panneau d'administration"
         Closed="AdministrationView_OnClosed"
         Height="770" Width="1160"
