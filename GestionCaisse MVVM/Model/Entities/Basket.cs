@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GestionCaisse_MVVM.Exceptions;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +9,6 @@ namespace GestionCaisse_MVVM.Model.Entities
 {
     public class Basket : INotifyPropertyChanged
     {
-        //TODO Gérer les changements de quantité dans l'UI
         private readonly ObservableCollection<BasketProduct> _products;
 
         public Basket()
@@ -53,16 +53,17 @@ namespace GestionCaisse_MVVM.Model.Entities
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
 
-        //TODO Ajouter exceptions quand l'ajout n'est pas correcte
         public void AddBasketProduct(BasketProduct basketProductToAdd)
         {
-            if (basketProductToAdd.Product == null) return;
+            if (basketProductToAdd.Product == null) throw new IllegalProductInsertion("Vous devez sélectionner un produit avant de l'ajouter !");
 
             var idProduct = basketProductToAdd.Product.IDProduct;
             var quantityToAdd = basketProductToAdd.Quantity;
 
-            if (quantityToAdd <= 0) return;
-            if (quantityToAdd > basketProductToAdd.Product.Quantity) return;
+            if (quantityToAdd <= 0) throw new IllegalProductInsertion("La quantité doit-être positive !");
+            if (quantityToAdd > basketProductToAdd.Product.Quantity)
+                throw new IllegalProductInsertion("La quantité ne peut pas être suppérieure au stock !\n" +
+                          $"Vous demandez {quantityToAdd} {basketProductToAdd.Product.Name} alors qu'il n'en reste que {basketProductToAdd.Product.Quantity}.");
 
             //If the product is already on the basket
             if (_products.Select(x => x.Product.IDProduct).Contains(idProduct))
@@ -71,7 +72,15 @@ namespace GestionCaisse_MVVM.Model.Entities
                 {
                     if (t.Product.IDProduct == idProduct)
                     {
-                        t.Quantity += quantityToAdd;
+                        if ((t.Quantity + 1) <= basketProductToAdd.Product.Quantity)
+                        {
+                            t.Quantity += quantityToAdd;
+                        }
+                        else
+                        {
+                            throw new IllegalProductInsertion("La quantité ne peut pas être suppérieure au stock !\n" +
+                            $"Vous demandez {basketProductToAdd.Product.Quantity + 1} {basketProductToAdd.Product.Name} alors qu'il n'en reste que {basketProductToAdd.Product.Quantity}.");
+                        }
                     }
                 }
             }
@@ -92,7 +101,7 @@ namespace GestionCaisse_MVVM.Model.Entities
 
         public void UpdateQuantity(Product product, int quantity)
         {
-            
+
         }
 
         public void ResetBasket()

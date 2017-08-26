@@ -13,6 +13,31 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class ProductInsertionViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        public ProductInsertionViewModel()
+        {
+            _SelectedProduct = new BasketProduct(null, 1);
+
+            var basketService = BasketService.Instance;
+
+            InsertProductToBasket = new RelayCommand(() =>
+            {
+                DialogService dialogService = new DialogService();
+
+                try
+                {
+                    basketService.GetBasket().AddBasketProduct(SelectedProduct);
+                }
+                catch (IllegalProductInsertion e)
+                {
+                    dialogService.ShowInformationWindow(e.Message, "Erreur durant l'insertion du produit", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    Close();
+                }
+            }, o => true);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string p = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
 
@@ -81,17 +106,5 @@ namespace GestionCaisse_MVVM.ViewModel
 
         #endregion
 
-        public ProductInsertionViewModel()
-        {
-            _SelectedProduct = new BasketProduct(null, 1);
-
-            var basketService = BasketService.Instance;
-
-            InsertProductToBasket = new RelayCommand(() =>
-            {
-                basketService.GetBasket().AddBasketProduct(SelectedProduct);
-                Close();
-            }, o => true);
-        }      
     }
 }

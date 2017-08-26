@@ -112,6 +112,7 @@
     <Compile Include="Converters\ResultToBrushConverter.cs" />
     <Compile Include="Converters\SellsScoreToSmileyImageConverter.cs" />
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
+    <Compile Include="Exceptions\IllegalProductInsertion.cs" />
     <Compile Include="History.cs">
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
