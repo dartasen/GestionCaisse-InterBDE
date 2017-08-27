@@ -15,14 +15,12 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" 
-                    Margin="2 0 0 0"
                     Command="{Binding ResetChanges}"
                     DockPanel.Dock="Top" 
                     Background="OrangeRed"
                     Content="Réinitialiser"/>
 
             <Button Grid.Column="1" 
-                    Margin="0 0 2 0"
                     Command="{Binding SaveChanges}"
                     DockPanel.Dock="Top" 
                     Background="LightGreen"
