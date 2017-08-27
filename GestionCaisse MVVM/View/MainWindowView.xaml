@@ -98,10 +98,38 @@
                     <DockPanel Grid.Column="0" Margin="0 0 10 0">
 
                         <!--Ajout Item-->
-                        <Button DockPanel.Dock="Bottom"
+                        <Grid DockPanel.Dock="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" 
+                                    Height="20"
+                                    Width="20"
+                                    
+                                    Command="{Binding DecreaseSelectedProductQuantity}">
+                                <StackPanel>
+                                    <Image Source="../Assets/minus.png" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button Grid.Column="1"
                                 Content="_Ajouter un item"
                                 FontWeight="Bold"
                                 Command="{Binding InsertProduct}" />
+
+                            <Button Grid.Column="2" 
+                                    Height="20"
+                                    Width="20"
+                                    
+                                    Command="{Binding IncreaseSelectedProductQuantity}">
+                                <StackPanel>
+                                    <Image Source="../Assets/plus.png" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
 
                         <!--Tableau-->
                         <DataGrid ItemsSource="{Binding Basket.Products}"

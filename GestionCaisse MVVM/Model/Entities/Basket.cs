@@ -99,9 +99,16 @@ namespace GestionCaisse_MVVM.Model.Entities
             NotifyProperties();
         }
 
-        public void UpdateQuantity(Product product, int quantity)
+        public void IncreaseQuantity(BasketProduct basketProduct)
         {
+            if (basketProduct.Quantity + 1 > basketProduct.Product.Quantity) return;
+            basketProduct.Quantity++;
+        }
 
+        public void DecreaseQuantity(BasketProduct basketProduct)
+        {
+            if (basketProduct.Quantity -1 < 0) return;
+            basketProduct.Quantity--;
         }
 
         public void ResetBasket()

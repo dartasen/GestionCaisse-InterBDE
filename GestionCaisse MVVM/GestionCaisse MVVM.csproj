@@ -296,6 +296,8 @@
     <Resource Include="Assets\plastic-cup.png" />
     <Resource Include="Assets\maintenance.png" />
     <Resource Include="Assets\smileys\fireworks.png" />
+    <Resource Include="Assets\minus.png" />
+    <Resource Include="Assets\plus.png" />
     <Content Include="Assets\smileys\happy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

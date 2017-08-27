@@ -74,6 +74,18 @@ namespace GestionCaisse_MVVM.ViewModel
                 }
             }, o => true);
 
+            IncreaseSelectedProductQuantity = new RelayCommand(() =>
+            {
+                if (_currentBasketProduct == null) return;
+                _basketService.GetBasket().IncreaseQuantity(_currentBasketProduct);
+            }, o => true);
+
+            DecreaseSelectedProductQuantity = new RelayCommand(() =>
+            {
+                if (_currentBasketProduct == null) return;
+                _basketService.GetBasket().DecreaseQuantity(_currentBasketProduct);
+            }, o => true);
+
             RefreshSessionDelay = new RelayCommand(() =>
             {
                 _timer = _loginService.GetLoginContext().User.IsAdmin ? AppInformations.DefaultSessionDelayForSuperusers : AppInformations.DefaultSessionDelay;
@@ -114,6 +126,10 @@ namespace GestionCaisse_MVVM.ViewModel
         public ICommand ShowAdministrationWindow { get; }
 
         public ICommand RefreshSessionDelay { get; }
+
+        public ICommand IncreaseSelectedProductQuantity { get; }
+
+        public ICommand DecreaseSelectedProductQuantity { get; }
         #endregion
 
         #region Properties
