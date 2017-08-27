@@ -64,13 +64,13 @@ namespace GestionCaisse_MVVM.Model.Services
         /// <param name="title">Title of the window</param>
         /// <param name="buttonType">Type of button to propose</param>
         /// <param name="imageType">Image type to display</param>
-        public void ShowInformationWindow(
+        public MessageBoxResult ShowInformationWindow(
             string message,
             string title = null,
             MessageBoxButton buttonType = MessageBoxButton.OK,
             MessageBoxImage imageType = MessageBoxImage.None)
         {
-            MessageBox.Show(message, title, buttonType, imageType);
+            return MessageBox.Show(message, title, buttonType, imageType);
         }
     }
 }

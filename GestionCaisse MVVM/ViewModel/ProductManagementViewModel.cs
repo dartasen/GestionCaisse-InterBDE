@@ -23,13 +23,18 @@ namespace GestionCaisse_MVVM.ViewModel
 
             SaveChanges = new RelayCommand(() =>
             {
+                DialogService dialogService = new DialogService();
                 try
                 {
-                    db.SaveChanges();
+                    MessageBoxResult result = dialogService.ShowInformationWindow("Voulez-vous vraiment appliquer ces modifications ?",
+                        "Confirmation de l'opération",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+                    if(result.Equals(MessageBoxResult.Yes))
+                        db.SaveChanges();
                 }
                 catch (Exception e)
                 {
-                    DialogService dialogService = new DialogService();
                     dialogService.ShowInformationWindow("Erreur :\n" + e.ToString(), "Mise à jour impossible !", MessageBoxButton.OK, MessageBoxImage.Hand);
                 }
                 finally { Refresh(); }
