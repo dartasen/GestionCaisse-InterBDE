@@ -18,9 +18,10 @@ namespace GestionCaisse_MVVM.View
 
             var vm = new MainWindowViewModel
             {
-                Close = () => Close()
+                Close = () => Close(),
+                Hide = () => Hide()
             };
-
+            
             DataContext = vm;
 
             Test();

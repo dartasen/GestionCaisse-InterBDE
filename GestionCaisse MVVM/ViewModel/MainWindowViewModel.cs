@@ -231,6 +231,7 @@ namespace GestionCaisse_MVVM.ViewModel
                 else
                 {
                     DialogService dialogService = new DialogService();
+                    Hide();
                     dialogService.ShowInformationWindow("La session a expiré, reconnectez-vous !", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
                     Logout.Execute(null);
                 }
