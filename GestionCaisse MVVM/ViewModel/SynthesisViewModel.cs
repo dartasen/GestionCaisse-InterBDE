@@ -17,7 +17,7 @@ namespace GestionCaisse_MVVM.ViewModel
         #region Properties
         public IEnumerable<UserService.UserRankQueryResult> RankedUsers
         {
-            get { return UserService.RankUsersBySellsForCurrentMonth(); }
+            get { return UserService.RankUsersBySellsForAMonth(DateTime.Now.Month); }
         }
 
         #endregion

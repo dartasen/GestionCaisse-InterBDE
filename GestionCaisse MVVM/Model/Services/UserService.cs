@@ -42,22 +42,27 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
-        public static IEnumerable<UserRankQueryResult> RankUsersBySellsForCurrentMonth()
+        public static IOrderedEnumerable<UserRankQueryResult> RankUsersBySellsForAMonth(int month)
         {
-            DateTime beginningOfTheMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             try
             {
                 using (var context = new DBConnection())
                 { 
-                    var query = 
-                        context.History
-                        .GroupBy(x => x.IdUser)
-                        .Select(y => new UserRankQueryResult()
+                    var scores = new List<UserRankQueryResult>();
+                    List<User> users = context.Users.ToList();
+
+                    foreach (var user in users)
+                    {
+                        var query = context.History.Count(x => x.IdUser == user.IdUser
+                                                               && x.SaleDate.Month == month
+                                                               && x.SaleDate.Year == DateTime.Now.Year);
+                        scores.Add(new UserRankQueryResult()
                         {
-                            Username = context.Users.FirstOrDefault(name => name.IdUser == (context.Users.FirstOrDefault().IdUser)).Name,
-                            Quantity = y.Count()
+                            Username = user.Name,
+                            Quantity = query
                         });
-                    return query.ToList();
+                    }
+                    return scores.OrderByDescending(x => x.Quantity);
                 }
             }
             catch (EntityException ex)

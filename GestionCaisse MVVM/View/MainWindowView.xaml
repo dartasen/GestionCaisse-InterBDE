@@ -32,6 +32,18 @@
                     </StackPanel>
                 </Button>
             </StatusBarItem>
+            
+            <StatusBarItem>
+                <Button Height="20"
+                        Width="20"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
+                        Command="{Binding ShowRankingWindow}">
+                    <StackPanel>
+                        <Image Source="../Assets/trophy.png" />
+                    </StackPanel>
+                </Button>
+            </StatusBarItem>
             <StatusBarItem>
                 <Grid>
                     <Grid.ColumnDefinitions>

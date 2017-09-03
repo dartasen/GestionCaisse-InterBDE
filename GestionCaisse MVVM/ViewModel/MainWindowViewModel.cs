@@ -41,6 +41,8 @@ namespace GestionCaisse_MVVM.ViewModel
                 return _loginService.GetLoginContext().User.IsAdmin;
             });
 
+            ShowRankingWindow = new RelayCommand(() => dialogService.ShowRankingWindow(), o => true);
+
             ValidateSell = new RelayCommand(() =>
             {
                 try
@@ -124,6 +126,8 @@ namespace GestionCaisse_MVVM.ViewModel
         public ICommand DeleteBasketProduct { get; }
 
         public ICommand ShowAdministrationWindow { get; }
+
+        public ICommand ShowRankingWindow { get; }
 
         public ICommand RefreshSessionDelay { get; }
 

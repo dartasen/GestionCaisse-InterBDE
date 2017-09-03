@@ -58,6 +58,26 @@ namespace GestionCaisse_MVVM.Model.Services
         }
 
         /// <summary>
+        ///     Display RankingPlayersBySellsView
+        /// </summary>
+        public void ShowRankingWindow()
+        {
+            var createType = Type.GetType("GestionCaisse_MVVM.View.RankingPlayersBySellsView, GestionCaisse");
+
+            try
+            {
+                var window = (Window)Activator.CreateInstance(createType);
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowInformationWindow(
+                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
         ///     Display a quick MessageBox fully customizable
         /// </summary>
         /// <param name="message">Message to display</param>

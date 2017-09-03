@@ -147,6 +147,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ProductInsertionViewModel.cs" />
     <Compile Include="ViewModel\ProductManagementViewModel.cs" />
+    <Compile Include="ViewModel\RankingPlayersBySellsViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\SynthesisViewModel.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
@@ -168,6 +169,9 @@
     </Compile>
     <Compile Include="View\ProductManagementUserControl.xaml.cs">
       <DependentUpon>ProductManagementUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RankingPlayersBySellsView.xaml.cs">
+      <DependentUpon>RankingPlayersBySellsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SynthesisUserControl.xaml.cs">
       <DependentUpon>SynthesisUserControl.xaml</DependentUpon>
@@ -223,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProductManagementUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RankingPlayersBySellsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,12 +304,16 @@
     <Content Include="Assets\extra\sentences.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\trophy.png" />
     <Resource Include="logo.ico" />
     <Resource Include="Assets\plastic-cup.png" />
     <Resource Include="Assets\maintenance.png" />
     <Resource Include="Assets\smileys\fireworks.png" />
     <Resource Include="Assets\minus.png" />
     <Resource Include="Assets\plus.png" />
+    <Resource Include="Assets\medals\gold-medal.png" />
+    <Resource Include="Assets\medals\second.png" />
+    <Resource Include="Assets\medals\third.png" />
     <Content Include="Assets\smileys\happy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
