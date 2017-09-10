@@ -23,6 +23,23 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
+        public static Dictionary<string, double> GetBDEsCoefficients()
+        {
+            try
+            {
+                var results = new Dictionary<string, double>();
+                using (var context = new DBConnection())
+                {
+                    context.BDEs.ToList().ForEach(x => results.Add(x.Name, x.Rate));
+                    return results;
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
+        }
+
         public static List<BDEDue> GetBDEDues(DateTime dateFrom, DateTime dateTo)
         {
             try

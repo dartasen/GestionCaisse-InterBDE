@@ -32,8 +32,9 @@
                     </StackPanel>
                 </Button>
             </StatusBarItem>
-            
-            <StatusBarItem>
+
+            <!--TODO Disabled for now-->
+            <StatusBarItem Visibility="Collapsed">
                 <Button Height="20"
                         Width="20"
                         BorderBrush="Transparent"

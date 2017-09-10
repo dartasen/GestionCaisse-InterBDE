@@ -123,6 +123,7 @@
     <Compile Include="Model\Entities\AutoCompleteFocusableBox.cs" />
     <Compile Include="Model\Entities\BasketProduct.cs" />
     <Compile Include="Model\Entities\Basket.cs" />
+    <Compile Include="Model\Entities\StringWrapper.cs" />
     <Compile Include="Model\Events\BasketProductAddedEventArgs.cs" />
     <Compile Include="Model\Entities\LoginContext.cs" />
     <Compile Include="Model\Services\AppInformations.cs" />
@@ -136,7 +137,6 @@
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="SampleData\SampleDataSource\SampleDataSource.xaml.cs" />
     <Compile Include="TemplateSelector\InsertProductDataTemplateSelector.cs" />
     <Compile Include="User.cs">
       <DependentUpon>AppDBModel.tt</DependentUpon>
@@ -147,9 +147,9 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ProductInsertionViewModel.cs" />
     <Compile Include="ViewModel\ProductManagementViewModel.cs" />
+    <Compile Include="ViewModel\QuickCalcsViewModel.cs" />
     <Compile Include="ViewModel\RankingPlayersBySellsViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
-    <Compile Include="ViewModel\SynthesisViewModel.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AdministrationView.xaml.cs">
@@ -170,19 +170,15 @@
     <Compile Include="View\ProductManagementUserControl.xaml.cs">
       <DependentUpon>ProductManagementUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuickCalcsUserControl.xaml.cs">
+      <DependentUpon>QuickCalcsUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RankingPlayersBySellsView.xaml.cs">
       <DependentUpon>RankingPlayersBySellsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SynthesisUserControl.xaml.cs">
-      <DependentUpon>SynthesisUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserManagementUserControl.xaml.cs">
       <DependentUpon>UserManagementUserControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="SampleData\SampleDataSource\SampleDataSource.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\AdministrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,11 +226,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RankingPlayersBySellsView.xaml">
+    <Page Include="View\QuickCalcsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SynthesisUserControl.xaml">
+    <Page Include="View\RankingPlayersBySellsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,7 +269,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SampleData\SampleDataSource\SampleDataSource.xsd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -301,6 +296,7 @@
       <DependentUpon>AppDBModel.edmx</DependentUpon>
       <LastGenOutput>AppDBModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Assets\administration\calculator.png" />
     <Content Include="Assets\extra\sentences.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -332,7 +328,6 @@
     <Resource Include="Assets\administration\barcode.png" />
     <Resource Include="Assets\administration\hierarchical-structure.png" />
     <Resource Include="Assets\administration\history.png" />
-    <Resource Include="Assets\administration\synthesis.png" />
     <Resource Include="Assets\forbidden.png" />
     <Resource Include="Assets\warning.png" />
     <Resource Include="Assets\database.png" />

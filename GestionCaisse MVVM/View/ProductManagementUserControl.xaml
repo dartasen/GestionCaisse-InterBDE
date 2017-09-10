@@ -52,6 +52,9 @@
                 <DataGridTextColumn Header="Quantité en stock"
                                     Binding="{Binding Quantity}" />
 
+                <DataGridTextColumn Header="Date de Péremption"
+                                    Binding="{Binding ExpiryDate, StringFormat='dd/MM/yy'}" />
+
                 <DataGridTextColumn Header="Catégorie"
                                     Binding="{Binding Category}" />
             </DataGrid.Columns>

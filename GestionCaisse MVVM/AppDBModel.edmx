@@ -5,10 +5,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBEntities.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self"
-              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
-              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
-              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBEntities.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="bde">
           <Key>
             <PropertyRef Name="idBde" />
@@ -37,6 +34,7 @@
           <Property Name="prix" Type="double" Nullable="false" />
           <Property Name="prixAchat" Type="double" Nullable="false" />
           <Property Name="quantite" Type="int" Nullable="false" />
+          <Property Name="datePeremption" Type="date" />
           <Property Name="categorie" Type="varchar" MaxLength="7" Nullable="false" />
         </EntityType>
         <EntityType Name="utilisateur">
@@ -121,8 +119,7 @@
             <End Role="utilisateur" EntitySet="utilisateur" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBEntities" Alias="Self" annotation:UseStrongSpatialTypes="false"
@@ -158,6 +155,7 @@
           <Property Name="BuyingPrice" Type="Double" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Category" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExpiryDate" Type="DateTime" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -272,6 +270,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DBEntities.Product">
               <MappingFragment StoreEntitySet="produit">
+                <ScalarProperty Name="ExpiryDate" ColumnName="datePeremption" />
                 <ScalarProperty Name="IDProduct" ColumnName="idProduit" />
                 <ScalarProperty Name="Name" ColumnName="nom" />
                 <ScalarProperty Name="Price" ColumnName="prix" />

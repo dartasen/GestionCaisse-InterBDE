@@ -16,13 +16,6 @@ namespace GestionCaisse_MVVM.ViewModel
 
         private void LoadFeatures()
         {
-            //Features.Add(new AdministrationFeature()
-            //{
-            //    Name = "Synthèse",
-            //    ImagePath = "/Assets/administration/synthesis.png",
-            //    UserControl = new SynthesisUserControl()
-            //});
-
             Features.Add(new AdministrationFeature()
             {
                 Name = "Historique des ventes",
@@ -36,7 +29,7 @@ namespace GestionCaisse_MVVM.ViewModel
                 ImagePath = "/Assets/administration/accountant.png",
                 UserControl = new BDEDuesUserControl()
             });
-
+            
             Features.Add(new AdministrationFeature()
             {
                 Name = "Gestion Utilisateurs",
@@ -49,6 +42,13 @@ namespace GestionCaisse_MVVM.ViewModel
                 Name = "Gestion Produits",
                 ImagePath = "/Assets/administration/barcode.png",
                 UserControl = new ProductManagementUserControl()
+            });
+
+            Features.Add(new AdministrationFeature()
+            {
+                Name = "Calculs Rapides",
+                ImagePath = "/Assets/administration/calculator.png",
+                UserControl = new QuickCalcsUserControl()
             });
         }
 

@@ -17,14 +17,15 @@ using GestionCaisse_MVVM.ViewModel;
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
-    /// Interaction logic for SynthesisUserControl.xaml
+    /// Interaction logic for QuickCalcsUserControl.xaml
     /// </summary>
-    public partial class SynthesisUserControl : UserControl
+    public partial class QuickCalcsUserControl : UserControl
     {
-        public SynthesisUserControl()
+        public QuickCalcsUserControl()
         {
             InitializeComponent();
-            DataContext = new SynthesisViewModel();
+
+            DataContext = new QuickCalcsViewModel();
         }
     }
 }
