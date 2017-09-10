@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data.Entity;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -35,7 +28,7 @@ namespace GestionCaisse_MVVM.ViewModel
                 }
                 catch (Exception e)
                 {
-                    dialogService.ShowInformationWindow("Erreur :\n" + e.ToString(), "Mise à jour impossible !", MessageBoxButton.OK, MessageBoxImage.Hand);
+                    dialogService.ShowInformationWindow("Erreur :\n" + e, "Mise à jour impossible !", MessageBoxButton.OK, MessageBoxImage.Hand);
                 }
                 finally { Refresh(); }
             }, o => true);
