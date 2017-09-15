@@ -49,6 +49,7 @@ namespace GestionCaisse_MVVM.ViewModel
                 LoginService.Instance.IsTimerActive = false;
                 dialogService.ShowCheckPasswordView("rollingback");
                 LoginService.Instance.IsTimerActive = true;
+                UpdateUserSellsSmiley();
             }, o => true);
 
             ValidateSell = new RelayCommand(() =>
