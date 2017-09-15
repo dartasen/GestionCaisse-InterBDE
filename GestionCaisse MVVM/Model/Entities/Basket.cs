@@ -103,12 +103,14 @@ namespace GestionCaisse_MVVM.Model.Entities
         {
             if (basketProduct.Quantity + 1 > basketProduct.Product.Quantity) return;
             basketProduct.Quantity++;
+            NotifyProperties();
         }
 
         public void DecreaseQuantity(BasketProduct basketProduct)
         {
             if (basketProduct.Quantity -1 < 0) return;
             basketProduct.Quantity--;
+            NotifyProperties();
         }
 
         public void ResetBasket()
