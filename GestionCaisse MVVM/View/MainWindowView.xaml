@@ -26,9 +26,23 @@
                         Width="20"
                         BorderBrush="Transparent"
                         Background="Transparent"
+                        Click="AdministrationButton_OnClick"
                         Command="{Binding ShowAdministrationWindow}">
                     <StackPanel>
                         <Image Source="../Assets/maintenance.png" />
+                    </StackPanel>
+                </Button>
+            </StatusBarItem>
+
+            <StatusBarItem>
+                <Button Height="20"
+                        Width="20"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
+                        Command="{Binding ShowRollingBackWindow}"
+                        Click="RollingBackView_OnClick">
+                    <StackPanel>
+                        <Image Source="../Assets/rollingback.png" />
                     </StackPanel>
                 </Button>
             </StatusBarItem>
@@ -146,6 +160,7 @@
 
                         <!--Tableau-->
                         <DataGrid ItemsSource="{Binding Basket.Products}"
+                                  x:Name="Basket"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
                                   ColumnWidth="*"

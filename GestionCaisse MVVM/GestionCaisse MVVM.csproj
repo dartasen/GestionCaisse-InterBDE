@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="ViewModel\AdministrationViewModel.cs" />
     <Compile Include="ViewModel\BDEDuesViewModel.cs" />
+    <Compile Include="ViewModel\CheckPasswordViewModel.cs" />
     <Compile Include="ViewModel\HistoryViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ProductInsertionViewModel.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="ViewModel\QuickCalcsViewModel.cs" />
     <Compile Include="ViewModel\RankingPlayersBySellsViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\RollingBackViewModel.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AdministrationView.xaml.cs">
@@ -157,6 +159,9 @@
     </Compile>
     <Compile Include="View\BDEDuesUserControl.xaml.cs">
       <DependentUpon>BDEDuesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CheckPasswordView.xaml.cs">
+      <DependentUpon>CheckPasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HistoryUserControl.xaml.cs">
       <DependentUpon>HistoryUserControl.xaml</DependentUpon>
@@ -176,6 +181,9 @@
     <Compile Include="View\RankingPlayersBySellsView.xaml.cs">
       <DependentUpon>RankingPlayersBySellsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\RollingBackView.xaml.cs">
+      <DependentUpon>RollingBackView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserManagementUserControl.xaml.cs">
       <DependentUpon>UserManagementUserControl.xaml</DependentUpon>
     </Compile>
@@ -184,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BDEDuesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheckPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -231,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RankingPlayersBySellsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RollingBackView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,6 +312,7 @@
       <DependentUpon>AppDBModel.edmx</DependentUpon>
       <LastGenOutput>AppDBModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Assets\validate.png" />
     <Resource Include="Assets\administration\calculator.png" />
     <Content Include="Assets\extra\sentences.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -310,6 +327,8 @@
     <Resource Include="Assets\medals\gold-medal.png" />
     <Resource Include="Assets\medals\second.png" />
     <Resource Include="Assets\medals\third.png" />
+    <Resource Include="Assets\rollingback.png" />
+    <Resource Include="Assets\locked.png" />
     <Content Include="Assets\smileys\happy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

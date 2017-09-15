@@ -71,5 +71,15 @@ namespace GestionCaisse_MVVM.View
         {
             ((MainWindowViewModel)DataContext).Logout.Execute(null);
         }
+
+        private void RollingBackView_OnClick(object sender, RoutedEventArgs e)
+        {
+            Basket.Focus();
+        }
+
+        private void AdministrationButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Basket.Focus();
+        }
     }
 }

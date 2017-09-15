@@ -35,13 +35,21 @@ namespace GestionCaisse_MVVM.ViewModel
             ShowAdministrationWindow = new RelayCommand(() =>
             {
                 LoginService.Instance.IsTimerActive = false;
-                dialogService.ShowAdministrationWindow();
+                dialogService.ShowCheckPasswordView("administration");
+                LoginService.Instance.IsTimerActive = true;
             }, o =>
             {
                 return _loginService.GetLoginContext().User.IsAdmin;
             });
 
             ShowRankingWindow = new RelayCommand(() => dialogService.ShowRankingWindow(), o => true);
+
+            ShowRollingBackWindow = new RelayCommand(() =>
+            {
+                LoginService.Instance.IsTimerActive = false;
+                dialogService.ShowCheckPasswordView("rollingback");
+                LoginService.Instance.IsTimerActive = true;
+            }, o => true);
 
             ValidateSell = new RelayCommand(() =>
             {
@@ -128,6 +136,8 @@ namespace GestionCaisse_MVVM.ViewModel
         public ICommand ShowAdministrationWindow { get; }
 
         public ICommand ShowRankingWindow { get; }
+
+        public ICommand ShowRollingBackWindow { get; }
 
         public ICommand RefreshSessionDelay { get; }
 

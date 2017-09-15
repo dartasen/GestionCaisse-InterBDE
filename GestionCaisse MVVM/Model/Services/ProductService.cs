@@ -25,19 +25,21 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
-        public static List<HistoryQueryResult> GetHistory(DateTime dateFrom, DateTime dateTo)
+        public static List<HistoryQueryResult> GetHistory(DateTime dateFrom, DateTime dateTo, int? idUser = null)
         {
             try
             {
                 using (var context = new DBConnection())
                 {
-                    var query = 
+                    var query =
                         from history in context.History
                         join user in context.Users on history.IdUser equals user.IdUser
                         join product in context.Products on history.IdProduct equals product.IDProduct
                         join buyingBDE in context.BDEs on history.IdBuyingBDE equals buyingBDE.idBDE
-                        where history.SaleDate > dateFrom && history.SaleDate < dateTo
-                        select new HistoryQueryResult(){
+                        where (idUser == null && history.SaleDate > dateFrom && history.SaleDate < dateTo) ||
+                              (idUser != null && history.SaleDate > dateFrom && history.SaleDate < dateTo && user.IdUser == idUser)
+                        select new HistoryQueryResult()
+                        {
                             IdSale = history.IdSale,
                             Username = user.Name,
                             ProductName = product.Name,
@@ -47,6 +49,26 @@ namespace GestionCaisse_MVVM.Model.Services
                         };
 
                     return query.ToList();
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
+        }
+
+        public static bool RollBackSell(int idSale)
+        {
+            try
+            {
+                using (var context = new DBConnection())
+                {
+                    History sellToDelete = context.History.FirstOrDefault(x => x.IdSale == idSale);
+                    if (sellToDelete == null) return false;
+                    context.Products.FirstOrDefault(x => x.IDProduct == sellToDelete.IdProduct).Quantity += sellToDelete.Quantity;
+                    context.History.Remove(sellToDelete);
+                    context.SaveChanges();
+                    return true;
                 }
             }
             catch (EntityException ex)
