@@ -39,7 +39,7 @@ namespace GestionCaisse_MVVM.Model.Services
                             SaleDate = DateTime.Now
                         });
 
-                        context.Products.Where(x => x.IDProduct == bp.Product.IDProduct).FirstOrDefault().Quantity--;
+                        context.Products.Where(x => x.IDProduct == bp.Product.IDProduct).FirstOrDefault().Quantity -= bp.Quantity;
                     }
                     context.SaveChanges();
                     return true;
