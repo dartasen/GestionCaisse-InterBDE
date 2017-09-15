@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GestionCaisse_MVVM.View"
+             xmlns:converters="clr-namespace:GestionCaisse_MVVM.Converters"
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <converters:StringToDouble x:Key="StringToDouble"/>
+    </UserControl.Resources>
     <DockPanel>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -42,16 +47,20 @@
                       Grid.ColumnSpan="2"
                       Margin="0 10 0 0"
                       Name="ListView"
-                      ItemsSource="{Binding Dues,
-                                    Mode=TwoWay, 
+                      SelectionMode="Single"
+                      IsManipulationEnabled="False"
+                      ItemsSource="{Binding Dues, 
+                                    Mode=TwoWay,
                                     UpdateSourceTrigger=PropertyChanged}">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Value}"/>
+                        <TextBlock Text="{Binding}"
+                                   FontWeight="Bold"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
 
         </Grid>
     </DockPanel>

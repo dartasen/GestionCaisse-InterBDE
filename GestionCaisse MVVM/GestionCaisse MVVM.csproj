@@ -114,6 +114,7 @@
     <Compile Include="Behaviors\PasswordBoxBindingBehavior.cs" />
     <Compile Include="Converters\ResultToBrushConverter.cs" />
     <Compile Include="Converters\SellsScoreToSmileyImageConverter.cs" />
+    <Compile Include="Converters\StringToDouble.cs" />
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
     <Compile Include="Exceptions\IllegalProductInsertion.cs" />
     <Compile Include="History.cs">
@@ -123,7 +124,6 @@
     <Compile Include="Model\Entities\AutoCompleteFocusableBox.cs" />
     <Compile Include="Model\Entities\BasketProduct.cs" />
     <Compile Include="Model\Entities\Basket.cs" />
-    <Compile Include="Model\Entities\StringWrapper.cs" />
     <Compile Include="Model\Events\BasketProductAddedEventArgs.cs" />
     <Compile Include="Model\Entities\LoginContext.cs" />
     <Compile Include="Model\Services\AppInformations.cs" />

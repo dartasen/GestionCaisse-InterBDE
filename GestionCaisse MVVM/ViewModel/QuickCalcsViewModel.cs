@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,13 +17,13 @@ namespace GestionCaisse_MVVM.ViewModel
     {
         public QuickCalcsViewModel()
         {
-            _dues = new List<StringWrapper>();
+            PriceToShare = 0.00;
 
             CalculateDues = new RelayCommand(Calculate, o => true);
         }
 
         #region Properties
-
+        //TODO ERROR : XAML empêche l'insertion de double 
         private double _priceToShare;
 
         public double PriceToShare
@@ -34,16 +35,13 @@ namespace GestionCaisse_MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<string> _dues;
 
-        private List<StringWrapper> _dues;
-
-        public List<StringWrapper> Dues
+        public ObservableCollection<string> Dues
         {
             get { return _dues; }
-            set { _dues = value; OnPropertyChanged();}
+            set { _dues = value; }
         }
-
-
         #endregion
 
         #region Commands
@@ -56,22 +54,24 @@ namespace GestionCaisse_MVVM.ViewModel
         {
             try
             {
-                if (Dues.Count > 0) Dues.Clear();
+                if (Dues == null)
+                    Dues = new ObservableCollection<string>();
+
+                if (Dues.Count > 0)
+                {
+                    Dues.Clear();
+                }
 
                 var coefficients = BDEService.GetBDEsCoefficients();
                 foreach (var coefficient in coefficients)
                 {
-                    Dues.Add(new StringWrapper
-                    {
-                        Value =
-                            $"{coefficient.Key} ({coefficient.Value * 100} %) : {2 * coefficient.Value}"
-                    });
+                    Dues.Add($"{coefficient.Key} ({coefficient.Value * 100} %) : {coefficient.Value * PriceToShare}");
                 }
                 OnPropertyChanged(nameof(Dues));
             }
             catch (InvalidCastException)
             {
-                DialogService s = new DialogService();
+                var s = new DialogService();
                 s.ShowInformationWindow("Votre nombre est invalide !", "Calcul impossible !", MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
