@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GestionCaisse_MVVM.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Rolling Back de la journée" 
+        Title="Rolling Back sur la journée" 
         Height="442" Width="744"
         MinHeight="442" MinWidth="744">
     <DockPanel>
