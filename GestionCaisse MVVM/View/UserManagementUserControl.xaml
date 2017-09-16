@@ -8,9 +8,32 @@
              Background="White"
              d:DesignHeight="300" d:DesignWidth="300">
     <DockPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" 
+                    Command="{Binding ActivateDeactivateUser}"
+                    DockPanel.Dock="Top" 
+                    Background="OrangeRed"
+                    Content="Activer/Désactiver un compte"/>
+
+            <Button Grid.Column="1" 
+                   
+                    DockPanel.Dock="Top" 
+                    Background="GreenYellow"
+                    Content="Ajouter un utilisateur"/>
+        </Grid>
+        
         <DataGrid ItemsSource="{Binding Users,
                                 Mode=TwoWay,
                                 UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedUser,
+                                 Mode=TwoWay,
+                                 UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode="Single"
                   AlternatingRowBackground="LightBlue"
                   ColumnWidth="*"
                   IsReadOnly="True"

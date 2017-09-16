@@ -64,6 +64,8 @@ namespace GestionCaisse_MVVM.ViewModel
                             "Confirmation",
                             MessageBoxButton.OK,
                             MessageBoxImage.Exclamation);
+
+                        UpdateUserSellsSmiley();
                     }
                     else
                     {
@@ -73,8 +75,6 @@ namespace GestionCaisse_MVVM.ViewModel
                             MessageBoxButton.OK,
                             MessageBoxImage.Hand);
                     }
-
-                    UpdateUserSellsSmiley();
                 }
                 catch (ConnectionFailedException ex)
                 {

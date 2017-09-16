@@ -42,6 +42,22 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
+        public static void ToggleUserConnectionRights(User user)
+        {
+            try
+            {
+                using (var context = new DBConnection())
+                {
+                    context.Users.FirstOrDefault(x => x.IdUser == user.IdUser).IsActive = !user.IsActive;
+                    context.SaveChanges();
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
+        }
+
         public static IOrderedEnumerable<UserRankQueryResult> RankUsersBySellsForAMonth(int month)
         {
             try
