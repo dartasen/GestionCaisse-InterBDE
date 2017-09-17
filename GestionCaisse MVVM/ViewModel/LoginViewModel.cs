@@ -7,6 +7,7 @@ using System.Security;
 using System.Windows;
 using System.Windows.Input;
 using GestionCaisse_MVVM.Exceptions;
+using GestionCaisse_MVVM.Model.Entities;
 using GestionCaisse_MVVM.Model.Services;
 
 namespace GestionCaisse_MVVM.ViewModel
@@ -76,16 +77,24 @@ namespace GestionCaisse_MVVM.ViewModel
             {
                 try
                 {
-                    var user = _loginService.Login(_username, _password);
+                    var connection = _loginService.Login(_username, _password);
 
-                    if (user != null)
+                    if (connection.ConnectionResult.Equals(ConnectionResult.Authorized))
                     {
-                        _loginService.GetLoginContext().User = user;
+                        _loginService.GetLoginContext().User = connection.User;
                         _loginService.GetLoginContext().BuyingBDE = BDEService.GetBDEs()
-                            .Where(x => x.idBDE == user.IdBDE).FirstOrDefault();
+                            .Where(x => x.idBDE == connection.User.IdBDE).FirstOrDefault();
                         Password = null; //Makes the password box empty
                         Hide();
                         dialogService.ShowMainWindow();
+                    }
+                    else if (connection.ConnectionResult.Equals(ConnectionResult.Disabled))
+                    {
+                        dialogService.ShowInformationWindow("Votre compte a été désactivé ! Contactez un administrateur !",
+                            "Erreur de connexion",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                        Password = null;
                     }
                     else
                     {

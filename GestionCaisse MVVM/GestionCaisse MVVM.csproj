@@ -124,6 +124,8 @@
     <Compile Include="Model\Entities\AutoCompleteFocusableBox.cs" />
     <Compile Include="Model\Entities\BasketProduct.cs" />
     <Compile Include="Model\Entities\Basket.cs" />
+    <Compile Include="Model\Entities\ConnectionResult.cs" />
+    <Compile Include="Model\Entities\LoginResult.cs" />
     <Compile Include="Model\Events\BasketProductAddedEventArgs.cs" />
     <Compile Include="Model\Entities\LoginContext.cs" />
     <Compile Include="Model\Services\AppInformations.cs" />

@@ -23,7 +23,7 @@ namespace GestionCaisse_MVVM.Model.Services
             return _loginContext;
         }
 
-        public User Login(string username, SecureString password)
+        public LoginResult Login(string username, SecureString password)
         {
             var passwordBSTR = default(IntPtr);
             var insecurePassword = "";
@@ -41,7 +41,7 @@ namespace GestionCaisse_MVVM.Model.Services
             return IsUserAuthorizedToLogIn(username, insecurePassword);
         }
 
-        private User IsUserAuthorizedToLogIn(string username, string plainTextPassword)
+        private LoginResult IsUserAuthorizedToLogIn(string username, string plainTextPassword)
         {
             if (username == null || plainTextPassword == null) return null;
             var convertedPassword = CalculateMD5Hash(plainTextPassword);
@@ -50,13 +50,13 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    return ((Func<User>) (() =>
+                    var user = context.Users.FirstOrDefault(x => x.Name.Equals(username) &&
+                                                                 x.PersonnalPassword.Equals(convertedPassword));
+                    if (user == null)
                     {
-                        var user = context.Users.FirstOrDefault(x => x.Name.Equals(username) &&
-                                                                     x.PersonnalPassword.Equals(convertedPassword));
-                        if (user == null) return null;
-                        return !user.IsActive ? null : user;
-                    }))();
+                        return new LoginResult(ConnectionResult.NotFound, null);
+                    }
+                    return !user.IsActive ? new LoginResult(ConnectionResult.Disabled, user) : new LoginResult(ConnectionResult.Authorized, user);
                 }
             }
             catch (EntityException ex)

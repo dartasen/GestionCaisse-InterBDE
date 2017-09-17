@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using GestionCaisse_MVVM.Model.Services;
 
@@ -19,6 +20,13 @@ namespace GestionCaisse_MVVM.ViewModel
             ActivateDeactivateUser = new RelayCommand(() =>
             {
                 if (SelectedUser == null) return;
+                if (SelectedUser.IdUser.Equals(LoginService.Instance.GetLoginContext().User.IdUser))
+                {
+                    DialogService _dialogService = new DialogService();
+                    _dialogService.ShowInformationWindow("Vous ne pouvez-pas désactiver votre propre compte",
+                        "Opération interdite !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 UserService.ToggleUserConnectionRights(SelectedUser);
                 _users = UserService.GetUsers();
                 OnPropertyChanged(nameof(Users));

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using GestionCaisse_MVVM.Model.Entities;
 using GestionCaisse_MVVM.Model.Services;
 
 namespace GestionCaisse_MVVM.ViewModel
@@ -22,7 +23,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
                 var dialogService = new DialogService();
 
-                if (LoginService.Instance.Login(username, Password) != null)
+                if (LoginService.Instance.Login(username, Password).ConnectionResult.Equals(ConnectionResult.Authorized))
                 {
                     Hide();
                     switch (windowToOpenAction)
