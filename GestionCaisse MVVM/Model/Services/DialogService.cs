@@ -105,11 +105,27 @@ namespace GestionCaisse_MVVM.Model.Services
         /// </summary>
         public void ShowCheckPasswordView(string windowToOpen)
         {
-            var createType = Type.GetType("GestionCaisse_MVVM.View.CheckPasswordView, GestionCaisse");
-
             try
             {
                 var window = (Window)Activator.CreateInstance(typeof(CheckPasswordView), windowToOpen);
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowInformationWindow(
+                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        ///     Display AddUserView
+        /// </summary>
+        public void ShowAddUserView()
+        {
+            try
+            {
+                var window = (Window)Activator.CreateInstance(typeof(AddUserView));
                 window.ShowDialog();
             }
             catch (Exception ex)

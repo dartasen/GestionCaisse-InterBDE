@@ -65,7 +65,7 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
-        private string CalculateMD5Hash(string input)
+        public static string CalculateMD5Hash(string input)
         {
             var md5 = MD5.Create();
 

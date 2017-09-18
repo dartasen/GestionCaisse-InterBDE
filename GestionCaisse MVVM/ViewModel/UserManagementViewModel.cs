@@ -17,6 +17,8 @@ namespace GestionCaisse_MVVM.ViewModel
         {
             _users = UserService.GetUsers();
 
+            DialogService dialogService = new DialogService();
+
             ActivateDeactivateUser = new RelayCommand(() =>
             {
                 if (SelectedUser == null) return;
@@ -30,6 +32,57 @@ namespace GestionCaisse_MVVM.ViewModel
                 UserService.ToggleUserConnectionRights(SelectedUser);
                 _users = UserService.GetUsers();
                 OnPropertyChanged(nameof(Users));
+            }, o => true);
+
+            ToggleIsUserAdmin = new RelayCommand(() =>
+            {
+                if (SelectedUser == null) return;
+                if (SelectedUser.IdUser.Equals(LoginService.Instance.GetLoginContext().User.IdUser))
+                {
+                    DialogService _dialogService = new DialogService();
+                    _dialogService.ShowInformationWindow("Vous ne pouvez-pas vous révoquer votre droit administrateur vous-même",
+                        "Opération interdite !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                UserService.ToggleIsAdminUser(SelectedUser.IdUser);
+                _users = UserService.GetUsers();
+                OnPropertyChanged(nameof(Users));
+            }, o => true);
+
+            OpenAddUserView = new RelayCommand(() =>
+            {
+                dialogService.ShowAddUserView();
+                _users = UserService.GetUsers();
+                OnPropertyChanged(nameof(Users));
+            } ,o => true);
+
+            DeleteUser = new RelayCommand(() =>
+            {
+                try
+                {
+                    if (SelectedUser == null)
+                    {
+                        dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
+                            "Suppression impossibl !", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    MessageBoxResult result = dialogService.ShowInformationWindow("Voulez-vous vraiment supprimer cet utilisateur ?",
+                        "Confirmation de l'opération",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+                    if (result.Equals(MessageBoxResult.Yes))
+                    {
+                        UserService.DeleteUser(SelectedUser.IdUser);
+                        _users = UserService.GetUsers();
+                        OnPropertyChanged(nameof(Users));
+                    }
+                }
+                catch (Exception e)
+                {
+                    dialogService.ShowInformationWindow("Erreur :\n" + e, "Suppression impossible !", MessageBoxButton.OK, MessageBoxImage.Hand);
+                }
             }, o => true);
         }
 
@@ -52,7 +105,10 @@ namespace GestionCaisse_MVVM.ViewModel
         #endregion
 
         #region Commands
+        public ICommand ToggleIsUserAdmin { get; }
         public ICommand ActivateDeactivateUser { get; }
+        public ICommand OpenAddUserView { get; }
+        public ICommand DeleteUser { get; }
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;

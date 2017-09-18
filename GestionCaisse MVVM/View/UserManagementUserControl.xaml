@@ -12,18 +12,28 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" 
                     Command="{Binding ActivateDeactivateUser}"
-                    DockPanel.Dock="Top" 
-                    Background="OrangeRed"
+                    Background="DimGray"
                     Content="Activer/Désactiver un compte"/>
 
             <Button Grid.Column="1" 
-                   
-                    DockPanel.Dock="Top" 
-                    Background="GreenYellow"
+                    Command="{Binding ToggleIsUserAdmin}"
+                    Background="DodgerBlue"
+                    Content="Activer/Désactiver mode admin"/>
+
+            <Button Grid.Column="2" 
+                    Background="OrangeRed"
+                    Command="{Binding DeleteUser}"
+                    Content="Supprimer un utilisateur"/>
+
+            <Button Grid.Column="3" 
+                    Background="LightGreen"
+                    Command="{Binding OpenAddUserView}"
                     Content="Ajouter un utilisateur"/>
         </Grid>
         

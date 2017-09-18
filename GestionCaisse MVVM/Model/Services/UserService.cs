@@ -58,12 +58,72 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
+        public static bool AddUser(string name, string clearTextPassword, BDE bde, bool isActive, bool isAdmin)
+        {
+            try
+            {
+                using (var context = new DBConnection())
+                {
+                    var userToAdd = new User()
+                    {
+                        Name = name,
+                        PersonnalPassword = clearTextPassword,
+                        IdBDE = bde.idBDE,
+                        IsActive = isActive,
+                        IsAdmin = isAdmin,
+                    };
+
+                    context.Users.Add(userToAdd);
+                    context.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
+        }
+
+        public static void DeleteUser(int userId)
+        {
+            try
+            {
+                using (var context = new DBConnection())
+                {
+                    context.Users.Remove(context.Users.FirstOrDefault(x => x.IdUser == userId));
+                    context.SaveChanges();
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
+        }
+
+        public static void ToggleIsAdminUser(int userId)
+        {
+            try
+            {
+                using (var context = new DBConnection())
+                {
+                    var user = context.Users.FirstOrDefault(x => x.IdUser == userId);
+                    user.IsAdmin = !user.IsAdmin;
+                    context.SaveChanges();
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
+        }
+
         public static IOrderedEnumerable<UserRankQueryResult> RankUsersBySellsForAMonth(int month)
         {
             try
             {
                 using (var context = new DBConnection())
-                { 
+                {
                     var scores = new List<UserRankQueryResult>();
                     List<User> users = context.Users.ToList();
 
@@ -94,9 +154,9 @@ namespace GestionCaisse_MVVM.Model.Services
                 using (var context = new DBConnection())
                 {
                     var query = context.History.Where(x => x.IdUser == user.IdUser
-                                                            && x.SaleDate.Day == DateTime.Now.Day
-                                                            && x.SaleDate.Month == DateTime.Now.Month
-                                                            && x.SaleDate.Year == DateTime.Now.Year)
+                                                           && x.SaleDate.Day == DateTime.Now.Day
+                                                           && x.SaleDate.Month == DateTime.Now.Month
+                                                           && x.SaleDate.Year == DateTime.Now.Year)
                         .GroupBy(x => x.SaleDate);
 
                     return query.Count();
