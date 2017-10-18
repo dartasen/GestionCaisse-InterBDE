@@ -10,6 +10,81 @@
         Height="442" Width="744"
         MinHeight="442" MinWidth="744">
     <DockPanel>
+        <Grid DockPanel.Dock="Top"
+              Visibility="Visible">
+            <Grid Margin="0 0 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="3"
+                           Margin="0 0 0 5"
+                           Text="Mode Administrateur"
+                           FontSize="15"
+                           FontWeight="Bold"
+                           Background="OrangeRed"
+                           HorizontalAlignment="Stretch"
+                           TextAlignment="Center"/>
+
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Text="Utilisateur"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
+
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           Text="Date Début"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
+                
+                <TextBlock Grid.Row="1"
+                           Grid.Column="2"
+                           Text="Date Fin"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
+
+                <ComboBox Grid.Row="2"
+                          Grid.Column="0"
+                          Margin="5 0 5 0"
+                          ItemsSource="{Binding Users}"
+                          SelectedItem="{Binding CurrentUser, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    
+                </ComboBox>
+                
+                <DatePicker Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="0 0 5 0"
+                            SelectedDate="{Binding DateFrom, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
+
+                <DatePicker Grid.Row="2"
+                            Grid.Column="2"
+                            Margin="0 0 5 0"
+                            SelectedDate="{Binding DateTo, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </Grid>
+        
         <Grid DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

@@ -18,6 +18,12 @@ namespace GestionCaisse_MVVM.ViewModel
         public RollingBackViewModel()
         {
             _loginService = LoginService.Instance;
+
+            CurrentUser = _loginService.GetLoginContext().User;
+
+            DateFrom = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            DateTo = DateTime.Now;
+
             UpdateHistory();
 
             Quit = new RelayCommand(() => Close(), o => true);
@@ -78,6 +84,31 @@ namespace GestionCaisse_MVVM.ViewModel
             set { _selectedHistoryQueryResult = value; OnPropertyChanged(); }
         }
 
+        public IEnumerable<User> Users => UserService.GetUsers();
+
+        private User _currentUser;
+
+        public User CurrentUser
+        {
+            get { return _currentUser; }
+            set { _currentUser = value; OnPropertyChanged(); UpdateHistory();}
+        }
+
+        private DateTime _dateFrom;
+
+        public DateTime DateFrom
+        {
+            get { return _dateFrom; }
+            set { _dateFrom = value; OnPropertyChanged(); UpdateHistory(); }
+        }
+
+        private DateTime _dateTo;
+
+        public DateTime DateTo
+        {
+            get { return _dateTo; }
+            set { _dateTo = value; OnPropertyChanged(); UpdateHistory(); }
+        }
         #endregion
 
         #region Commands
@@ -86,7 +117,11 @@ namespace GestionCaisse_MVVM.ViewModel
         public ICommand SaveChanges { get; set; }
         #endregion
 
-        private void UpdateHistory() => _history = ProductService.GetHistory(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day), DateTime.Now, _loginService.GetLoginContext().User.IdUser);
+        private void UpdateHistory()
+        {
+            _history = ProductService.GetHistory(_dateFrom, _dateTo, _currentUser.IdUser);
+            OnPropertyChanged(nameof(History));
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string p = null) =>
