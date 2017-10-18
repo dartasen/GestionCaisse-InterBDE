@@ -25,7 +25,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
             Features.Add(new AdministrationFeature()
             {
-                Name = "Dûs de chaque BDE",
+                Name = "Dus de chaque BDE",
                 ImagePath = "/Assets/administration/accountant.png",
                 UserControl = new BDEDuesUserControl()
             });
