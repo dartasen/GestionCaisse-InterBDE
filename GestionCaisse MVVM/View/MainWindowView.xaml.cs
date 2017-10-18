@@ -24,10 +24,10 @@ namespace GestionCaisse_MVVM.View
             
             DataContext = vm;
 
-            Test();
+            SetBackgroundDependingOnBDE();
         }
 
-        public void Test()
+        public void SetBackgroundDependingOnBDE()
         {
             var vm = DataContext as MainWindowViewModel;
             if (vm == null) return;
