@@ -28,6 +28,8 @@ namespace GestionCaisse_MVVM.View
             {
                 Close = () => Close()
             };
+
+            LoginTextBlock.Focus();
         }
     }
 }
