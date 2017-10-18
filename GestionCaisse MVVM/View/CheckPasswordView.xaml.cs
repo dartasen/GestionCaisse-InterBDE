@@ -39,9 +39,10 @@ namespace GestionCaisse_MVVM.View
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key.Equals(Key.Enter))
-            {
                 ((CheckPasswordViewModel)DataContext).CheckUserPassword.Execute(null);
-            }
+
+            if (e.Key.Equals(Key.Escape))
+                Close();
         }
     }
 }
