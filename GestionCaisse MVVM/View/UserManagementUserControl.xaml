@@ -14,6 +14,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" 
@@ -27,6 +28,7 @@
                     Content="Activer/Désactiver mode admin"/>
 
             <Button Grid.Column="2" 
+                    IsEnabled="False"
                     Background="OrangeRed"
                     Command="{Binding DeleteUser}"
                     Content="Supprimer un utilisateur"/>
@@ -35,6 +37,11 @@
                     Background="LightGreen"
                     Command="{Binding OpenAddUserView}"
                     Content="Ajouter un utilisateur"/>
+
+            <Button Grid.Column="4" 
+                    Background="Yellow"
+                    Command="{Binding OpenAddUserView}"
+                    Content="Réinitialisation MDP"/>
         </Grid>
         
         <DataGrid ItemsSource="{Binding Users,
