@@ -110,6 +110,7 @@
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ResultToBrushConverter.cs" />
     <Compile Include="Converters\SellsScoreToSmileyImageConverter.cs" />
     <Compile Include="Converters\StringToDouble.cs" />
