@@ -42,8 +42,6 @@ namespace GestionCaisse_MVVM.ViewModel
                 return _loginService.GetLoginContext().User.IsAdmin;
             });
 
-            ShowRankingWindow = new RelayCommand(() => dialogService.ShowRankingWindow(), o => true);
-
             ShowRollingBackWindow = new RelayCommand(() =>
             {
                 LoginService.Instance.IsTimerActive = false;
@@ -135,8 +133,6 @@ namespace GestionCaisse_MVVM.ViewModel
         public ICommand DeleteBasketProduct { get; }
 
         public ICommand ShowAdministrationWindow { get; }
-
-        public ICommand ShowRankingWindow { get; }
 
         public ICommand ShowRollingBackWindow { get; }
 
