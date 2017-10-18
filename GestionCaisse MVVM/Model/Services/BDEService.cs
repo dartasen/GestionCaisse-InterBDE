@@ -84,8 +84,15 @@ namespace GestionCaisse_MVVM.Model.Services
 
         public class BDEDue
         {
+            private double _due;
             public BDE BDE { get; set; }
-            public double Due { get; set; }
+
+            public double Due
+            {
+                get { return _due; }
+                set { _due = Math.Round(value, 2); } //Round the due to 2 decimals
+            }
+
         }
 
         private static double ApplyPromotion(List<PromotionQueryResult> listToDeducePromotion)
