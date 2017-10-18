@@ -109,6 +109,8 @@ namespace GestionCaisse_MVVM.ViewModel
             get { return _dateTo; }
             set { _dateTo = value; OnPropertyChanged(); UpdateHistory(); }
         }
+
+        public bool IsAdmin => _loginService.GetLoginContext().User.IsAdmin;
         #endregion
 
         #region Commands

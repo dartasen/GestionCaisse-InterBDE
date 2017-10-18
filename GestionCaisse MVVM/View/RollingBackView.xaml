@@ -3,15 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:GestionCaisse_MVVM.Converters"
         xmlns:local="clr-namespace:GestionCaisse_MVVM.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Rolling Back sur la journée" 
         Height="442" Width="744"
         MinHeight="442" MinWidth="744">
+
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+    
     <DockPanel>
         <Grid DockPanel.Dock="Top"
-              Visibility="Visible">
+              Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid Margin="0 0 0 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
