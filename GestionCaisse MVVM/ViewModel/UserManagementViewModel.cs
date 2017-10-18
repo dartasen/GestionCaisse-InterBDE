@@ -68,7 +68,15 @@ namespace GestionCaisse_MVVM.ViewModel
                         return;
                     }
 
-                    MessageBoxResult result = dialogService.ShowInformationWindow("Voulez-vous vraiment supprimer cet utilisateur ?",
+                    if (SelectedUser.IdUser.Equals(LoginService.Instance.GetLoginContext().User.IdUser))
+                    {
+                        DialogService _dialogService = new DialogService();
+                        _dialogService.ShowInformationWindow("Vous ne pouvez-pas vous supprimer vous-même",
+                            "Opération interdite !", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    MessageBoxResult result = dialogService.ShowInformationWindow("Voulez-vous vraiment supprimer cet utilisateur ? Une désactivation est souvent préférable : elle permet de conserver l'historique de vente !!!",
                         "Confirmation de l'opération",
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
