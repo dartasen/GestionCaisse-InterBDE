@@ -111,6 +111,8 @@ namespace GestionCaisse_MVVM.ViewModel
         }
 
         public bool IsAdmin => _loginService.GetLoginContext().User.IsAdmin;
+
+        public string Title => !CurrentUser.IsAdmin ? "Rolling Back sur la journée" : "Rolling Back";
         #endregion
 
         #region Commands

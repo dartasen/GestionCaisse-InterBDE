@@ -7,9 +7,10 @@
         xmlns:local="clr-namespace:GestionCaisse_MVVM.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Rolling Back sur la journée" 
+        Title="{Binding Title}" 
         Height="442" Width="744"
-        MinHeight="442" MinWidth="744">
+        MinHeight="442" MinWidth="744"
+        Loaded="RollingBackView_OnLoaded">
 
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -63,6 +64,7 @@
                 <ComboBox Grid.Row="2"
                           Grid.Column="0"
                           Margin="5 0 5 0"
+                          x:Name="ComboBox"
                           ItemsSource="{Binding Users}"
                           SelectedItem="{Binding CurrentUser, 
                                                 Mode=TwoWay,
