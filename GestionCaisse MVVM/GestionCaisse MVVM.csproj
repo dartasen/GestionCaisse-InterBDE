@@ -150,7 +150,6 @@
     <Compile Include="ViewModel\ProductInsertionViewModel.cs" />
     <Compile Include="ViewModel\ProductManagementViewModel.cs" />
     <Compile Include="ViewModel\QuickCalcsViewModel.cs" />
-    <Compile Include="ViewModel\RankingPlayersBySellsViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\RollingBackViewModel.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
@@ -327,16 +326,12 @@
     <Content Include="Assets\extra\sentences.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Assets\trophy.png" />
     <Resource Include="logo.ico" />
     <Resource Include="Assets\plastic-cup.png" />
     <Resource Include="Assets\maintenance.png" />
     <Resource Include="Assets\smileys\fireworks.png" />
     <Resource Include="Assets\minus.png" />
     <Resource Include="Assets\plus.png" />
-    <Resource Include="Assets\medals\gold-medal.png" />
-    <Resource Include="Assets\medals\second.png" />
-    <Resource Include="Assets\medals\third.png" />
     <Resource Include="Assets\rollingback.png" />
     <Resource Include="Assets\locked.png" />
     <Content Include="Assets\smileys\happy.png">
