@@ -181,9 +181,6 @@
     <Compile Include="View\QuickCalcsUserControl.xaml.cs">
       <DependentUpon>QuickCalcsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RankingPlayersBySellsView.xaml.cs">
-      <DependentUpon>RankingPlayersBySellsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\RollingBackView.xaml.cs">
       <DependentUpon>RollingBackView.xaml</DependentUpon>
     </Compile>
@@ -246,10 +243,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuickCalcsUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\RankingPlayersBySellsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
