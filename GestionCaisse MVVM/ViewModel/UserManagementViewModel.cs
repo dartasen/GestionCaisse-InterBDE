@@ -21,7 +21,13 @@ namespace GestionCaisse_MVVM.ViewModel
 
             ActivateDeactivateUser = new RelayCommand(() =>
             {
-                if (SelectedUser == null) return;
+                if (SelectedUser == null)
+                {
+                    dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
+                        "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 if (SelectedUser.IdUser.Equals(LoginService.Instance.GetLoginContext().User.IdUser))
                 {
                     DialogService _dialogService = new DialogService();
@@ -36,7 +42,13 @@ namespace GestionCaisse_MVVM.ViewModel
 
             ToggleIsUserAdmin = new RelayCommand(() =>
             {
-                if (SelectedUser == null) return;
+                if (SelectedUser == null)
+                {
+                    dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
+                        "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 if (SelectedUser.IdUser.Equals(LoginService.Instance.GetLoginContext().User.IdUser))
                 {
                     DialogService _dialogService = new DialogService();
@@ -64,7 +76,7 @@ namespace GestionCaisse_MVVM.ViewModel
                     if (SelectedUser == null)
                     {
                         dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
-                            "Suppression impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                            "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
@@ -100,7 +112,7 @@ namespace GestionCaisse_MVVM.ViewModel
                     if (SelectedUser == null)
                     {
                         dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
-                            "Suppression impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                            "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
