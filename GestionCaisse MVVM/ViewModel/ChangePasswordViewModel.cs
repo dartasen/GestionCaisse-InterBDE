@@ -27,7 +27,6 @@ namespace GestionCaisse_MVVM.ViewModel
                     return;
                 }
 
-
                 try
                 {
                     UserService.ChangeUserPassword(user, Password);
