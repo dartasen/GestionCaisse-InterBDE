@@ -64,7 +64,7 @@ namespace GestionCaisse_MVVM.ViewModel
                     if (SelectedUser == null)
                     {
                         dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
-                            "Suppression impossibl !", MessageBoxButton.OK, MessageBoxImage.Error);
+                            "Suppression impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
@@ -92,6 +92,25 @@ namespace GestionCaisse_MVVM.ViewModel
                     dialogService.ShowInformationWindow("Erreur :\n" + e, "Suppression impossible !", MessageBoxButton.OK, MessageBoxImage.Hand);
                 }
             }, o => true);
+
+            ChangePassword = new RelayCommand(() =>
+            {
+                try
+                {
+                    if (SelectedUser == null)
+                    {
+                        dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
+                            "Suppression impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    dialogService.ShowChangePasswordView(SelectedUser);
+                }
+                catch (Exception e)
+                {
+                    dialogService.ShowInformationWindow("Erreur :\n" + e, "Modification impossible !", MessageBoxButton.OK, MessageBoxImage.Hand);
+                }
+            }, o => true);
         }
 
         #region Properties
@@ -117,6 +136,7 @@ namespace GestionCaisse_MVVM.ViewModel
         public ICommand ActivateDeactivateUser { get; }
         public ICommand OpenAddUserView { get; }
         public ICommand DeleteUser { get; }
+        public ICommand ChangePassword { get; }
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;

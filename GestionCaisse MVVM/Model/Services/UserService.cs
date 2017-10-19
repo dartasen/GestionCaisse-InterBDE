@@ -85,6 +85,24 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
+        public static void ChangeUserPassword(User user, string plaintextPassword)
+        {
+            try
+            {
+                using (var context = new DBConnection())
+                {
+                    string hashedPassword = LoginService.CalculateMD5Hash(plaintextPassword);
+                    context.Users.FirstOrDefault(x => x.IdUser == user.IdUser).PersonnalPassword = hashedPassword;
+
+                    context.SaveChanges();
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
+        }
+
         public static void DeleteUser(int userId)
         {
             try

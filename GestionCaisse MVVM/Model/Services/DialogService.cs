@@ -137,6 +137,25 @@ namespace GestionCaisse_MVVM.Model.Services
         }
 
         /// <summary>
+        ///  Display ChangePasswordView
+        /// </summary>
+        /// <param name="user">user to modify the password</param>
+        public void ShowChangePasswordView(User user)
+        {
+            try
+            {
+                var window = (Window)Activator.CreateInstance(typeof(ChangePasswordView), user);
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowInformationWindow(
+                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
         ///     Display a quick MessageBox fully customizable
         /// </summary>
         /// <param name="message">Message to display</param>

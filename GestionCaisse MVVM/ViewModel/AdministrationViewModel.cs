@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GestionCaisse_MVVM.Model.Entities;
-using GestionCaisse_MVVM.Model.Services;
 using GestionCaisse_MVVM.View;
 
 namespace GestionCaisse_MVVM.ViewModel
