@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity.Core;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using GestionCaisse_MVVM.Exceptions;
 
 namespace GestionCaisse_MVVM.Model.Services

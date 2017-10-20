@@ -6,6 +6,6 @@ namespace GestionCaisse_MVVM.Model.Entities
     {
         public User User { get; set; }
         public BDE BuyingBDE { get; set; }
-        public List<int> idSellsMade { get; set; }
+        public List<int> IdSellsMade { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace GestionCaisse_MVVM.Model.Services
                             SaleDate = DateTime.Now
                         });
 
-                        context.Products.Where(x => x.IDProduct == bp.Product.IDProduct).FirstOrDefault().Quantity -= bp.Quantity;
+                        context.Products.FirstOrDefault(x => x.IDProduct == bp.Product.IDProduct).Quantity -= bp.Quantity;
                     }
                     context.SaveChanges();
                     return true;
@@ -55,14 +55,7 @@ namespace GestionCaisse_MVVM.Model.Services
 
         private static BasketService _instance;
 
-        public static BasketService Instance
-        {
-            get
-            {
-                if (_instance == null) _instance = new BasketService();
-                return _instance;
-            }
-        }
+        public static BasketService Instance => _instance ?? (_instance = new BasketService());
 
         private BasketService()
         {

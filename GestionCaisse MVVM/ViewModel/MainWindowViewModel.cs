@@ -173,8 +173,8 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public BasketProduct CurrentBasketProduct
         {
-            get { return _currentBasketProduct; }
-            set { _currentBasketProduct = value; }
+            get => _currentBasketProduct;
+            set => _currentBasketProduct = value;
         }
 
         private BDE _selectedBDE;

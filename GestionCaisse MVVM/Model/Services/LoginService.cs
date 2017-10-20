@@ -1,13 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows;
-using System.Windows.Threading;
 using GestionCaisse_MVVM.Exceptions;
 using GestionCaisse_MVVM.Model.Entities;
 
@@ -44,7 +41,7 @@ namespace GestionCaisse_MVVM.Model.Services
         private LoginResult IsUserAuthorizedToLogIn(string username, string plainTextPassword)
         {
             if (username == null || plainTextPassword == null) return null;
-            var convertedPassword = CalculateMD5Hash(plainTextPassword);
+            var convertedPassword = CalculateMd5Hash(plainTextPassword);
 
             try
             {
@@ -65,7 +62,7 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
-        public static string CalculateMD5Hash(string input)
+        public static string CalculateMd5Hash(string input)
         {
             var md5 = MD5.Create();
 
@@ -87,14 +84,7 @@ namespace GestionCaisse_MVVM.Model.Services
 
         private static LoginService _instance;
 
-        public static LoginService Instance
-        {
-            get
-            {
-                if (_instance == null) _instance = new LoginService();
-                return _instance;
-            }
-        }
+        public static LoginService Instance => _instance ?? (_instance = new LoginService());
 
         private LoginService()
         {

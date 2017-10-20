@@ -17,14 +17,14 @@ namespace GestionCaisse_MVVM.Model.Entities
 
         public Product Product
         {
-            get { return _product; }
+            get => _product;
             set
             { _product = value; OnPropertyChanged(); }
         }
         
         public int Quantity
         {
-            get { return _quantity; }
+            get => _quantity;
             set { _quantity = value; OnPropertyChanged(); }
         }
 

@@ -23,7 +23,7 @@ namespace GestionCaisse_MVVM.ViewModel
                     return;
                 }
 
-                UserService.AddUser(Login, LoginService.CalculateMD5Hash(Password), SelectedBde, IsActive, IsAdmin);
+                UserService.AddUser(Login, LoginService.CalculateMd5Hash(Password), SelectedBde, IsActive, IsAdmin);
                 Close();
             }, o => true);
             CloseWindow = new RelayCommand(() => Close(), o => true);
@@ -34,7 +34,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public string Login
         {
-            get { return _login; }
+            get => _login;
             set { _login = value; OnPropertyChanged(); }
         }
 
@@ -42,7 +42,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public string Password
         {
-            get { return _password; }
+            get => _password;
             set { _password = value; OnPropertyChanged(); }
         }
 
@@ -52,7 +52,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public BDE SelectedBde
         {
-            get { return _selecteBde; }
+            get => _selecteBde;
             set { _selecteBde = value; OnPropertyChanged(); }
         }
 
@@ -60,7 +60,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public bool IsActive
         {
-            get { return _isActive; }
+            get => _isActive;
             set { _isActive = value; OnPropertyChanged(); }
         }
 
@@ -68,7 +68,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public bool IsAdmin
         {
-            get { return _isAdmin; }
+            get => _isAdmin;
             set { _isAdmin = value; OnPropertyChanged(); }
         }
         #endregion

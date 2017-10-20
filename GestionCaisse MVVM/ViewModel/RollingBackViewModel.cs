@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GestionCaisse_MVVM.Model.Services;
@@ -13,7 +10,7 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class RollingBackViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private LoginService _loginService;
+        private readonly LoginService _loginService;
 
         public RollingBackViewModel()
         {
@@ -72,7 +69,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public List<ProductService.HistoryQueryResult> History
         {
-            get { return _history; }
+            get => _history;
             set { _history = value; OnPropertyChanged(); }
         }
 
@@ -80,7 +77,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public ProductService.HistoryQueryResult SelectedHistoryQueryResult
         {
-            get { return _selectedHistoryQueryResult; }
+            get => _selectedHistoryQueryResult;
             set { _selectedHistoryQueryResult = value; OnPropertyChanged(); }
         }
 
@@ -90,7 +87,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public User CurrentUser
         {
-            get { return _currentUser; }
+            get => _currentUser;
             set { _currentUser = value; OnPropertyChanged(); UpdateHistory();}
         }
 
@@ -98,7 +95,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public DateTime DateFrom
         {
-            get { return _dateFrom; }
+            get => _dateFrom;
             set { _dateFrom = value; OnPropertyChanged(); UpdateHistory(); }
         }
 
@@ -106,7 +103,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public DateTime DateTo
         {
-            get { return _dateTo; }
+            get => _dateTo;
             set { _dateTo = value; OnPropertyChanged(); UpdateHistory(); }
         }
 

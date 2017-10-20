@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace GestionCaisse_MVVM.Model.Entities
 {
@@ -12,8 +7,7 @@ namespace GestionCaisse_MVVM.Model.Entities
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            var textbox = Template.FindName("Text", this) as TextBox;
-            if (textbox != null) textbox.Focus();
+            if (Template.FindName("Text", this) is TextBox textbox) textbox.Focus();
         }
     }
 }

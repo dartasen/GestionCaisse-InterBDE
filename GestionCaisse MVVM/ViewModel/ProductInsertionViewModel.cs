@@ -16,7 +16,7 @@ namespace GestionCaisse_MVVM.ViewModel
         //TODO Possibilité de modifier la quantité sans supprimer l'article du panier
         public ProductInsertionViewModel()
         {
-            _SelectedProduct = new BasketProduct(null, 1);
+            _selectedProduct = new BasketProduct(null, 1);
 
             var basketService = BasketService.Instance;
 
@@ -58,14 +58,14 @@ namespace GestionCaisse_MVVM.ViewModel
             }
         }
 
-        private BasketProduct _SelectedProduct;
+        private BasketProduct _selectedProduct;
 
         public BasketProduct SelectedProduct
         {
-            get => _SelectedProduct;
+            get => _selectedProduct;
             set
             {
-                _SelectedProduct = value;
+                _selectedProduct = value;
                 OnPropertyChanged();
             }
         }

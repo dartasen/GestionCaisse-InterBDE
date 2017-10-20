@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows;
-using GestionCaisse_MVVM.Exceptions;
 using GestionCaisse_MVVM.View;
 
 namespace GestionCaisse_MVVM.Model.Services

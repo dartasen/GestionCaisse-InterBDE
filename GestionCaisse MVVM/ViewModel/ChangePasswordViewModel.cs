@@ -8,7 +8,7 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class ChangePasswordViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private User user;
+        private readonly User user;
 
         public ChangePasswordViewModel(User user)
         {
@@ -50,7 +50,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public string Password
         {
-            get { return _password; }
+            get => _password;
             set { _password = value; OnPropertyChanged(); }
         }
         #endregion

@@ -15,7 +15,7 @@ namespace GestionCaisse_MVVM.ViewModel
     public class LoginViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly LoginService _loginService = LoginService.Instance;
-        private Random random;
+        private readonly Random random;
 
         #region Commands
 
@@ -54,15 +54,12 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public string RandomedSentence
         {
-            get { return _randomedSentence; }
+            get => _randomedSentence;
             set { _randomedSentence = value; OnPropertyChanged(); }
         }
 
 
-        public string WindowName
-        {
-            get => $"Connexion à l'application (v.{AppInformations.Version})";
-        }
+        public string WindowName => $"Connexion à l'application (v.{AppInformations.Version})";
 
         #endregion
 
@@ -82,8 +79,8 @@ namespace GestionCaisse_MVVM.ViewModel
                     if (connection.ConnectionResult.Equals(ConnectionResult.Authorized))
                     {
                         _loginService.GetLoginContext().User = connection.User;
-                        _loginService.GetLoginContext().BuyingBDE = BDEService.GetBDEs()
-                            .Where(x => x.idBDE == connection.User.IdBDE).FirstOrDefault();
+                        _loginService.GetLoginContext().BuyingBDE = BDEService
+                            .GetBDEs().FirstOrDefault(x => x.idBDE == connection.User.IdBDE);
                         Password = null; //Makes the password box empty
                         Hide();
                         dialogService.ShowMainWindow();

@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using GestionCaisse_MVVM.Model.Entities;
 using GestionCaisse_MVVM.Model.Services;
 
 namespace GestionCaisse_MVVM.ViewModel
@@ -28,7 +23,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public double PriceToShare
         {
-            get { return _priceToShare; }
+            get => _priceToShare;
             set
             {
                 _priceToShare = value;
@@ -39,8 +34,8 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public ObservableCollection<string> Dues
         {
-            get { return _dues; }
-            set { _dues = value; }
+            get => _dues;
+            set => _dues = value;
         }
         #endregion
 

@@ -24,7 +24,7 @@ namespace GestionCaisse_MVVM.ViewModel
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
                     if(result.Equals(MessageBoxResult.Yes))
-                        db.SaveChanges();
+                        _db.SaveChanges();
                 }
                 catch (Exception e)
                 {
@@ -36,12 +36,12 @@ namespace GestionCaisse_MVVM.ViewModel
             ResetChanges = new RelayCommand(() => Refresh(), o => true);
         }
 
-        private DBConnection db;
+        private DBConnection _db;
         public void Refresh()
         {
-            db = new DBConnection();
-            db.Products.Load();
-            _products.Source = db.Products.Local;
+            _db = new DBConnection();
+            _db.Products.Load();
+            _products.Source = _db.Products.Local;
         }
 
         #region Properties
@@ -49,8 +49,8 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public CollectionViewSource Products
         {
-            get { return _products; }
-            set { _products = value; }
+            get => _products;
+            set => _products = value;
         }
 
         #endregion;

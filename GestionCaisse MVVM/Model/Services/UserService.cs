@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity.Core;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
 using GestionCaisse_MVVM.Exceptions;
 
 namespace GestionCaisse_MVVM.Model.Services
@@ -91,7 +87,7 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    string hashedPassword = LoginService.CalculateMD5Hash(plaintextPassword);
+                    string hashedPassword = LoginService.CalculateMd5Hash(plaintextPassword);
                     context.Users.FirstOrDefault(x => x.IdUser == user.IdUser).PersonnalPassword = hashedPassword;
 
                     context.SaveChanges();

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace GestionCaisse_MVVM.Converters
@@ -14,13 +10,11 @@ namespace GestionCaisse_MVVM.Converters
         {
             try
             {
-                string stringToConvert = value as string;
+                var stringToConvert = value as string;
                 if (string.IsNullOrEmpty(stringToConvert))
                     return 0.00;
 
-                double convertedString;
-
-                Double.TryParse(stringToConvert, NumberStyles.Number, System.Globalization.CultureInfo.InvariantCulture, out convertedString);
+                double.TryParse(stringToConvert, NumberStyles.Number, System.Globalization.CultureInfo.InvariantCulture, out var convertedString);
 
                 return convertedString;
             }

@@ -25,7 +25,7 @@ namespace GestionCaisse_MVVM.View
 
             DataContext = vm;
 
-            usernameTextBox.Focus();
+            UsernameTextBox.Focus();
         }
 
         /// <summary>

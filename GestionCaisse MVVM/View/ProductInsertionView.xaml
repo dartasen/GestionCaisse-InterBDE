@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converter="clr-namespace:GestionCaisse_MVVM.Converters"
         xmlns:templates="clr-namespace:GestionCaisse_MVVM.TemplateSelector"
-        xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         xmlns:entities="clr-namespace:GestionCaisse_MVVM.Model.Entities"
         mc:Ignorable="d"
         Title="Insertion d'un produit" Height="300" Width="300"

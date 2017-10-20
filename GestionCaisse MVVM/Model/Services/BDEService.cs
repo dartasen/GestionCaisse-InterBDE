@@ -89,8 +89,8 @@ namespace GestionCaisse_MVVM.Model.Services
 
             public double Due
             {
-                get { return _due; }
-                set { _due = Math.Round(value, 2); } //Round the due to 2 decimals
+                get => _due;
+                set => _due = Math.Round(value, 2); //Round the due to 2 decimals
             }
 
         }

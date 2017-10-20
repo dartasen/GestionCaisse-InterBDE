@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using GestionCaisse_MVVM.Model.Services;
 
 namespace GestionCaisse_MVVM.ViewModel
@@ -34,8 +31,8 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public List<BDEService.BDEDue> BDEDues
         {
-            get { return _bdeDues; }
-            set { _bdeDues = value; }
+            get => _bdeDues;
+            set => _bdeDues = value;
         }
 
         private DateTime _dateFrom;
