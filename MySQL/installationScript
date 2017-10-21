@@ -149,3 +149,13 @@ INSERT INTO `bde`.`Bde` (`idBde`, `nom`, `taux`) VALUES (NULL, 'RT', 0.25);
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `bde`.`Utilisateur`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `bde`;
+INSERT INTO `bde`.`Utilisateur` (`idUtilisateur`, `nom`, `codePersonnel`, `codeBadge`, `idBde`, `admin`, `active`) VALUES (NULL, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'NULL', 1, 1, 1);
+
+COMMIT;
+
