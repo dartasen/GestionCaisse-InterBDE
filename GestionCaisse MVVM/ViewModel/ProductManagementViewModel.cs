@@ -25,12 +25,14 @@ namespace GestionCaisse_MVVM.ViewModel
                         MessageBoxImage.Question);
                     if(result.Equals(MessageBoxResult.Yes))
                         _db.SaveChanges();
+                    else
+                        return;
                 }
                 catch (Exception e)
                 {
                     dialogService.ShowInformationWindow("Erreur :\n" + e, "Mise à jour impossible !", MessageBoxButton.OK, MessageBoxImage.Hand);
                 }
-                finally { Refresh(); }
+                Refresh();
             }, o => true);
 
             ResetChanges = new RelayCommand(() => Refresh(), o => true);
