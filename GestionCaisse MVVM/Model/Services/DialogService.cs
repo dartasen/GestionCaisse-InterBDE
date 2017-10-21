@@ -11,10 +11,17 @@ namespace GestionCaisse_MVVM.Model.Services
         /// </summary>
         public void ShowProductInsertPage()
         {
-            var createType = Type.GetType("GestionCaisse_MVVM.View.ProductInsertionView, GestionCaisse");
-            var window = (Window)Activator.CreateInstance(createType);
-
-            window.ShowDialog();
+            try
+            {
+                var window = (Window)Activator.CreateInstance(typeof(ProductInsertionView));
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowInformationWindow(
+                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -22,11 +29,9 @@ namespace GestionCaisse_MVVM.Model.Services
         /// </summary>
         public void ShowMainWindow()
         {
-            var createType = Type.GetType("GestionCaisse_MVVM.View.MainWindowView, GestionCaisse");
-
             try
             {
-                var window = (Window)Activator.CreateInstance(createType);
+                var window = (Window)Activator.CreateInstance(typeof(MainWindowView));
                 window.ShowDialog();
             }
             catch (Exception ex)
@@ -42,31 +47,9 @@ namespace GestionCaisse_MVVM.Model.Services
         /// </summary>
         public void ShowAdministrationWindow()
         {
-            var createType = Type.GetType("GestionCaisse_MVVM.View.AdministrationView, GestionCaisse");
-
             try
             {
-                var window = (Window)Activator.CreateInstance(createType);
-                window.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        /// <summary>
-        ///     Display RankingPlayersBySellsView
-        /// </summary>
-        public void ShowRankingWindow()
-        {
-            var createType = Type.GetType("GestionCaisse_MVVM.View.RankingPlayersBySellsView, GestionCaisse");
-
-            try
-            {
-                var window = (Window)Activator.CreateInstance(createType);
+                var window = (Window)Activator.CreateInstance(typeof(AdministrationView));
                 window.ShowDialog();
             }
             catch (Exception ex)
@@ -82,11 +65,9 @@ namespace GestionCaisse_MVVM.Model.Services
         /// </summary>
         public void ShowRollingBackWindow()
         {
-            var createType = Type.GetType("GestionCaisse_MVVM.View.RollingBackView, GestionCaisse");
-
             try
             {
-                var window = (Window)Activator.CreateInstance(createType);
+                var window = (Window)Activator.CreateInstance(typeof(RollingBackView));
                 window.ShowDialog();
             }
             catch (Exception ex)
