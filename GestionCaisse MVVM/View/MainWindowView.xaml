@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converter="clr-namespace:GestionCaisse_MVVM.Converters"
         mc:Ignorable="d"
-        Title="Gestion Caisse Inter-BDE" Height="287" Width="583"
+        Title="Gestion Caisse Inter-BDE" Height="287" Width="782"
         WindowStartupLocation="CenterScreen"
-        MinHeight="287" MinWidth="590"
+        MinHeight="287" MinWidth="782"
         Icon="../Assets/plastic-cup.png"
         RenderOptions.BitmapScalingMode="HighQuality"
         Loaded="MainWindowView_OnLoaded"
@@ -180,6 +180,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
                             <Button Grid.Column="0"
@@ -196,6 +197,12 @@
                                     Command="{Binding Logout}" />
 
                             <Button Grid.Column="2"
+                                    FontSize="14"
+                                    Margin="10 0 0 0"
+                                    Command="{Binding ValidateSell}"
+                                    Content="Carte"/>
+
+                            <Button Grid.Column="3"
                                     FontSize="14"
                                     Margin="10 0 0 0"
                                     Command="{Binding ValidateSell}"
