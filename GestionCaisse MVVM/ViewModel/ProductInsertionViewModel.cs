@@ -13,7 +13,6 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class ProductInsertionViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        //TODO Possibilité de modifier la quantité sans supprimer l'article du panier
         public ProductInsertionViewModel()
         {
             _selectedProduct = new BasketProduct(null, 1);
