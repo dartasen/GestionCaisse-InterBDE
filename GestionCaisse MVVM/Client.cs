@@ -15,7 +15,7 @@ namespace GestionCaisse_MVVM
     public partial class Client
     {
         public int IdClient { get; set; }
-        public string IdCarte { get; set; }
+        public string BadgeID { get; set; }
         public string Name { get; set; }
         public Nullable<int> IdBDE { get; set; }
         public double Balance { get; set; }

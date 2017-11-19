@@ -18,7 +18,7 @@ namespace GestionCaisse_MVVM.Model.Services
         /// <summary>
         ///     Register the sell of products to the DB
         /// </summary>
-        public bool ValidateSell()
+        public bool ValidateSell(int? clientId = null)
         {
             if (!GetBasket().Products.Any()) return false;
 
@@ -36,6 +36,7 @@ namespace GestionCaisse_MVVM.Model.Services
                             IdProduct = bp.Product.IDProduct,
                             Quantity = bp.Quantity,
                             IdBuyingBDE = loginService.BuyingBDE.idBDE,
+                            IdClient = clientId,
                             SaleDate = DateTime.Now
                         });
 

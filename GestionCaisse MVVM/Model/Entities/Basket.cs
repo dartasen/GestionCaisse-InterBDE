@@ -18,33 +18,27 @@ namespace GestionCaisse_MVVM.Model.Entities
 
         public IEnumerable<BasketProduct> Products => _products;
 
-        public string SnacksPrice
+        public double SnacksPrice => _products.Where(x => x.Product.Category.Equals("snack"))
+            .Sum(x => x.Quantity * x.Product.Price);
+
+        public string SnacksPriceFormated => SnacksPrice + " €";
+
+        public double DrinksPrice => _products.Where(x => x.Product.Category.Equals("boisson"))
+            .Sum(x => x.Quantity * x.Product.Price);
+
+        public string DrinksPriceFormated => DrinksPrice + " €";
+
+        public double TotalPrice
         {
             get
             {
-                return _products.Where(x => x.Product.Category.Equals("snack"))
-                    .Sum(x => x.Quantity * x.Product.Price) + " €";
+                var promotion = _products.Where(x => x.Product.Price >= 0.70).Sum(x => x.Quantity) / 2 * 0.20;
+
+                return _products.Sum(x => x.Quantity * x.Product.Price) - promotion;
             }
         }
 
-        public string DrinksPrice
-        {
-            get
-            {
-                return _products.Where(x => x.Product.Category.Equals("boisson"))
-                           .Sum(x => x.Quantity * x.Product.Price) + " €";
-            }
-        }
-
-        public string TotalPrice
-        {
-            get
-            {
-                double promotion = _products.Where(x => x.Product.Price >= 0.70).Sum(x => x.Quantity) / 2 * 0.20;
-
-                return _products.Sum(x => x.Quantity * x.Product.Price) - promotion + " €";
-            }
-        }
+        public string TotalPriceFormated => TotalPrice + " €";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -121,9 +115,9 @@ namespace GestionCaisse_MVVM.Model.Entities
 
         private void NotifyProperties()
         {
-            OnPropertyChanged(nameof(SnacksPrice));
-            OnPropertyChanged(nameof(DrinksPrice));
-            OnPropertyChanged(nameof(TotalPrice));
+            OnPropertyChanged(nameof(SnacksPriceFormated));
+            OnPropertyChanged(nameof(DrinksPriceFormated));
+            OnPropertyChanged(nameof(TotalPriceFormated));
         }
     }
 }

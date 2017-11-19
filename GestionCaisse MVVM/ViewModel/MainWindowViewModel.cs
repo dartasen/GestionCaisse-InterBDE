@@ -50,6 +50,11 @@ namespace GestionCaisse_MVVM.ViewModel
                 UpdateUserSellsSmiley();
             }, o => true);
 
+            ValidateClientCashing = new RelayCommand(() =>
+            {
+                dialogService.ShowClientCashing();
+            }, o => true);
+
             ValidateSell = new RelayCommand(() =>
             {
                 try
@@ -127,6 +132,8 @@ namespace GestionCaisse_MVVM.ViewModel
         public ICommand InsertProduct { get; }
 
         public ICommand ValidateSell { get; }
+
+        public ICommand ValidateClientCashing { get; set; }
 
         public ICommand Logout { get; }
 

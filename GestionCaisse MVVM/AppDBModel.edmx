@@ -345,7 +345,7 @@
             <PropertyRef Name="IdClient" />
           </Key>
           <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdCarte" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdBDE" Type="Int32" />
           <Property Name="Balance" Type="Double" Nullable="false" />
@@ -440,7 +440,7 @@
                 <ScalarProperty Name="Balance" ColumnName="credit" />
                 <ScalarProperty Name="IdBDE" ColumnName="idBde" />
                 <ScalarProperty Name="Name" ColumnName="nom" />
-                <ScalarProperty Name="IdCarte" ColumnName="idCarte" />
+                <ScalarProperty Name="BadgeID" ColumnName="idCarte" />
                 <ScalarProperty Name="IdClient" ColumnName="idClient" />
               </MappingFragment>
             </EntityTypeMapping>

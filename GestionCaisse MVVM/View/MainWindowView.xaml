@@ -199,7 +199,7 @@
                             <Button Grid.Column="2"
                                     FontSize="14"
                                     Margin="10 0 0 0"
-                                    Command="{Binding ValidateSell}"
+                                    Command="{Binding ValidateClientCashing}"
                                     Content="Carte"/>
 
                             <Button Grid.Column="3"
@@ -252,17 +252,17 @@
                                 <StackPanel Grid.Column="1">
                                     <TextBlock x:Name="DrinksTotalTextBlock"
                                                FontSize="14"
-                                               Text="{Binding Basket.DrinksPrice}" />
+                                               Text="{Binding Basket.DrinksPriceFormated}" />
 
                                     <TextBlock x:Name="SnacksTotalTextBlock"
                                                FontSize="14"
-                                               Text="{Binding Basket.SnacksPrice}" />
+                                               Text="{Binding Basket.SnacksPriceFormated}" />
 
                                     <TextBlock x:Name="TotalTextBlock"
                                                FontSize="14"
                                                Foreground="OrangeRed"
                                                FontWeight="ExtraBold"
-                                               Text="{Binding Basket.TotalPrice}" />
+                                               Text="{Binding Basket.TotalPriceFormated}" />
                                 </StackPanel>
 
                             </Grid>

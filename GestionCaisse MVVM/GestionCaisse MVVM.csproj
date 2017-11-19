@@ -134,6 +134,7 @@
     <Compile Include="Model\Services\AppInformations.cs" />
     <Compile Include="Model\Services\BasketService.cs" />
     <Compile Include="Model\Services\BDEService.cs" />
+    <Compile Include="Model\Services\ClientService.cs" />
     <Compile Include="Model\Services\DialogService.cs" />
     <Compile Include="Model\Services\LoginService.cs" />
     <Compile Include="Model\Services\ProductService.cs" />
@@ -151,6 +152,9 @@
     <Compile Include="ViewModel\BDEDuesViewModel.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\CheckPasswordViewModel.cs" />
+    <Compile Include="ViewModel\ClientCashingStep1ViewModel.cs" />
+    <Compile Include="ViewModel\ClientCashingStep2ViewModel.cs" />
+    <Compile Include="ViewModel\ClientCashingViewModel.cs" />
     <Compile Include="ViewModel\HistoryViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ProductInsertionViewModel.cs" />
@@ -174,6 +178,15 @@
     </Compile>
     <Compile Include="View\CheckPasswordView.xaml.cs">
       <DependentUpon>CheckPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientCashing.xaml.cs">
+      <DependentUpon>ClientCashing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientCashingStep1UserControl.xaml.cs">
+      <DependentUpon>ClientCashingStep1UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientCashingStep2UserControl.xaml.cs">
+      <DependentUpon>ClientCashingStep2UserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HistoryUserControl.xaml.cs">
       <DependentUpon>HistoryUserControl.xaml</DependentUpon>
@@ -213,6 +226,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CheckPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientCashing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientCashingStep1UserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientCashingStep2UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

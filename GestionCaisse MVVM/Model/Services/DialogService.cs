@@ -43,6 +43,24 @@ namespace GestionCaisse_MVVM.Model.Services
         }
 
         /// <summary>
+        ///     Display ClientCashing
+        /// </summary>
+        public void ShowClientCashing()
+        {
+            try
+            {
+                var window = (Window)Activator.CreateInstance(typeof(ClientCashing));
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowInformationWindow(
+                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
         ///     Display AdministrationView
         /// </summary>
         public void ShowAdministrationWindow()
