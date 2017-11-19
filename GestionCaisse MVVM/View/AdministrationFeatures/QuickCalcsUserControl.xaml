@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="GestionCaisse_MVVM.View.AdministrationFeatures.QuickCalcsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:GestionCaisse_MVVM.Converters"
+             mc:Ignorable="d" 
+             Background="White"
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <converters:StringToDouble x:Key="StringToDouble"/>
+    </UserControl.Resources>
+    <DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="0 0 3 0"
+                       Text="Somme à partager : "/>
+
+            <TextBox Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding PriceToShare,
+                           Mode=TwoWay,
+                           UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Button Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0 10 0 0"
+                    Content="Calculer"
+                    Command="{Binding CalculateDues}"/>
+
+            <ListView Grid.Row="2"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2"
+                      Margin="0 10 0 0"
+                      Name="ListView"
+                      SelectionMode="Single"
+                      IsManipulationEnabled="False"
+                      ItemsSource="{Binding Dues, 
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"
+                                   FontWeight="Bold"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+        </Grid>
+    </DockPanel>
+</UserControl>

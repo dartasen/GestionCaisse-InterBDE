@@ -147,48 +147,48 @@
     <Compile Include="User.cs">
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\AddUserViewModel.cs" />
+    <Compile Include="ViewModel\AdministrationFeatures\AddUserViewModel.cs" />
     <Compile Include="ViewModel\AdministrationViewModel.cs" />
-    <Compile Include="ViewModel\BDEDuesViewModel.cs" />
-    <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModel\AdministrationFeatures\BDEDuesViewModel.cs" />
+    <Compile Include="ViewModel\AdministrationFeatures\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\CheckPasswordViewModel.cs" />
-    <Compile Include="ViewModel\ClientCashingStep1ViewModel.cs" />
-    <Compile Include="ViewModel\ClientCashingStep2ViewModel.cs" />
-    <Compile Include="ViewModel\ClientCashingViewModel.cs" />
-    <Compile Include="ViewModel\HistoryViewModel.cs" />
+    <Compile Include="ViewModel\ClientCashing\ClientCashingStep1ViewModel.cs" />
+    <Compile Include="ViewModel\ClientCashing\ClientCashingStep2ViewModel.cs" />
+    <Compile Include="ViewModel\ClientCashing\ClientCashingViewModel.cs" />
+    <Compile Include="ViewModel\AdministrationFeatures\HistoryViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ProductInsertionViewModel.cs" />
-    <Compile Include="ViewModel\ProductManagementViewModel.cs" />
-    <Compile Include="ViewModel\QuickCalcsViewModel.cs" />
+    <Compile Include="ViewModel\AdministrationFeatures\ProductManagementViewModel.cs" />
+    <Compile Include="ViewModel\AdministrationFeatures\QuickCalcsViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\RollingBackViewModel.cs" />
-    <Compile Include="ViewModel\UserManagementViewModel.cs" />
+    <Compile Include="ViewModel\AdministrationFeatures\UserManagementViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="View\AddUserView.xaml.cs">
+    <Compile Include="View\AdministrationFeatures\AddUserView.xaml.cs">
       <DependentUpon>AddUserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AdministrationView.xaml.cs">
       <DependentUpon>AdministrationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BDEDuesUserControl.xaml.cs">
+    <Compile Include="View\AdministrationFeatures\BDEDuesUserControl.xaml.cs">
       <DependentUpon>BDEDuesUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ChangePasswordView.xaml.cs">
+    <Compile Include="View\AdministrationFeatures\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CheckPasswordView.xaml.cs">
       <DependentUpon>CheckPasswordView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientCashing.xaml.cs">
+    <Compile Include="View\ClientCashing\ClientCashing.xaml.cs">
       <DependentUpon>ClientCashing.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientCashingStep1UserControl.xaml.cs">
+    <Compile Include="View\ClientCashing\ClientCashingStep1UserControl.xaml.cs">
       <DependentUpon>ClientCashingStep1UserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientCashingStep2UserControl.xaml.cs">
+    <Compile Include="View\ClientCashing\ClientCashingStep2UserControl.xaml.cs">
       <DependentUpon>ClientCashingStep2UserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HistoryUserControl.xaml.cs">
+    <Compile Include="View\AdministrationFeatures\HistoryUserControl.xaml.cs">
       <DependentUpon>HistoryUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
@@ -197,19 +197,19 @@
     <Compile Include="View\ProductInsertionView.xaml.cs">
       <DependentUpon>ProductInsertionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ProductManagementUserControl.xaml.cs">
+    <Compile Include="View\AdministrationFeatures\ProductManagementUserControl.xaml.cs">
       <DependentUpon>ProductManagementUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\QuickCalcsUserControl.xaml.cs">
+    <Compile Include="View\AdministrationFeatures\QuickCalcsUserControl.xaml.cs">
       <DependentUpon>QuickCalcsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RollingBackView.xaml.cs">
       <DependentUpon>RollingBackView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserManagementUserControl.xaml.cs">
+    <Compile Include="View\AdministrationFeatures\UserManagementUserControl.xaml.cs">
       <DependentUpon>UserManagementUserControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\AddUserView.xaml">
+    <Page Include="View\AdministrationFeatures\AddUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,11 +217,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BDEDuesUserControl.xaml">
+    <Page Include="View\AdministrationFeatures\BDEDuesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ChangePasswordView.xaml">
+    <Page Include="View\AdministrationFeatures\ChangePasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,19 +229,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ClientCashing.xaml">
+    <Page Include="View\ClientCashing\ClientCashing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ClientCashingStep1UserControl.xaml">
+    <Page Include="View\ClientCashing\ClientCashingStep1UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ClientCashingStep2UserControl.xaml">
+    <Page Include="View\ClientCashing\ClientCashingStep2UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HistoryUserControl.xaml">
+    <Page Include="View\AdministrationFeatures\HistoryUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -276,11 +276,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ProductManagementUserControl.xaml">
+    <Page Include="View\AdministrationFeatures\ProductManagementUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuickCalcsUserControl.xaml">
+    <Page Include="View\AdministrationFeatures\QuickCalcsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,7 +288,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserManagementUserControl.xaml">
+    <Page Include="View\AdministrationFeatures\UserManagementUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="GestionCaisse_MVVM.View.ClientCashing.ClientCashingStep1UserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GestionCaisse_MVVM.View"
+             mc:Ignorable="d" 
+             PreviewKeyDown="OnPreviewKeyDown"
+             Background="White" Height="220" Width="350">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top"
+                   Text="Un code ? "
+                   FontWeight="Bold"
+                   FontSize="20"/>
+
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    IsEnabled="False"
+                    Content="Précédent"/>
+
+            <Button Grid.Column="1"
+                    Content="_Vérifier"
+                    Command="{Binding CheckPasskey}"/>
+        </Grid>
+        
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="0"
+                     Grid.Column="0"
+                     VerticalAlignment="Center"
+                     Padding="0 7.5 0 7.5"
+                     TextAlignment="Center"
+                     x:Name="TextBox"
+                     Text="{Binding Passkey,
+                            Mode=TwoWay,
+                            UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+    </DockPanel>
+</UserControl>

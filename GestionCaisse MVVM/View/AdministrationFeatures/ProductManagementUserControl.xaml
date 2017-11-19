@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="GestionCaisse_MVVM.View.AdministrationFeatures.ProductManagementUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Background="White"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <DockPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" 
+                    Command="{Binding ResetChanges}"
+                    DockPanel.Dock="Top" 
+                    Background="OrangeRed"
+                    Content="Réinitialiser"/>
+
+            <Button Grid.Column="1" 
+                    Command="{Binding SaveChanges}"
+                    DockPanel.Dock="Top" 
+                    Background="LightGreen"
+                    Content="Valider les changements"/>
+        </Grid>
+
+        <DataGrid ItemsSource="{Binding Products.View,
+                                UpdateSourceTrigger=PropertyChanged}"
+                  AlternatingRowBackground="LightBlue"
+                  ColumnWidth="*"
+                  CanUserAddRows="True"
+                  
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id Produit"
+                                    Binding="{Binding IDProduct}"
+                                    IsReadOnly="False" />
+
+                <DataGridTextColumn Header="Nom"
+                                    Binding="{Binding Name}"
+                                    IsReadOnly="False" />
+
+                <DataGridTextColumn Header="Prix de vente"
+                                    Binding="{Binding Price}" />
+
+                <DataGridTextColumn Header="Prix d'achat"
+                                    Binding="{Binding BuyingPrice}" />
+
+                <DataGridTextColumn Header="Quantité en stock"
+                                    Binding="{Binding Quantity}" />
+
+                <DataGridTextColumn Header="Date de Péremption"
+                                    Binding="{Binding ExpiryDate, StringFormat='dd/MM/yy'}" />
+
+                <DataGridTextColumn Header="Catégorie"
+                                    Binding="{Binding Category}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

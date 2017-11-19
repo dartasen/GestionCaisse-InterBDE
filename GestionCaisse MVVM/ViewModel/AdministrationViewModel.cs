@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using GestionCaisse_MVVM.Model.Entities;
-using GestionCaisse_MVVM.View;
+using GestionCaisse_MVVM.View.AdministrationFeatures;
 
 namespace GestionCaisse_MVVM.ViewModel
 {

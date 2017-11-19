@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using GestionCaisse_MVVM.View;
+using GestionCaisse_MVVM.View.AdministrationFeatures;
+using GestionCaisse_MVVM.View.ClientCashing;
 
 namespace GestionCaisse_MVVM.Model.Services
 {
