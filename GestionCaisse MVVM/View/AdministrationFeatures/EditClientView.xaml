@@ -7,7 +7,11 @@
         xmlns:converters="clr-namespace:GestionCaisse_MVVM.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Edition d'un client" Height="213.334" Width="370">
+        Title="{Binding WindowName}" 
+        Height="215" 
+        Width="370"
+        MinHeight="215" 
+        MinWidth="370">
 
     <Window.Resources>
         <converters:IntTo3GroupOfDigits x:Key="IntTo3GroupOfDigits"/>
