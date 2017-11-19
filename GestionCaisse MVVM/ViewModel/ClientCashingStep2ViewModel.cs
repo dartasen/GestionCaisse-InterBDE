@@ -74,7 +74,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public string Name => _client.Name;
         public string BadgeID => _client.BadgeID;
-        public double Balance => _client.Balance;
+        public string Balance => _client.Balance + " €";
         #endregion
 
         #region Commands

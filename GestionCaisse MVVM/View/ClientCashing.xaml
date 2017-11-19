@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Encaissement d'un client" 
-        Height="274"
-        Width="383">
+        Height="275"
+        Width="380"
+        MinHeight="275"
+        MinWidth="380">
     <Border Padding="5">
         <DockPanel>
             <UserControl Content="{Binding CurrentUserControl}"/>

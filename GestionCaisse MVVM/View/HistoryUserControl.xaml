@@ -72,7 +72,10 @@
 
                 <DataGridTextColumn Header="BDE de l'acheteur"
                                     Binding="{Binding BuyingBDEName}"/>
-                
+
+                <DataGridTextColumn Header="Nom du client"
+                                    Binding= "{Binding ClientName}"/>
+
                 <DataGridTextColumn Header="Date de la vente"
                                     Binding="{Binding FormatedSaleDate}"
                                     IsReadOnly="True"/>

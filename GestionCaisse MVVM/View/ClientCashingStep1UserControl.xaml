@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GestionCaisse_MVVM.View"
              mc:Ignorable="d" 
+             PreviewKeyDown="OnPreviewKeyDown"
              Background="White" Height="220" Width="350">
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"
@@ -23,7 +24,7 @@
                     Content="Précédent"/>
 
             <Button Grid.Column="1"
-                    Content="Vérifier"
+                    Content="_Vérifier"
                     Command="{Binding CheckPasskey}"/>
         </Grid>
         
@@ -38,6 +39,7 @@
                      VerticalAlignment="Center"
                      Padding="0 7.5 0 7.5"
                      TextAlignment="Center"
+                     x:Name="TextBox"
                      Text="{Binding Passkey,
                             Mode=TwoWay,
                             UpdateSourceTrigger=PropertyChanged}"/>

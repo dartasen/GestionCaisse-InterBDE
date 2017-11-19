@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace GestionCaisse_MVVM.ViewModel
@@ -22,7 +23,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         private void UpdateHistory()
         {
-            _history = ProductService.GetHistory(_dateFrom, _dateTo);
+            _history = ProductService.GetHistory(_dateFrom, _dateTo).OrderByDescending(x => x.SaleDate).ToList();
             OnPropertyChanged(nameof(History));
         }
 

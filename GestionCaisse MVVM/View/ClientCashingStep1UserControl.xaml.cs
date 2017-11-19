@@ -26,6 +26,16 @@ namespace GestionCaisse_MVVM.View
             InitializeComponent();
 
             DataContext = new ClientCashingStep1ViewModel(checkPasskey);
+
+            TextBox.Focus();
+        }
+
+        private void OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.Equals(Key.Enter))
+            {
+                ((ClientCashingStep1ViewModel)DataContext).CheckPasskey.Execute(null);
+            }
         }
     }
 }
