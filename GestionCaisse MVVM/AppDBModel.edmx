@@ -14,6 +14,17 @@
           <Property Name="nom" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="taux" Type="double" Nullable="false" />
         </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCarte" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idBde" Type="int" />
+          <Property Name="credit" Type="double" Nullable="false" />
+          <Property Name="codeSecret" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="historique">
           <Key>
             <PropertyRef Name="idVente" />
@@ -23,7 +34,16 @@
           <Property Name="idProduit" Type="int" Nullable="false" />
           <Property Name="quantite" Type="int" Nullable="false" />
           <Property Name="idBDEAcheteur" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="int" />
           <Property Name="dateVente" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="historiqueclient">
+          <Key>
+            <PropertyRef Name="idHistorique" />
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idHistorique" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="produit">
           <Key>
@@ -34,8 +54,8 @@
           <Property Name="prix" Type="double" Nullable="false" />
           <Property Name="prixAchat" Type="double" Nullable="false" />
           <Property Name="quantite" Type="int" Nullable="false" />
+          <Property Name="categorie" Type="enum" Nullable="false" />
           <Property Name="datePeremption" Type="date" />
-          <Property Name="categorie" Type="varchar" MaxLength="7" Nullable="false" />
         </EntityType>
         <EntityType Name="utilisateur">
           <Key>
@@ -49,6 +69,54 @@
           <Property Name="admin" Type="bool" Nullable="false" />
           <Property Name="active" Type="bool" Nullable="false" />
         </EntityType>
+        <Association Name="ClientIdBdeInexistant">
+          <End Role="bde" Type="Self.bde" Multiplicity="0..1" />
+          <End Role="client" Type="Self.client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bde">
+              <PropertyRef Name="idBde" />
+            </Principal>
+            <Dependent Role="client">
+              <PropertyRef Name="idBde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HistoriqueClientIdClientInexistant">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="historiqueclient" Type="Self.historiqueclient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="historiqueclient">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HistoriqueClientIdHistoriqueInexistant">
+          <End Role="historique" Type="Self.historique" Multiplicity="1" />
+          <End Role="historiqueclient" Type="Self.historiqueclient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="historique">
+              <PropertyRef Name="idVente" />
+            </Principal>
+            <Dependent Role="historiqueclient">
+              <PropertyRef Name="idHistorique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HistoriqueIdAcheteurInvalide">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="historique" Type="Self.historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="historique">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="HistoriqueIdBDEInexistant">
           <End Role="bde" Type="Self.bde" Multiplicity="1" />
           <End Role="historique" Type="Self.historique" Multiplicity="*" />
@@ -99,9 +167,27 @@
         </Association>
         <EntityContainer Name="DBEntitiesStoreContainer">
           <EntitySet Name="bde" EntityType="Self.bde" Schema="bde" store:Type="Tables" />
+          <EntitySet Name="client" EntityType="Self.client" Schema="bde" store:Type="Tables" />
           <EntitySet Name="historique" EntityType="Self.historique" Schema="bde" store:Type="Tables" />
+          <EntitySet Name="historiqueclient" EntityType="Self.historiqueclient" Schema="bde" store:Type="Tables" />
           <EntitySet Name="produit" EntityType="Self.produit" Schema="bde" store:Type="Tables" />
           <EntitySet Name="utilisateur" EntityType="Self.utilisateur" Schema="bde" store:Type="Tables" />
+          <AssociationSet Name="ClientIdBdeInexistant" Association="Self.ClientIdBdeInexistant">
+            <End Role="bde" EntitySet="bde" />
+            <End Role="client" EntitySet="client" />
+          </AssociationSet>
+          <AssociationSet Name="HistoriqueClientIdClientInexistant" Association="Self.HistoriqueClientIdClientInexistant">
+            <End Role="client" EntitySet="client" />
+            <End Role="historiqueclient" EntitySet="historiqueclient" />
+          </AssociationSet>
+          <AssociationSet Name="HistoriqueClientIdHistoriqueInexistant" Association="Self.HistoriqueClientIdHistoriqueInexistant">
+            <End Role="historique" EntitySet="historique" />
+            <End Role="historiqueclient" EntitySet="historiqueclient" />
+          </AssociationSet>
+          <AssociationSet Name="HistoriqueIdAcheteurInvalide" Association="Self.HistoriqueIdAcheteurInvalide">
+            <End Role="client" EntitySet="client" />
+            <End Role="historique" EntitySet="historique" />
+          </AssociationSet>
           <AssociationSet Name="HistoriqueIdBDEInexistant" Association="Self.HistoriqueIdBDEInexistant">
             <End Role="bde" EntitySet="bde" />
             <End Role="historique" EntitySet="historique" />
@@ -144,7 +230,8 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="IdBuyingBDE" Type="Int32" Nullable="false" />
           <Property Name="SaleDate" Type="DateTime" Nullable="false" />
-        </EntityType>
+          <Property Name="idClient" Type="Int32" />
+          </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="IDProduct" />
@@ -239,8 +326,60 @@
             <End Role="utilisateur" EntitySet="Users" />
             <End Role="historique" EntitySet="History" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="Clients" EntityType="DBEntities.Client" />
+          <AssociationSet Name="ClientIdBdeInexistant" Association="DBEntities.ClientIdBdeInexistant">
+            <End Role="BDE" EntitySet="BDEs" />
+            <End Role="client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="HistoriqueIdAcheteurInvalide" Association="DBEntities.HistoriqueIdAcheteurInvalide">
+            <End Role="client" EntitySet="Clients" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="historiqueclient" Association="DBEntities.historiqueclient">
+            <End Role="client" EntitySet="Clients" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCarte" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdBDE" Type="Int32" />
+          <Property Name="Balance" Type="Double" Nullable="false" />
+          <Property Name="Passkey" Type="Int32" Nullable="false" />
+          </EntityType>
+        <Association Name="ClientIdBdeInexistant">
+          <End Type="DBEntities.BDE" Role="BDE" Multiplicity="0..1" />
+          <End Type="DBEntities.Client" Role="client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BDE">
+              <PropertyRef Name="idBDE" />
+            </Principal>
+            <Dependent Role="client">
+              <PropertyRef Name="IdBDE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HistoriqueIdAcheteurInvalide">
+          <End Type="DBEntities.Client" Role="client" Multiplicity="0..1" />
+          <End Type="DBEntities.History" Role="History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="historiqueclient">
+          <End Type="DBEntities.Client" Role="client" Multiplicity="*" />
+          <End Type="DBEntities.History" Role="History" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -258,6 +397,7 @@
           <EntitySetMapping Name="History">
             <EntityTypeMapping TypeName="DBEntities.History">
               <MappingFragment StoreEntitySet="historique">
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
                 <ScalarProperty Name="IdSale" ColumnName="idVente" />
                 <ScalarProperty Name="IdUser" ColumnName="idUtilisateur" />
                 <ScalarProperty Name="IdProduct" ColumnName="idProduit" />
@@ -293,7 +433,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="DBEntities.Client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="Passkey" ColumnName="codeSecret" />
+                <ScalarProperty Name="Balance" ColumnName="credit" />
+                <ScalarProperty Name="IdBDE" ColumnName="idBde" />
+                <ScalarProperty Name="Name" ColumnName="nom" />
+                <ScalarProperty Name="IdCarte" ColumnName="idCarte" />
+                <ScalarProperty Name="IdClient" ColumnName="idClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="historiqueclient" TypeName="DBEntities.historiqueclient" StoreEntitySet="historiqueclient">
+            <EndProperty Name="History">
+              <ScalarProperty Name="IdSale" ColumnName="idHistorique" />
+            </EndProperty>
+            <EndProperty Name="client">
+              <ScalarProperty Name="IdClient" ColumnName="idClient" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

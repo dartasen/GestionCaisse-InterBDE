@@ -13,6 +13,10 @@
         <AssociationConnector Association="DBEntities.UtilisateurIdBDEInexistant" ManuallyRouted="false" />
         <AssociationConnector Association="DBEntities.HistoriqueIdProduitInexistant" ManuallyRouted="false" />
         <AssociationConnector Association="DBEntities.HistoriqueIdUtilisateurInexistant" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBEntities.Client" Width="1.5" PointX="5" PointY="6.75" />
+        <AssociationConnector Association="DBEntities.ClientIdBdeInexistant" />
+        <AssociationConnector Association="DBEntities.HistoriqueIdAcheteurInvalide" />
+        <AssociationConnector Association="DBEntities.historiqueclient" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

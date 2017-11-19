@@ -12,14 +12,13 @@ namespace GestionCaisse_MVVM
     using System;
     using System.Collections.Generic;
     
-    public partial class History
+    public partial class Client
     {
-        public int IdSale { get; set; }
-        public Nullable<int> IdUser { get; set; }
-        public int IdProduct { get; set; }
-        public int Quantity { get; set; }
-        public int IdBuyingBDE { get; set; }
-        public System.DateTime SaleDate { get; set; }
-        public Nullable<int> idClient { get; set; }
+        public int IdClient { get; set; }
+        public string IdCarte { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> IdBDE { get; set; }
+        public double Balance { get; set; }
+        public int Passkey { get; set; }
     }
 }

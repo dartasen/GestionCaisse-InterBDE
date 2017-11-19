@@ -29,5 +29,6 @@ namespace GestionCaisse_MVVM
         public virtual DbSet<History> History { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
     }
 }

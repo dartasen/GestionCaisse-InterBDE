@@ -61,12 +61,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.10.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.6.10.4\lib\net452\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.8.8\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.10.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.Entity.6.10.4\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.8.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -112,6 +112,9 @@
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="Client.cs">
+      <DependentUpon>AppDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ResultToBrushConverter.cs" />
     <Compile Include="Converters\SellsScoreToSmileyImageConverter.cs" />
@@ -324,17 +327,6 @@
       <DependentUpon>AppDBModel.edmx</DependentUpon>
       <LastGenOutput>AppDBModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="docs\MySqlCommand.xml" />
-    <Resource Include="docs\MySqlCommandBuilder.xml" />
-    <Resource Include="docs\MySqlConnection.xml" />
-    <Resource Include="docs\MySqlConnectionStringBuilder.xml" />
-    <Resource Include="docs\MySqlDataAdapter.xml" />
-    <Resource Include="docs\MySqlDataReader.xml" />
-    <Resource Include="docs\MySqlException.xml" />
-    <Resource Include="docs\MySqlHelper.xml" />
-    <Resource Include="docs\MySqlParameter.xml" />
-    <Resource Include="docs\MySqlParameterCollection.xml" />
-    <Resource Include="docs\MySqlTransaction.xml" />
     <Resource Include="Assets\validate.png" />
     <Resource Include="Assets\administration\calculator.png" />
     <Content Include="Assets\extra\sentences.txt">
