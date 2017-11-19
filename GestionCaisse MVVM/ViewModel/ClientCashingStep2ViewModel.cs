@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GestionCaisse_MVVM.Exceptions;
@@ -12,9 +8,9 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class ClientCashingStep2ViewModel
     {
-        private Client _client;
-        private Action _goBackward;
-        private Action _closeWindow;
+        private readonly Client _client;
+        private readonly Action _goBackward;
+        private readonly Action _closeWindow;
 
         public ClientCashingStep2ViewModel(Client client, Action goBackward, Action closeWindow)
         {

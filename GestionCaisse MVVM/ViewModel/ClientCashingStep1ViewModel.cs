@@ -11,7 +11,7 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class ClientCashingStep1ViewModel : INotifyPropertyChanged
     {
-        private Action<int> _checkPasskey;
+        private readonly Action<int> _checkPasskey;
 
         public ClientCashingStep1ViewModel(Action<int> checkPasskey)
         {
