@@ -20,6 +20,6 @@ namespace GestionCaisse_MVVM
         public int Quantity { get; set; }
         public int IdBuyingBDE { get; set; }
         public System.DateTime SaleDate { get; set; }
-        public Nullable<int> idClient { get; set; }
+        public Nullable<int> IdClient { get; set; }
     }
 }

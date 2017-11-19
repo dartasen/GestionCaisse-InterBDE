@@ -230,7 +230,7 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="IdBuyingBDE" Type="Int32" Nullable="false" />
           <Property Name="SaleDate" Type="DateTime" Nullable="false" />
-          <Property Name="idClient" Type="Int32" />
+          <Property Name="IdClient" Type="Int32" />
           </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -371,7 +371,7 @@
               <PropertyRef Name="IdClient" />
             </Principal>
             <Dependent Role="History">
-              <PropertyRef Name="idClient" />
+              <PropertyRef Name="IdClient" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -397,7 +397,7 @@
           <EntitySetMapping Name="History">
             <EntityTypeMapping TypeName="DBEntities.History">
               <MappingFragment StoreEntitySet="historique">
-                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="IdClient" ColumnName="idClient" />
                 <ScalarProperty Name="IdSale" ColumnName="idVente" />
                 <ScalarProperty Name="IdUser" ColumnName="idUtilisateur" />
                 <ScalarProperty Name="IdProduct" ColumnName="idProduit" />
