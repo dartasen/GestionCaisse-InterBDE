@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
@@ -120,7 +121,7 @@ namespace GestionCaisse_MVVM.ViewModel
 
         private void UpdateHistory()
         {
-            _history = ProductService.GetHistory(_dateFrom, _dateTo, _currentUser.IdUser);
+            _history = ProductService.GetHistory(_dateFrom, _dateTo, _currentUser.IdUser).OrderByDescending(x => x.IdSale).ToList();
             OnPropertyChanged(nameof(History));
         }
 
