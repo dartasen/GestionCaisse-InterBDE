@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:GestionCaisse_MVVM.View.AdministrationFeatures"
              xmlns:converters="clr-namespace:GestionCaisse_MVVM.Converters"
              mc:Ignorable="d" 
-              Background="White"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:IntTo3GroupOfDigits x:Key="IntTo3GroupOfDigits"/>
@@ -18,6 +17,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" 
@@ -26,6 +26,11 @@
                     Content="Editer un client"/>
 
             <Button Grid.Column="1" 
+                    Command="{Binding RemoveClient}"
+                    Background="OrangeRed"
+                    Content="Supprimer un client"/>
+
+            <Button Grid.Column="2" 
                     Background="LightGreen"
                     Command="{Binding AddClient}"
                     Content="Ajouter un utilisateur"/>

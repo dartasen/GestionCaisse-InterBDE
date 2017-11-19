@@ -32,6 +32,37 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                 OnPropertyChanged(nameof(Clients));
             }, o => true);
 
+            RemoveClient = new RelayCommand(() =>
+            {
+                if (SelectedClient == null)
+                {
+                    dialogService.ShowInformationWindow("Vous devez sélectionner un client !",
+                        "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                var result = dialogService.ShowInformationWindow(
+                    "Voulez-vous vraiment supprimer ce client ?",
+                    "Confirmation de l'opération",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (!result.Equals(MessageBoxResult.Yes)) return;
+
+                try
+                {
+                    ClientService.RemoveClient(SelectedClient);
+                    dialogService.ShowInformationWindow("Ce client a bien été supprimé du système.",
+                        "Suppression réussie !", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception)
+                {
+                    dialogService.ShowInformationWindow("Suppression impossible !",
+                        "Suppression impossible !", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                OnPropertyChanged(nameof(Clients));
+            }, o => true);
+
             AddClient = new RelayCommand(() =>
             {
                 dialogService.ShowAddClient();
@@ -57,6 +88,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
         #region Commands
         public ICommand EditClient { get; set; }
         public ICommand AddClient { get; set; }
+        public ICommand RemoveClient { get; set; }
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;

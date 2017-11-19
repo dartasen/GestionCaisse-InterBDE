@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
@@ -91,6 +92,29 @@ namespace GestionCaisse_MVVM.Model.Services
                     }
 
                     return newPasskey;
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new ConnectionFailedException(ex.Message, ex);
+            }
+        }
+
+        public static void RemoveClient(Client client)
+        {
+            try
+            {
+                using (var context = new DBConnection())
+                {
+                    foreach (var history in context.History)
+                    {
+                        if (history.IdClient == client.IdClient)
+                            history.IdClient = null;
+                    }
+
+                    context.Clients.Remove(context.Clients.FirstOrDefault(x => x.IdClient == client.IdClient));
+
+                    context.SaveChanges();
                 }
             }
             catch (EntityException ex)

@@ -23,6 +23,7 @@ namespace GestionCaisse_MVVM.Model.Services
             }
         }
 
+        //TODO Amméliorer comparaison date => faire sur année, puis mois puis jour
         public static List<HistoryQueryResult> GetHistory(DateTime dateFrom, DateTime dateTo, int? idUser = null)
         {
             try
@@ -34,8 +35,8 @@ namespace GestionCaisse_MVVM.Model.Services
                         join user in context.Users on history.IdUser equals user.IdUser
                         join product in context.Products on history.IdProduct equals product.IDProduct
                         join buyingBDE in context.BDEs on history.IdBuyingBDE equals buyingBDE.idBDE
-                        where (idUser == null && history.SaleDate > dateFrom && history.SaleDate < dateTo) ||
-                              (idUser != null && history.SaleDate > dateFrom && history.SaleDate < dateTo && user.IdUser == idUser)
+                        where (idUser == null && history.SaleDate >= dateFrom && history.SaleDate <= dateTo) ||
+                              (idUser != null && history.SaleDate >= dateFrom && history.SaleDate <= dateTo && user.IdUser == idUser)
                         select new HistoryQueryResult()
                         {
                             IdSale = history.IdSale,
