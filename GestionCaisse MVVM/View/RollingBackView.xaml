@@ -13,6 +13,7 @@
 
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:ClientIdToClientName x:Key="ClientIdToClientName"/>
     </Window.Resources>
     
     <DockPanel>
@@ -136,11 +137,10 @@
                                     Binding="{Binding BuyingBDEName}"/>
                 
                 <DataGridTextColumn Header="Nom du client"
-                                    Binding="{Binding ClientName}"/>
+                                    Binding="{Binding IdClient, Converter={StaticResource ClientIdToClientName}}"/>
 
                 <DataGridTextColumn Header="Date de la vente"
-                                    Binding="{Binding FormatedSaleDate}"
-                                    IsReadOnly="True"/>
+                                    Binding="{Binding FormatedSaleDate}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

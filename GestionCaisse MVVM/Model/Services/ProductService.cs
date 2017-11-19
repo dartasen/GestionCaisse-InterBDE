@@ -29,7 +29,7 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    var queryNoClients =
+                    var query =
                         from history in context.History
                         join user in context.Users on history.IdUser equals user.IdUser
                         join product in context.Products on history.IdProduct equals product.IDProduct
@@ -42,34 +42,12 @@ namespace GestionCaisse_MVVM.Model.Services
                             Username = user.Name,
                             ProductName = product.Name,
                             Quantity = history.Quantity,
+                            IdClient = history.IdClient,
                             BuyingBDEName = buyingBDE.Name,
                             SaleDate = history.SaleDate
                         };
 
-                    var queryClients =
-                        from history in context.History
-                        join user in context.Users on history.IdUser equals user.IdUser
-                        join product in context.Products on history.IdProduct equals product.IDProduct
-                        join buyingBDE in context.BDEs on history.IdBuyingBDE equals buyingBDE.idBDE
-                        join client in context.Clients on history.IdClient equals client.IdClient
-                        where history.IdClient != null && (idUser == null && history.SaleDate > dateFrom && history.SaleDate < dateTo) ||
-                              (idUser != null && history.SaleDate > dateFrom && history.SaleDate < dateTo && user.IdUser == idUser)
-                        select new HistoryQueryResult()
-                        {
-                            IdSale = history.IdSale,
-                            Username = user.Name,
-                            ProductName = product.Name,
-                            Quantity = history.Quantity,
-                            ClientName = client.Name,
-                            BuyingBDEName = buyingBDE.Name,
-                            SaleDate = history.SaleDate
-                        };
-
-                    var results = new List<HistoryQueryResult>();
-                    results.AddRange(queryNoClients.ToList());
-                    results.AddRange(queryClients.ToList());
-
-                    return results;
+                    return query.ToList();
                 }
             }
             catch (EntityException ex)
@@ -109,7 +87,6 @@ namespace GestionCaisse_MVVM.Model.Services
             public string Username { get; set; }
             public string ProductName { get; set; }
             public string BuyingBDEName { get; set; }
-            public string ClientName { get; set; }
             public string FormatedSaleDate => SaleDate.ToString("dd/MM/yyyy HH:MM:ss");
         }
     }

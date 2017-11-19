@@ -38,11 +38,18 @@ namespace GestionCaisse_MVVM.ViewModel
 
             Features.Add(new AdministrationFeature()
             {
+                Name = "Gestion Clients",
+                ImagePath = "/Assets/administration/clients.png",
+                UserControl = new ClientManagementUserControl()
+            });
+
+            Features.Add(new AdministrationFeature()
+            {
                 Name = "Gestion Produits",
                 ImagePath = "/Assets/administration/barcode.png",
                 UserControl = new ProductManagementUserControl()
             });
-
+            
             Features.Add(new AdministrationFeature()
             {
                 Name = "Calculs Rapides",

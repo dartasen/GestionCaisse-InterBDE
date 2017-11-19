@@ -11,6 +11,7 @@ namespace GestionCaisse_MVVM.View.AdministrationFeatures
         public UserManagementUserControl()
         {
             InitializeComponent();
+
             DataContext = new UserManagementViewModel();
         }
     }

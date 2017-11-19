@@ -81,6 +81,42 @@ namespace GestionCaisse_MVVM.Model.Services
         }
 
         /// <summary>
+        ///     Display EditClientView
+        /// </summary>
+        public void ShowEditClient(Client client)
+        {
+            try
+            {
+                var window = (Window)Activator.CreateInstance(typeof(EditClientView), client);
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowInformationWindow(
+                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        ///     Display EditClientView in Add mode
+        /// </summary>
+        public void ShowAddClient()
+        {
+            try
+            {
+                var window = (Window)Activator.CreateInstance(typeof(EditClientView));
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowInformationWindow(
+                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
         ///     Display RollingBackView
         /// </summary>
         public void ShowRollingBackWindow()

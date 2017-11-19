@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="GestionCaisse_MVVM.View.AdministrationFeatures.ClientManagementUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GestionCaisse_MVVM.View.AdministrationFeatures"
+             xmlns:converters="clr-namespace:GestionCaisse_MVVM.Converters"
+             mc:Ignorable="d" 
+              Background="White"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:IntTo3GroupOfDigits x:Key="IntTo3GroupOfDigits"/>
+        <converters:IdToBDEName x:Key="IdToBdeName"/>
+    </UserControl.Resources>
+    
+    <DockPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" 
+                    Command="{Binding EditClient}"
+                    Background="DimGray"
+                    Content="Editer un client"/>
+
+            <Button Grid.Column="1" 
+                    Background="LightGreen"
+                    Command="{Binding AddClient}"
+                    Content="Ajouter un utilisateur"/>
+        </Grid>
+
+        <DataGrid ItemsSource="{Binding Clients,
+                                UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedClient,
+                                 Mode=TwoWay,
+                                 UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode="Single"
+                  AlternatingRowBackground="LightBlue"
+                  ColumnWidth="*"
+                  IsReadOnly="True"
+                  
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id Client"
+                                    Binding="{Binding IdClient}" />
+
+                <DataGridTextColumn Header="Nom"
+                                    Binding="{Binding Name}" />
+
+                <DataGridTextColumn Header="Numéro carte étudiante"
+                                    Binding="{Binding BadgeID}"/>
+
+                <DataGridTextColumn Header="BDE"
+                                    Binding="{Binding IdBDE, Converter={StaticResource IdToBdeName}}" />
+
+                <DataGridTextColumn Header="Clé secrète"
+                                    Binding="{Binding Passkey, Converter={StaticResource IntTo3GroupOfDigits}}" />
+
+                <DataGridTextColumn Header="Solde"
+                                    Binding="{Binding Balance}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

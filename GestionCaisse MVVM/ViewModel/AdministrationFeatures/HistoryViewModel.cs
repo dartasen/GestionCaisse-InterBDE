@@ -23,7 +23,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
 
         private void UpdateHistory()
         {
-            _history = ProductService.GetHistory(_dateFrom, _dateTo).OrderByDescending(x => x.SaleDate).ToList();
+            _history = ProductService.GetHistory(_dateFrom, _dateTo).OrderByDescending(x => x.IdSale).ToList();
             OnPropertyChanged(nameof(History));
         }
 

@@ -116,6 +116,9 @@
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\ClientIdToClientName.cs" />
+    <Compile Include="Converters\IdToBDEName.cs" />
+    <Compile Include="Converters\IntTo3GroupOfDigits.cs" />
     <Compile Include="Converters\ResultToBrushConverter.cs" />
     <Compile Include="Converters\SellsScoreToSmileyImageConverter.cs" />
     <Compile Include="Converters\StringToDouble.cs" />
@@ -148,6 +151,8 @@
       <DependentUpon>AppDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdministrationFeatures\AddUserViewModel.cs" />
+    <Compile Include="ViewModel\AdministrationFeatures\ClientManagementViewModel.cs" />
+    <Compile Include="ViewModel\AdministrationFeatures\EditClientViewModel.cs" />
     <Compile Include="ViewModel\AdministrationViewModel.cs" />
     <Compile Include="ViewModel\AdministrationFeatures\BDEDuesViewModel.cs" />
     <Compile Include="ViewModel\AdministrationFeatures\ChangePasswordViewModel.cs" />
@@ -166,6 +171,15 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AdministrationFeatures\AddUserView.xaml.cs">
       <DependentUpon>AddUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdministrationFeatures\ClientManagementUserControl.xaml.cs">
+      <DependentUpon>ClientManagementUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdministrationFeatures\EditClientView.xaml.cs">
+      <DependentUpon>EditClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdministrationFeatures\UserManagementUserControl.xaml.cs">
+      <DependentUpon>UserManagementUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AdministrationView.xaml.cs">
       <DependentUpon>AdministrationView.xaml</DependentUpon>
@@ -206,10 +220,19 @@
     <Compile Include="View\RollingBackView.xaml.cs">
       <DependentUpon>RollingBackView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AdministrationFeatures\UserManagementUserControl.xaml.cs">
-      <DependentUpon>UserManagementUserControl.xaml</DependentUpon>
-    </Compile>
     <Page Include="View\AdministrationFeatures\AddUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdministrationFeatures\ClientManagementUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdministrationFeatures\EditClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdministrationFeatures\UserManagementUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,10 +311,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AdministrationFeatures\UserManagementUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -354,6 +373,7 @@
     </Content>
     <Resource Include="Assets\validate.png" />
     <Resource Include="Assets\administration\calculator.png" />
+    <Resource Include="Assets\administration\clients.png" />
     <Content Include="Assets\extra\sentences.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

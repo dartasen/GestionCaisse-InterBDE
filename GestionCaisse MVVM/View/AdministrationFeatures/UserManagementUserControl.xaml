@@ -42,7 +42,7 @@
                     Command="{Binding ChangePassword}"
                     Content="Réinitialisation MDP"/>
         </Grid>
-        
+
         <DataGrid ItemsSource="{Binding Users,
                                 Mode=TwoWay,
                                 UpdateSourceTrigger=PropertyChanged}"
@@ -59,7 +59,7 @@
                 <DataGridTextColumn Header="Id Utilisateur"
                                     Binding="{Binding IdUser}"
                                     IsReadOnly="True" />
-                
+
                 <DataGridTextColumn Header="Nom"
                                     Binding="{Binding Name}"
                                     IsReadOnly="True" />
@@ -69,7 +69,7 @@
                 
                 <DataGridTextColumn Header="Code Badge"
                                     Binding="{Binding BadgeID}" />-->
-                
+
                 <DataGridTextColumn Header="Nom du BDE"
                                     Binding="{Binding BDEName}" />
 
