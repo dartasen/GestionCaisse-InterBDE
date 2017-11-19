@@ -17,6 +17,8 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
         //Edit a client
         public EditClientViewModel(Client client)
         {
+            WindowName = "Edition d'un client";
+
             IsAddClientVisible = false;
             IsValidateChangesVisible = true;
 
@@ -61,6 +63,8 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
         //Add a new client
         public EditClientViewModel()
         {
+            WindowName = "Ajout d'un client";
+
             IsAddClientVisible = true;
             IsValidateChangesVisible = false;
 
@@ -100,6 +104,8 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
         }
 
         #region Properties
+        public string WindowName { get; }
+
         private Client _newClient;
 
         public Client NewClient
