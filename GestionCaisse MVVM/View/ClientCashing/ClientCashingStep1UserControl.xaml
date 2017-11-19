@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:GestionCaisse_MVVM.View"
              mc:Ignorable="d" 
              PreviewKeyDown="OnPreviewKeyDown"
+             Loaded="ClientCashingStep1UserControl_OnLoaded"
              Background="White" Height="220" Width="350">
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"
@@ -39,6 +40,7 @@
                      VerticalAlignment="Center"
                      Padding="0 7.5 0 7.5"
                      TextAlignment="Center"
+                     
                      x:Name="TextBox"
                      Text="{Binding Passkey,
                             Mode=TwoWay,

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GestionCaisse_MVVM.ViewModel.ClientCashing;
@@ -15,8 +16,6 @@ namespace GestionCaisse_MVVM.View.ClientCashing
             InitializeComponent();
 
             DataContext = new ClientCashingStep1ViewModel(checkPasskey);
-
-            TextBox.Focus();
         }
 
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
@@ -25,6 +24,12 @@ namespace GestionCaisse_MVVM.View.ClientCashing
             {
                 ((ClientCashingStep1ViewModel)DataContext).CheckPasskey.Execute(null);
             }
+        }
+
+        private void ClientCashingStep1UserControl_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            TextBox.Focus();
+            TextBox.Text = string.Empty;
         }
     }
 }
