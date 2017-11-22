@@ -70,7 +70,7 @@ namespace GestionCaisse_MVVM.Model.Services
 
                     if (sellToDelete.IdClient != null)
                         context.Clients.FirstOrDefault(x => x.IdClient == sellToDelete.IdClient).Balance +=
-                            context.Products.FirstOrDefault(x => x.IDProduct == sellToDelete.IdProduct).Price;
+                            context.Products.FirstOrDefault(x => x.IDProduct == sellToDelete.IdProduct).Price * sellToDelete.Quantity;
 
                     context.History.Remove(sellToDelete);
                     context.SaveChanges();
