@@ -1,21 +1,14 @@
 # GestionCaisseInterBDE
 
-GestionCaisseInterBDE is an WPF/C# application designed to manage the student union's inventory of drinks and snacks when making sales.
+GestionCaisseInterBDE est une application écrite avec WPF/C# et a été conçu pour gérer les ventes/stocks de l'interBDE pour les boissons, snacks, ..
 
-## Features
+## Fonctionnalités
 
-* Keeping track of the inventory and sales (by whom student? how much?...)
-* Possibility to have multiple salers (account tracking)
-* Ability to create "local accounts" for students that they can refill as they wish
+* Créer des ventes avec un affichage des stocks de produit disponible (ou en rupture de stock)
+* Garder un historique des ventes (Qui est le vendeur ? Prix ? Produit(s) acheté(s) , ..)
+* Créer des comptes clients qui leur permettent de solder leur compte pour éviter de payer à chaque fois en espèces
+* ...
 
 ## Requirement
 
-* MySQL engine to store application's data
-
-## Installation
-
-* Database must be initialized first using Mysql Workbench or the installation script inside the *Mysql* folder
-
-## Nota
-
-I created this application to experiment MVVM in my first year of *DUT Informatique*... as a consequence there might be some ugly code inside: don't be too hard on me ^^
+* Un moteur MySQL pour stocker les données
