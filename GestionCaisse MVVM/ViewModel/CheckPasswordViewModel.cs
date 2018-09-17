@@ -14,7 +14,7 @@ namespace GestionCaisse_MVVM.ViewModel
         {
             CheckUserPassword = new RelayCommand(() =>
             {
-                string username = LoginService.Instance.GetLoginContext().User.Name;
+                string username = LoginService.Instance.GetLoginContext().User.Nom;
 
                 var dialogService = new DialogService();
 

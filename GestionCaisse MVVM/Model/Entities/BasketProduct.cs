@@ -7,12 +7,12 @@ namespace GestionCaisse_MVVM.Model.Entities
     public class BasketProduct : INotifyPropertyChanged
     {
         private Product _product;
-        private int _quantity;
+        private int _quantite;
 
         public BasketProduct(Product product, int quantity)
         {
             Product = product;
-            Quantity = quantity;
+            Quantite = quantity;
         }
 
         public Product Product
@@ -22,10 +22,10 @@ namespace GestionCaisse_MVVM.Model.Entities
             { _product = value; OnPropertyChanged(); }
         }
         
-        public int Quantity
+        public int Quantite
         {
-            get => _quantity;
-            set { _quantity = value; OnPropertyChanged(); }
+            get => _quantite;
+            set { _quantite = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

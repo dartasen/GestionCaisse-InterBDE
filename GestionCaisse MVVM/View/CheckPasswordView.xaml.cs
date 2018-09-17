@@ -1,13 +1,13 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using GestionCaisse_MVVM.ViewModel;
+using MahApps.Metro.Controls;
 
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
     /// Interaction logic for CheckPasswordView.xaml
     /// </summary>
-    public partial class CheckPasswordView : Window
+    public partial class CheckPasswordView : MetroWindow
     {
         public CheckPasswordView(string windowToOpenAction)
         {

@@ -11,6 +11,8 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class RollingBackViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private readonly LoginService _loginService;
 
         public RollingBackViewModel()
@@ -38,20 +40,20 @@ namespace GestionCaisse_MVVM.ViewModel
                         return;
                     }
 
-                    MessageBoxResult result = dialogService.ShowInformationWindow($"Voulez-vous vraiment supprimer cette vente ({SelectedHistoryQueryResult.IdSale}) ?",
+                    MessageBoxResult result = dialogService.ShowInformationWindow($"Voulez-vous vraiment supprimer cette vente ({SelectedHistoryQueryResult.IdVente}) ?",
                         "Confirmation de l'opération",
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
                     if (result.Equals(MessageBoxResult.Yes))
                     {
-                        if (!ProductService.RollBackSell(SelectedHistoryQueryResult.IdSale))
+                        if (!ProductService.RollBackSell(SelectedHistoryQueryResult.IdVente))
                         {
                             dialogService.ShowInformationWindow("Erreur lors de la suppression !", "Erreur de suppresion",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                         }
 
-                        dialogService.ShowInformationWindow("Vous venez de supprimer la vente n°" + SelectedHistoryQueryResult.IdSale, "Vente supprimée !",
+                        dialogService.ShowInformationWindow("Vous venez de supprimer la vente n°" + SelectedHistoryQueryResult.IdVente, "Vente supprimée !",
                             MessageBoxButton.OK, MessageBoxImage.Information);
                         UpdateHistory();
                         OnPropertyChanged(nameof(History));
@@ -66,17 +68,17 @@ namespace GestionCaisse_MVVM.ViewModel
 
         #region Properties
 
-        private List<ProductService.HistoryQueryResult> _history;
+        private List<QueryHistory> _history;
 
-        public List<ProductService.HistoryQueryResult> History
+        public List<QueryHistory> History
         {
             get => _history;
             set { _history = value; OnPropertyChanged(); }
         }
 
-        private ProductService.HistoryQueryResult _selectedHistoryQueryResult;
+        private QueryHistory _selectedHistoryQueryResult;
 
-        public ProductService.HistoryQueryResult SelectedHistoryQueryResult
+        public QueryHistory SelectedHistoryQueryResult
         {
             get => _selectedHistoryQueryResult;
             set { _selectedHistoryQueryResult = value; OnPropertyChanged(); }
@@ -121,12 +123,13 @@ namespace GestionCaisse_MVVM.ViewModel
 
         private void UpdateHistory()
         {
-            _history = ProductService.GetHistory(_dateFrom, _dateTo, _currentUser.IdUser).OrderByDescending(x => x.IdSale).ToList();
+            _history = ProductService.GetHistory(_dateFrom, _dateTo, _currentUser.IdUtilisateur).OrderByDescending(x => x.IdVente).ToList();
             OnPropertyChanged(nameof(History));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string p = null) =>
+        private void OnPropertyChanged([CallerMemberName] string p = null)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+        }
     }
 }

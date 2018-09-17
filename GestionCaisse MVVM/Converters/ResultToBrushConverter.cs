@@ -13,8 +13,7 @@ namespace GestionCaisse_MVVM.Converters
 
             if (convertedValue == 0) return new SolidColorBrush((Color) ColorConverter.ConvertFromString("#D91E36"));
             if (convertedValue >= 40) return new SolidColorBrush((Color) ColorConverter.ConvertFromString("#149911"));
-            if (convertedValue <= 40 && convertedValue >= 20)
-                return new SolidColorBrush((Color) ColorConverter.ConvertFromString("#A27035"));
+            if (convertedValue <= 40 && convertedValue >= 20) return new SolidColorBrush((Color) ColorConverter.ConvertFromString("#A27035"));
             if (convertedValue < 20 && convertedValue > 0) return new SolidColorBrush(Colors.OrangeRed);
 
             return new SolidColorBrush(Colors.Black);

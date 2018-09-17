@@ -4,13 +4,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using GestionCaisse_MVVM.Model.Services;
 using GestionCaisse_MVVM.ViewModel;
+using MahApps.Metro.Controls;
 
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
     ///     Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindowView : Window
+    public partial class MainWindowView : MetroWindow
     {
         public MainWindowView()
         {
@@ -29,10 +30,11 @@ namespace GestionCaisse_MVVM.View
 
         public void SetBackgroundDependingOnBDE()
         {
-            var vm = DataContext as MainWindowViewModel;
-            if (vm == null) return;
-            string bde = LoginService.Instance.GetLoginContext().BuyingBDE.Name;
+            if (!(DataContext is MainWindowViewModel vm)) return;
+
+            string bde = LoginService.Instance.GetLoginContext().BuyingBDE.Nom;
             BrushConverter bc = new BrushConverter();
+
             switch (bde)
             {
                 case "Informatique":
@@ -57,19 +59,22 @@ namespace GestionCaisse_MVVM.View
 
             for (int i = 0; i < ComboBox.Items.Count; i++)
             {
-                if (((BDE)ComboBox.Items[i]).idBDE == currentBDE.idBDE) ComboBox.SelectedIndex = i;
+                if ((ComboBox.Items[i] as BDE).Id == currentBDE.Id)
+                {
+                    ComboBox.SelectedIndex = i;
+                }
             }
         }
 
         private void UIElement_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key.Equals(Key.Delete))
-                ((MainWindowViewModel)DataContext).DeleteBasketProduct.Execute(null);
+                (DataContext as MainWindowViewModel).DeleteBasketProduct.Execute(null);
         }
 
         private void MainWindowView_OnClosed(object sender, EventArgs e)
         {
-            ((MainWindowViewModel)DataContext).Logout.Execute(null);
+            (DataContext as MainWindowViewModel).Logout.Execute(null);
         }
 
         private void RollingBackView_OnClick(object sender, RoutedEventArgs e)

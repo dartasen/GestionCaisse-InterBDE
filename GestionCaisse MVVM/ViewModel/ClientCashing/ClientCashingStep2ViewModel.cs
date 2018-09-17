@@ -30,10 +30,10 @@ namespace GestionCaisse_MVVM.ViewModel.ClientCashing
 
                         var totalPrice = basketService.GetBasket().TotalPrice;
 
-                        if (client.Balance < totalPrice)
+                        if (client.Credit < totalPrice)
                         {
                             dialogService.ShowInformationWindow(
-                                $"Ce compte ne possède pas assez de crédit ! ({client.Balance} sur le compte pour un total de {totalPrice}",
+                                $"Ce compte ne possède pas assez de crédit ! ({client.Credit} sur le compte pour un total de {totalPrice}",
                                 "Achat impossible", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                         }
@@ -72,9 +72,9 @@ namespace GestionCaisse_MVVM.ViewModel.ClientCashing
 
         #region Properties
 
-        public string Name => _client.Name;
-        public string BadgeID => _client.BadgeID;
-        public string Balance => _client.Balance + " €";
+        public string Name => _client.Nom;
+        public string BadgeID => _client.IdCarte;
+        public string Balance => _client.Credit + " €";
         #endregion
 
         #region Commands

@@ -18,13 +18,13 @@ namespace GestionCaisse_MVVM.Model.Entities
 
         public IEnumerable<BasketProduct> Products => _products;
 
-        public double SnacksPrice => _products.Where(x => x.Product.Category.Equals("snack"))
-            .Sum(x => x.Quantity * x.Product.Price);
+        public double SnacksPrice => _products.Where(x => x.Product.Categorie.Equals("snack"))
+            .Sum(x => x.Quantite * x.Product.Prix);
 
         public string SnacksPriceFormated => SnacksPrice + " €";
 
-        public double DrinksPrice => _products.Where(x => x.Product.Category.Equals("boisson"))
-            .Sum(x => x.Quantity * x.Product.Price);
+        public double DrinksPrice => _products.Where(x => x.Product.Categorie.Equals("boisson"))
+            .Sum(x => x.Quantite * x.Product.Prix);
 
         public string DrinksPriceFormated => DrinksPrice + " €";
 
@@ -32,9 +32,9 @@ namespace GestionCaisse_MVVM.Model.Entities
         {
             get
             {
-                var promotion = _products.Where(x => x.Product.Price >= 0.70).Sum(x => x.Quantity) / 2 * 0.20;
+                var promotion = _products.Where(x => x.Product.Prix >= 0.70).Sum(x => x.Quantite) / 2 * 0.20;
 
-                return _products.Sum(x => x.Quantity * x.Product.Price) - promotion;
+                return _products.Sum(x => x.Quantite * x.Product.Prix) - promotion;
             }
         }
 
@@ -51,29 +51,29 @@ namespace GestionCaisse_MVVM.Model.Entities
         {
             if (basketProductToAdd.Product == null) throw new IllegalProductInsertion("Vous devez sélectionner un produit avant de l'ajouter !");
 
-            var idProduct = basketProductToAdd.Product.IDProduct;
-            var quantityToAdd = basketProductToAdd.Quantity;
+            var idProduct = basketProductToAdd.Product.IdProduit;
+            var quantityToAdd = basketProductToAdd.Quantite;
 
             if (quantityToAdd <= 0) throw new IllegalProductInsertion("La quantité doit-être positive !");
-            if (quantityToAdd > basketProductToAdd.Product.Quantity)
+            if (quantityToAdd > basketProductToAdd.Product.Quantite)
                 throw new IllegalProductInsertion("La quantité ne peut pas être suppérieure au stock !\n" +
-                          $"Vous demandez {quantityToAdd} {basketProductToAdd.Product.Name} alors qu'il n'en reste que {basketProductToAdd.Product.Quantity}.");
+                          $"Vous demandez {quantityToAdd} {basketProductToAdd.Product.Nom} alors qu'il n'en reste que {basketProductToAdd.Product.Quantite}.");
 
             //If the product is already on the basket
-            if (_products.Select(x => x.Product.IDProduct).Contains(idProduct))
+            if (_products.Select(x => x.Product.IdProduit).Contains(idProduct))
             {
                 foreach (BasketProduct t in _products)
                 {
-                    if (t.Product.IDProduct == idProduct)
+                    if (t.Product.IdProduit == idProduct)
                     {
-                        if ((t.Quantity + 1) <= basketProductToAdd.Product.Quantity)
+                        if ((t.Quantite + 1) <= basketProductToAdd.Product.Quantite)
                         {
-                            t.Quantity += quantityToAdd;
+                            t.Quantite += quantityToAdd;
                         }
                         else
                         {
                             throw new IllegalProductInsertion("La quantité ne peut pas être suppérieure au stock !\n" +
-                            $"Vous demandez {basketProductToAdd.Product.Quantity + 1} {basketProductToAdd.Product.Name} alors qu'il n'en reste que {basketProductToAdd.Product.Quantity}.");
+                            $"Vous demandez {basketProductToAdd.Product.Quantite + 1} {basketProductToAdd.Product.Nom} alors qu'il n'en reste que {basketProductToAdd.Product.Quantite}.");
                         }
                     }
                 }
@@ -95,15 +95,15 @@ namespace GestionCaisse_MVVM.Model.Entities
 
         public void IncreaseQuantity(BasketProduct basketProduct)
         {
-            if (basketProduct.Quantity + 1 > basketProduct.Product.Quantity) return;
-            basketProduct.Quantity++;
+            if (basketProduct.Quantite + 1 > basketProduct.Product.Quantite) return;
+            basketProduct.Quantite++;
             NotifyProperties();
         }
 
         public void DecreaseQuantity(BasketProduct basketProduct)
         {
-            if (basketProduct.Quantity -1 < 0) return;
-            basketProduct.Quantity--;
+            if (basketProduct.Quantite -1 < 0) return;
+            basketProduct.Quantite--;
             NotifyProperties();
         }
 

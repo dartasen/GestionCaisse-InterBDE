@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GestionCaisse_MVVM.Model.Services;
 using GestionCaisse_MVVM.ViewModel;
+using MahApps.Metro.Controls;
 
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
     ///     Logique d'interaction pour ProductInsertionView.xaml
     /// </summary>
-    public partial class ProductInsertionView : Window
+    public partial class ProductInsertionView : MetroWindow
     {
         public ProductInsertionView()
         {
@@ -31,25 +31,21 @@ namespace GestionCaisse_MVVM.View
         /// <param name="e"></param>
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var listView = sender as ListView;
-            if (listView == null) return;
+            if (!(sender is ListView listView)) return;
 
-            var p = listView.SelectedItem as Product;
-            if (p == null) return;
+            if (!(listView.SelectedItem is Product p)) return;
 
-            if (p.Quantity == 0)
+            if (p.Quantite == 0)
                 listView.UnselectAll();
         }
 
         private void AutoCompleteBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var autocompleteBox = sender as AutoCompleteBox;
-            if (autocompleteBox == null) return;
+            if (!(sender is AutoCompleteBox autocompleteBox)) return;
 
-            var selectedItem = autocompleteBox.SelectedItem as Product;
-            if (selectedItem == null) return;
+            if (!(autocompleteBox.SelectedItem is Product selectedItem)) return;
 
-            if (selectedItem.Quantity == 0)
+            if (selectedItem.Quantite == 0)
                 autocompleteBox.SelectedItem = null;
         }
 
@@ -76,8 +72,7 @@ namespace GestionCaisse_MVVM.View
         /// <param name="e"></param>
         private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var vm = DataContext as ProductInsertionViewModel;
-            if (vm != null) vm.InsertProductToBasket.Execute(vm.SelectedProduct);
+            if (DataContext is ProductInsertionViewModel vm) vm.InsertProductToBasket.Execute(vm.SelectedProduct);
         }
     }
 }

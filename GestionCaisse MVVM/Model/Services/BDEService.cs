@@ -14,7 +14,7 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    return new List<BDE>(context.BDEs);
+                    return new List<BDE>(context.BDE);
                 }
             }
             catch (EntityException ex)
@@ -30,7 +30,7 @@ namespace GestionCaisse_MVVM.Model.Services
                 var results = new Dictionary<string, double>();
                 using (var context = new DBConnection())
                 {
-                    context.BDEs.ToList().ForEach(x => results.Add(x.Name, x.Rate));
+                    context.BDE.ToList().ForEach(x => results.Add(x.Nom, x.Taux));
                     return results;
                 }
             }
@@ -47,17 +47,17 @@ namespace GestionCaisse_MVVM.Model.Services
                 using (var context = new DBConnection())
                 {
                     var dues = new List<BDEDue>();
-                    List<BDE> bdes = context.BDEs.ToList();
+                    List<BDE> bdes = context.BDE.ToList();
 
                     foreach (BDE bde in bdes)
                     {
                         var query =
                             from history in context.History
-                            where history.IdBuyingBDE == bde.idBDE && history.SaleDate > dateFrom && history.SaleDate < dateTo
+                            where history.IdBDEAcheteur == bde.Id && history.DateVente > dateFrom && history.DateVente < dateTo
                             select new PromotionQueryResult()
                             {
-                                ProductPrice = context.Products.FirstOrDefault(x => x.IDProduct == history.IdProduct).Price,
-                                Quantity = history.Quantity
+                                ProductPrice = context.Product.FirstOrDefault(x => x.IdProduit == history.IdProduit).Prix,
+                                Quantity = history.Quantite
                             };
 
                         dues.Add(new BDEDue()

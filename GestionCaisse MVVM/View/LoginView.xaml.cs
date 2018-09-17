@@ -1,14 +1,14 @@
 ﻿using System.Configuration;
 using System.Windows;
-using System.Windows.Input;
 using GestionCaisse_MVVM.ViewModel;
+using MahApps.Metro.Controls;
 
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
     ///     Logique d'interaction pour LoginView.xaml
     /// </summary>
-    public partial class LoginView : Window
+    public partial class LoginView : MetroWindow
     {
         public LoginView()
         {
@@ -48,17 +48,8 @@ namespace GestionCaisse_MVVM.View
             }
             catch
             {
-                MessageBox.Show("Impossible de lire le fichier de configuration !",
-                    "Fichier de configuration invalide !", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Impossible de lire le fichier de configuration !", "Fichier de configuration invalide !", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
-            }
-        }
-
-        private void OnPreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key.Equals(Key.Enter))
-            {
-                ((LoginViewModel) DataContext).CheckAndTryToLogin.Execute(null);
             }
         }
     }

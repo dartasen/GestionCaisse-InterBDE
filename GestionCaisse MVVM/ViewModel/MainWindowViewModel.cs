@@ -197,7 +197,7 @@ namespace GestionCaisse_MVVM.ViewModel
             }
         }
 
-        public string CurrentUser => $"{_loginService.GetLoginContext().User.Name} ({_loginService.GetLoginContext().BuyingBDE.Name})";
+        public string CurrentUser => $"{_loginService.GetLoginContext().User.Nom} ({_loginService.GetLoginContext().BuyingBDE.Nom})";
 
         private DispatcherTimer Timer;
         private int _timer;

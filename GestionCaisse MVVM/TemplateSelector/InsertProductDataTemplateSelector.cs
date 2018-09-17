@@ -14,8 +14,9 @@ namespace GestionCaisse_MVVM.TemplateSelector
             var element = container as FrameworkElement;
             var product = item as Product;
 
-            if (product.Quantity > 0)
+            if (product.Quantite > 0)
                 return element.FindResource("SimpleItemTemplate") as DataTemplate;
+
             return element.FindResource("OutOfSaleItemTemplate") as DataTemplate;
         }
     }

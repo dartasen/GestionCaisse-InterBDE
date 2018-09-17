@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using GestionCaisse_MVVM.Model.Services;
 
@@ -18,7 +15,7 @@ namespace GestionCaisse_MVVM.Converters
 
             var bdeId = (int) value;
 
-            return BDEService.GetBDEs().FirstOrDefault(x => x.idBDE == bdeId)?.Name;
+            return BDEService.GetBDEs().FirstOrDefault(x => x.Id == bdeId)?.Nom;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

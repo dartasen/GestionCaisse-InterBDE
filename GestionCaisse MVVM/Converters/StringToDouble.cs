@@ -11,6 +11,7 @@ namespace GestionCaisse_MVVM.Converters
             try
             {
                 var stringToConvert = value as string;
+
                 if (string.IsNullOrEmpty(stringToConvert))
                     return 0.00;
 

@@ -13,15 +13,22 @@ namespace GestionCaisse_MVVM.Converters
             {
                 return Visibility.Visible;
             }
+
             return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Visibility && (Visibility)value == Visibility.Visible)
+            if (!(value is Visibility))
+            {
+                return false;
+            }
+
+            if (value as Visibility? == Visibility.Visible)
             {
                 return true;
             }
+
             return false;
         }
     }

@@ -24,16 +24,16 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
 
             NewClient = new Client
             {
-                Name = client.Name,
-                BadgeID = client.BadgeID,
-                Passkey = client.Passkey,
-                IdBDE = client.IdBDE,
-                Balance = client.Balance
+                Nom = client.Nom,
+                IdCarte = client.IdCarte,
+                CodeSecret = client.CodeSecret,
+                IdBde = client.IdBde,
+                Credit = client.Credit
             };
 
             BDEs = new List<BDE>(BDEService.GetBDEs());
 
-            SelectedBde = BDEs.FirstOrDefault(x => x.idBDE == client.IdBDE);
+            SelectedBde = BDEs.FirstOrDefault(x => x.Id == client.IdBde);
 
             Quit = new RelayCommand(() => Close(), o => true);
 
@@ -51,7 +51,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                     return;
                 }
 
-                NewClient.IdBDE = SelectedBde.idBDE;
+                NewClient.IdBde = SelectedBde.Id;
                 ClientService.ValidateChanges(client, NewClient);
                 var dialogService = new DialogService();
                 dialogService.ShowInformationWindow("Le compte client a correctement été mis à jour !", "Modifications effectuées",
@@ -92,7 +92,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                     return;
                 }
 
-                NewClient.IdBDE = SelectedBde.idBDE;
+                NewClient.IdBde = SelectedBde.Id;
                 ClientService.AddClient(NewClient);
 
                 var dialogService = new DialogService();
@@ -132,26 +132,26 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
 
         public string Name
         {
-            get => NewClient.Name;
-            set { NewClient.Name = value; OnPropertyChanged(); }
+            get => NewClient.Nom;
+            set { NewClient.Nom = value; OnPropertyChanged(); }
         }
 
         public string BadgeID
         {
-            get => NewClient.BadgeID;
-            set { NewClient.BadgeID = value; OnPropertyChanged(); }
+            get => NewClient.IdCarte;
+            set { NewClient.IdCarte = value; OnPropertyChanged(); }
         }
 
         public int Passkey
         {
-            get => NewClient.Passkey;
-            set { NewClient.Passkey = value; OnPropertyChanged(); }
+            get => NewClient.CodeSecret;
+            set { NewClient.CodeSecret = value; OnPropertyChanged(); }
         }
 
         public double Balance
         {
-            get => NewClient.Balance;
-            set { NewClient.Balance = value; OnPropertyChanged(); }
+            get => NewClient.Credit;
+            set { NewClient.Credit = value; OnPropertyChanged(); }
         }
 
         private bool _isValidateChangesVisible;

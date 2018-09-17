@@ -11,9 +11,6 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged([CallerMemberName] string p = null) => PropertyChanged?.Invoke(this,
-            new PropertyChangedEventArgs(p));
-
         public HistoryViewModel()
         {
             _dateFrom = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -23,19 +20,12 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
 
         private void UpdateHistory()
         {
-            _history = ProductService.GetHistory(_dateFrom, _dateTo).OrderByDescending(x => x.IdSale).ToList();
+            History = ProductService.GetHistory(_dateFrom, _dateTo).OrderByDescending(x => x.IdVente).ToList();
             OnPropertyChanged(nameof(History));
         }
 
         #region Properties
-
-        private List<ProductService.HistoryQueryResult> _history;
-
-        public List<ProductService.HistoryQueryResult> History
-        {
-            get => _history;
-            set => _history = value;
-        }
+        public List<QueryHistory> History { get; set; }
 
         private DateTime _dateFrom;
 
@@ -53,5 +43,10 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
             set { _dateTo = value; OnPropertyChanged(); UpdateHistory(); }
         }
         #endregion
+
+        private void OnPropertyChanged([CallerMemberName] string p = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+        }
     }
 }

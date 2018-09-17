@@ -57,7 +57,7 @@
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom du BDE"
-                                    Binding="{Binding BDE.Name}"
+                                    Binding="{Binding BDE.Nom}"
                                     IsReadOnly="True" />
 
                 <DataGridTextColumn Header="Dû"

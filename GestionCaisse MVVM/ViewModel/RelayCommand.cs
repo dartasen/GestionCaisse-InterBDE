@@ -5,8 +5,8 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action _actionToExecute;
         private readonly Func<object, bool> _checkCanExecute;
+        private readonly Action _actionToExecute;
 
         public RelayCommand(Action actionToExecute, Func<object, bool> actionToCheckExecute)
         {
@@ -16,14 +16,10 @@ namespace GestionCaisse_MVVM.ViewModel
 
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
-        {
-            return _checkCanExecute.Invoke(parameter);
-        }
+        public bool CanExecute(object parameter) => _checkCanExecute.Invoke(parameter);
 
-        public void Execute(object parameter)
-        {
-            _actionToExecute.Invoke();
-        }
+        public void Execute(object parameter) => _actionToExecute.Invoke();
+
+        public void Deny(object parameter) => CanExecuteChanged?.Invoke(this, new EventArgs());
     }
 }

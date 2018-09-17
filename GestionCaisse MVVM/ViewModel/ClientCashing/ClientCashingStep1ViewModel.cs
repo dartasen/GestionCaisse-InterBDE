@@ -23,17 +23,7 @@ namespace GestionCaisse_MVVM.ViewModel.ClientCashing
             }, o => true);
         }
 
-
-        #region Properties
-        private int _passkey;
-
-        public int Passkey
-        {
-            get { return _passkey; }
-            set { _passkey = value; }
-        }
-
-        #endregion
+        public int Passkey { get; set; }
 
         #region Commands
         public ICommand CheckPasskey { get; set; }

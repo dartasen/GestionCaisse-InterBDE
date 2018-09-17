@@ -52,19 +52,19 @@
                                     Binding="{Binding IdClient}" />
 
                 <DataGridTextColumn Header="Nom"
-                                    Binding="{Binding Name}" />
+                                    Binding="{Binding Nom}" />
 
                 <DataGridTextColumn Header="Numéro carte étudiante"
-                                    Binding="{Binding BadgeID}"/>
+                                    Binding="{Binding IdCarte}"/>
 
                 <DataGridTextColumn Header="BDE"
-                                    Binding="{Binding IdBDE, Converter={StaticResource IdToBdeName}}" />
+                                    Binding="{Binding IdBde, Converter={StaticResource IdToBdeName}}" />
 
                 <DataGridTextColumn Header="Clé secrète"
-                                    Binding="{Binding Passkey, Converter={StaticResource IntTo3GroupOfDigits}}" />
+                                    Binding="{Binding CodeSecret, Converter={StaticResource IntTo3GroupOfDigits}}" />
 
                 <DataGridTextColumn Header="Solde"
-                                    Binding="{Binding Balance}" />
+                                    Binding="{Binding Credit}" />
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

@@ -53,7 +53,7 @@ namespace GestionCaisse_MVVM.ViewModel
             get
             {
                 return (searchText, obj) =>
-                    (obj as Product).Name.ToLower().Contains(searchText.ToLower());
+                    (obj as Product).Nom.ToLower().Contains(searchText.ToLower());
             }
         }
 

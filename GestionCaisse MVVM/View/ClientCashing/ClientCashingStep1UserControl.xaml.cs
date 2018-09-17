@@ -22,7 +22,7 @@ namespace GestionCaisse_MVVM.View.ClientCashing
         {
             if (e.Key.Equals(Key.Enter))
             {
-                ((ClientCashingStep1ViewModel)DataContext).CheckPasskey.Execute(null);
+                (DataContext as ClientCashingStep1ViewModel).CheckPasskey.Execute(null);
             }
         }
 

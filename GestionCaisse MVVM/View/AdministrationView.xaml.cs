@@ -2,13 +2,14 @@
 using System.Windows;
 using GestionCaisse_MVVM.Model.Services;
 using GestionCaisse_MVVM.ViewModel;
+using MahApps.Metro.Controls;
 
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
     /// Interaction logic for AdministrationView.xaml
     /// </summary>
-    public partial class AdministrationView : Window
+    public partial class AdministrationView : MetroWindow
     {
         public AdministrationView()
         {

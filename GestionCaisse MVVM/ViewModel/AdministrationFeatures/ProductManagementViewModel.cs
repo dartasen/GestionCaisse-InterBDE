@@ -42,8 +42,8 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
         public void Refresh()
         {
             _db = new DBConnection();
-            _db.Products.Load();
-            _products.Source = _db.Products.Local;
+            _db.Product.Load();
+            _products.Source = _db.Product.Local;
         }
 
         #region Properties

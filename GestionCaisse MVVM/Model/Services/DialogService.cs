@@ -3,6 +3,8 @@ using System.Windows;
 using GestionCaisse_MVVM.View;
 using GestionCaisse_MVVM.View.AdministrationFeatures;
 using GestionCaisse_MVVM.View.ClientCashing;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace GestionCaisse_MVVM.Model.Services
 {
@@ -204,6 +206,12 @@ namespace GestionCaisse_MVVM.Model.Services
             MessageBoxImage imageType = MessageBoxImage.None)
         {
             return MessageBox.Show(message, title, buttonType, imageType);
+        }
+
+        public void ShowInformationModern(string message, string title = null, MessageDialogStyle style = MessageDialogStyle.Affirmative)
+        {
+            var window = (Application.Current.MainWindow as MetroWindow);
+            window.ShowMessageAsync(title, message, style);
         }
     }
 }

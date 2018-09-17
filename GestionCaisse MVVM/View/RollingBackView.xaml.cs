@@ -1,13 +1,14 @@
 ﻿using System.Windows;
 using GestionCaisse_MVVM.Model.Services;
 using GestionCaisse_MVVM.ViewModel;
+using MahApps.Metro.Controls;
 
 namespace GestionCaisse_MVVM.View
 {
     /// <summary>
     /// Interaction logic for RollingBackView.xaml
     /// </summary>
-    public partial class RollingBackView : Window
+    public partial class RollingBackView : MetroWindow
     {
         public RollingBackView()
         {
@@ -36,8 +37,10 @@ namespace GestionCaisse_MVVM.View
 
             for (int i = 0; i < ComboBox.Items.Count; i++)
             {
-                if (((UserService.UserQueryResult)ComboBox.Items[i]).Name == user.Name)
+                if ((ComboBox.Items[i] as User).Nom.Equals(user.Nom))
+                {
                     ComboBox.SelectedIndex = i;
+                }
             }
         }
     }

@@ -21,7 +21,7 @@ namespace GestionCaisse_MVVM.Model.Services
                 {
                     try
                     {
-                        var client = context.Clients.FirstOrDefault(x => x.Passkey == passkey);
+                        var client = context.Client.FirstOrDefault(x => x.CodeSecret == passkey);
                         return client;
                     }
                     catch (ArgumentNullException)
@@ -44,7 +44,7 @@ namespace GestionCaisse_MVVM.Model.Services
                 {
                     try
                     {
-                        context.Clients.FirstOrDefault(x => x.IdClient == client.IdClient).Balance -= due;
+                        context.Client.FirstOrDefault(x => x.IdClient == client.IdClient).Credit -= due;
                         context.SaveChanges();
                     }
                     catch (ArgumentNullException) { }
@@ -64,7 +64,7 @@ namespace GestionCaisse_MVVM.Model.Services
                 {
                     try
                     {
-                        return context.Clients.ToList();
+                        return context.Client.ToList();
                     }
                     catch (ArgumentNullException)
                     {
@@ -86,7 +86,7 @@ namespace GestionCaisse_MVVM.Model.Services
                 {
                     var newPasskey = random.Next(100000000, 999999999); // creates a 9 digit random no.
 
-                    while (context.Clients.Any(x => x.Passkey == newPasskey))
+                    while (context.Client.Any(x => x.CodeSecret == newPasskey))
                     {
                         newPasskey = random.Next(100000000, 999999999);
                     }
@@ -112,7 +112,7 @@ namespace GestionCaisse_MVVM.Model.Services
                             history.IdClient = null;
                     }
 
-                    context.Clients.Remove(context.Clients.FirstOrDefault(x => x.IdClient == client.IdClient));
+                    context.Client.Remove(context.Client.FirstOrDefault(x => x.IdClient == client.IdClient));
 
                     context.SaveChanges();
                 }
@@ -129,7 +129,7 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    context.Clients.Add(client);
+                    context.Client.Add(client);
                     context.SaveChanges();
                 }
             }
@@ -145,29 +145,29 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    if (!oldClient.Name.Equals(newClient.Name))
+                    if (!oldClient.Nom.Equals(newClient.Nom))
                     {
-                        context.Clients.FirstOrDefault(x => x.IdClient == oldClient.IdClient).Name = newClient.Name;
+                        context.Client.FirstOrDefault(x => x.IdClient == oldClient.IdClient).Nom = newClient.Nom;
                     }
 
-                    if (!oldClient.BadgeID.Equals(newClient.BadgeID))
+                    if (!oldClient.IdCarte.Equals(newClient.IdCarte))
                     {
-                        context.Clients.FirstOrDefault(x => x.IdClient == oldClient.IdClient).BadgeID = newClient.BadgeID;
+                        context.Client.FirstOrDefault(x => x.IdClient == oldClient.IdClient).IdCarte = newClient.IdCarte;
                     }
 
-                    if (oldClient.Passkey != newClient.Passkey)
+                    if (oldClient.CodeSecret != newClient.CodeSecret)
                     {
-                        context.Clients.FirstOrDefault(x => x.IdClient == oldClient.IdClient).Passkey = newClient.Passkey;
+                        context.Client.FirstOrDefault(x => x.IdClient == oldClient.IdClient).CodeSecret = newClient.CodeSecret;
                     }
 
-                    if (oldClient.IdBDE != newClient.IdBDE)
+                    if (oldClient.IdBde != newClient.IdBde)
                     {
-                        context.Clients.FirstOrDefault(x => x.IdClient == oldClient.IdClient).IdBDE = newClient.IdBDE;
+                        context.Client.FirstOrDefault(x => x.IdClient == oldClient.IdClient).IdBde = newClient.IdBde;
                     }
 
-                    if (oldClient.Balance != newClient.Balance)
+                    if (oldClient.Credit != newClient.Credit)
                     {
-                        context.Clients.FirstOrDefault(x => x.IdClient == oldClient.IdClient).Balance = newClient.Balance;
+                        context.Client.FirstOrDefault(x => x.IdClient == oldClient.IdClient).Credit = newClient.Credit;
                     }
 
                     context.SaveChanges();

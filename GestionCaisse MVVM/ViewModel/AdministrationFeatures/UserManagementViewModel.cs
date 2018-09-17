@@ -25,7 +25,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                     return;
                 }
 
-                if (SelectedUser.IdUser.Equals(LoginService.Instance.GetLoginContext().User.IdUser))
+                if (SelectedUser.IdUtilisateur.Equals(LoginService.Instance.GetLoginContext().User.IdUtilisateur))
                 {
                     dialogService.ShowInformationWindow("Vous ne pouvez-pas désactiver votre propre compte",
                         "Opération interdite !", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -45,7 +45,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                     return;
                 }
 
-                if (SelectedUser.IdUser.Equals(LoginService.Instance.GetLoginContext().User.IdUser))
+                if (SelectedUser.IdUtilisateur.Equals(LoginService.Instance.GetLoginContext().User.IdUtilisateur))
                 {
                     dialogService.ShowInformationWindow(
                         "Vous ne pouvez-pas vous révoquer votre droit administrateur vous-même",
@@ -53,7 +53,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                     return;
                 }
 
-                UserService.ToggleIsAdminUser(SelectedUser.IdUser);
+                UserService.ToggleIsAdminUser(SelectedUser.IdUtilisateur);
                 Users = UserService.GetUsers();
                 OnPropertyChanged(nameof(Users));
             }, o => true);
@@ -76,7 +76,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                         return;
                     }
 
-                    if (SelectedUser.IdUser.Equals(LoginService.Instance.GetLoginContext().User.IdUser))
+                    if (SelectedUser.IdUtilisateur.Equals(LoginService.Instance.GetLoginContext().User.IdUtilisateur))
                     {
                         dialogService.ShowInformationWindow("Vous ne pouvez-pas vous supprimer vous-même",
                             "Opération interdite !", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -90,7 +90,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                         MessageBoxImage.Question);
                     if (result.Equals(MessageBoxResult.Yes))
                     {
-                        UserService.DeleteUser(SelectedUser.IdUser);
+                        UserService.DeleteUser(SelectedUser.IdUtilisateur);
                         Users = UserService.GetUsers();
                         OnPropertyChanged(nameof(Users));
                     }
@@ -132,11 +132,11 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
 
         #region Properties
 
-        public List<UserService.UserQueryResult> Users { get; set; }
+        public List<QueryUser> Users { get; set; }
 
-        private UserService.UserQueryResult _selectedUser;
+        private QueryUser _selectedUser;
 
-        public UserService.UserQueryResult SelectedUser
+        public QueryUser SelectedUser
         {
             get => _selectedUser;
             set

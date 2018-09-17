@@ -24,8 +24,7 @@ namespace GestionCaisse_MVVM.Converters
                 var image = new BitmapImage(new Uri($"pack://application:,,,/Assets/smileys/{smiley}.png"));
 
                 return image;
-            }
-            catch { }
+            } catch { }
 
             return new BitmapImage();
         }

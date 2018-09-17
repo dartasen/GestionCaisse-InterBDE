@@ -1,84 +1,94 @@
-﻿<Window x:Class="GestionCaisse_MVVM.View.LoginView"
+﻿<Controls:MetroWindow
+        x:Class="GestionCaisse_MVVM.View.LoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:behaviors="clr-namespace:GestionCaisse_MVVM.Behaviors"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Height="280" Width="580"
+        Height="400" Width="800"
         ResizeMode="NoResize"
+        GlowBrush="Black"
         Icon="../Assets/plastic-cup.png"
         Title="{Binding WindowName}"
         RenderOptions.BitmapScalingMode="HighQuality"
         WindowStartupLocation="CenterScreen">
 
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Bottom">
-            <TextBlock HorizontalAlignment="Center" Text="{Binding RandomedSentence}"/>
-        </DockPanel>
+    <Border Padding="12">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-        <Border Padding="12">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <Image MaxHeight="300" Grid.Column="0" Source="../Assets/inter_bde_logo.png" />
 
-                <Image Grid.Column="0"
-                       Source="../Assets/inter_bde_logo.png">
-                </Image>
-
-                <DockPanel Grid.Column="1">
-                    <TextBlock DockPanel.Dock="Top"
-                               Text="Gestion Caisse Inter-BDE"
-                               FontSize="17"
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Gestion Ventes Inter-BDE"
+                               FontSize="23"
                                FontWeight="Bold"
-                               FontFamily="Verdana"
+                               FontFamily="Aldhabi"
                                HorizontalAlignment="Center"
                                Margin="0 20 0 15"/>
 
-                    <Grid DockPanel.Dock="Bottom">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{StaticResource appbar_user}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
 
-                        <Button Grid.Column="0"
+                        <TextBlock Margin="0 5 0 0" Text="Utilisateur : " />
+                    </StackPanel>
+
+                    <TextBox x:Name="UsernameTextBox"
+                                 Padding="0 2 0 0"
+                                 Margin="0 0 0 15"
+                                 Text="{Binding Username, Mode=TwoWay}" />
+
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{StaticResource appbar_key}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        
+                        <TextBlock Margin="0 5 0 0" Text="Mot de passe : " />
+                    </StackPanel>
+
+                    <PasswordBox Padding="0 2 0 0">
+                        <i:Interaction.Behaviors>
+                            <behaviors:PasswordBoxBindingBehavior Password="{Binding Password}" />
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
+                </StackPanel>
+
+                <Grid Margin="5,20,5,20">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Grid.Column="0"
                                 Margin="0 0 5 0"
                                 Content="Quitter"
                                 Command="{Binding Quit}" />
 
-                        <Button Grid.Column="1"
+                    <Button Grid.Column="1"
                                 Margin="5 0 0 0"
                                 Content="Connexion"
+                                IsDefault="True"
                                 Command="{Binding CheckAndTryToLogin}" />
-                    </Grid>
+                </Grid>
 
-                    <StackPanel>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding RandomedSentence}"/>
 
-                        <TextBlock Margin="0 5 0 0"
-                                   Text="Utilisateur : " />
+            </StackPanel>
+        </Grid>
+    </Border>
 
-                        <TextBox x:Name="UsernameTextBox"
-                                 Padding="0 2 0 0"
-                                 Margin="0 0 0 15"
-                                 PreviewKeyDown="OnPreviewKeyDown"
-                                 Text="{Binding Username,
-                                Mode=TwoWay}" />
-
-                        <TextBlock Margin="0 5 0 0"
-                                   Text="Mot de passe : " />
-
-                        <PasswordBox Padding="0 2 0 0"
-                                     PreviewKeyDown="OnPreviewKeyDown">
-                            <i:Interaction.Behaviors>
-                                <behaviors:PasswordBoxBindingBehavior Password="{Binding Password}" />
-                            </i:Interaction.Behaviors>
-                        </PasswordBox>
-                    </StackPanel>
-                </DockPanel>
-            </Grid>
-        </Border>
-    </DockPanel>
-</Window>
+</Controls:MetroWindow>

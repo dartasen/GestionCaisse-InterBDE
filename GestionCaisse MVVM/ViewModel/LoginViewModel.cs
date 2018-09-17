@@ -14,8 +14,9 @@ namespace GestionCaisse_MVVM.ViewModel
 {
     public class LoginViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private readonly LoginService _loginService = LoginService.Instance;
-        private readonly Random random;
+        private LoginService _loginService { get; } = LoginService.Instance;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #region Commands
 
@@ -58,18 +59,17 @@ namespace GestionCaisse_MVVM.ViewModel
             set { _randomedSentence = value; OnPropertyChanged(); }
         }
 
-
         public string WindowName => $"Connexion à l'application (v.{AppInformations.Version})";
 
         #endregion
 
         public LoginViewModel()
         {
-            random = new Random();
             var dialogService = new DialogService();
-            _randomedSentence = GetRandomASentence();
+            RandomedSentence = GetRandomASentence();
 
             LoginService.ShowLoginWindow = () => { Show(); };
+
             CheckAndTryToLogin = new RelayCommand(() =>
             {
                 try
@@ -80,36 +80,30 @@ namespace GestionCaisse_MVVM.ViewModel
                     {
                         _loginService.GetLoginContext().User = connection.User;
                         _loginService.GetLoginContext().BuyingBDE = BDEService
-                            .GetBDEs().FirstOrDefault(x => x.idBDE == connection.User.IdBDE);
-                        Password = null; //Makes the password box empty
+                            .GetBDEs().FirstOrDefault(x => x.Id == connection.User.IdBDE);
                         Hide();
                         dialogService.ShowMainWindow();
                     }
                     else if (connection.ConnectionResult.Equals(ConnectionResult.Disabled))
                     {
-                        dialogService.ShowInformationWindow("Votre compte a été désactivé ! Contactez un administrateur !",
-                            "Erreur de connexion",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Error);
-                        Password = null;
+                        dialogService.ShowInformationModern("Votre compte a été désactivé ! Contactez un administrateur !",
+                            "Erreur de connexion" );
                     }
                     else
                     {
-                        dialogService.ShowInformationWindow("Utilisateur ou mot de passe incorrect !",
-                            "Erreur de connexion",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Error);
-                        Password = null;
+                        dialogService.ShowInformationModern("Utilisateur ou mot de passe incorrect !",
+                            "Erreur de connexion");
                     }
                 }
-                catch (ConnectionFailedException ex)
+                catch (Exception erreur)
                 {
                     dialogService.ShowInformationWindow(
-                        "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
+                        "Problème de connexion à la base de données !\n" + erreur.Message,
                         "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 RandomedSentence = GetRandomASentence();
+
             }, o => true);
 
             Quit = new RelayCommand(() => Close(), o => true);
@@ -121,7 +115,7 @@ namespace GestionCaisse_MVVM.ViewModel
             {
                 string[] allLines = File.ReadAllLines(@"Assets\extra\sentences.txt");
 
-                int randomedNumber = random.Next(0, allLines.Length);
+                int randomedNumber = new Random().Next(0, allLines.Length);
 
                 return allLines[randomedNumber];
             }
@@ -131,9 +125,7 @@ namespace GestionCaisse_MVVM.ViewModel
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string p = null)
+        private void OnPropertyChanged([CallerMemberName] string p = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }

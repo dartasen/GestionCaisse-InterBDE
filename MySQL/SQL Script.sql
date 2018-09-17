@@ -20,14 +20,13 @@ USE `bde` ;
 DROP TABLE IF EXISTS `bde`.`Produit` ;
 
 CREATE TABLE IF NOT EXISTS `bde`.`Produit` (
-  `idProduit` INT NOT NULL AUTO_INCREMENT,
+  `idProduit` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `nom` VARCHAR(50) NOT NULL,
   `prix` DOUBLE UNSIGNED NOT NULL,
   `prixAchat` DOUBLE UNSIGNED NOT NULL,
   `quantite` INT UNSIGNED NOT NULL,
   `categorie` ENUM('boisson', 'snack') NOT NULL,
   `datePeremption` DATE NULL,
-  PRIMARY KEY (`idProduit`),
   UNIQUE INDEX `nom_UNIQUE` (`nom` ASC))
 ENGINE = InnoDB;
 
@@ -38,10 +37,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `bde`.`Bde` ;
 
 CREATE TABLE IF NOT EXISTS `bde`.`Bde` (
-  `idBde` INT NOT NULL AUTO_INCREMENT,
+  `idBde` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `nom` VARCHAR(25) NOT NULL,
   `taux` DOUBLE UNSIGNED NOT NULL,
-  PRIMARY KEY (`idBde`))
 ENGINE = InnoDB;
 
 

@@ -14,7 +14,7 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    return context.Products.OrderBy(x => x.Name).ToList();
+                    return context.Product.OrderBy(x => x.Nom).ToList();
                 }
             }
             catch (EntityException ex)
@@ -24,29 +24,28 @@ namespace GestionCaisse_MVVM.Model.Services
         }
 
         //TODO Amméliorer comparaison date => faire sur année, puis mois puis jour
-        public static List<HistoryQueryResult> GetHistory(DateTime dateFrom, DateTime dateTo, int? idUser = null)
+        public static List<QueryHistory> GetHistory(DateTime dateFrom, DateTime dateTo, int? idUser = null)
         {
             try
             {
                 using (var context = new DBConnection())
                 {
                     var query =
-                        from history in context.History
-                        join user in context.Users on history.IdUser equals user.IdUser
-                        join product in context.Products on history.IdProduct equals product.IDProduct
-                        join buyingBDE in context.BDEs on history.IdBuyingBDE equals buyingBDE.idBDE
-                        where (idUser == null && history.SaleDate >= dateFrom && history.SaleDate <= dateTo) ||
-                              (idUser != null && history.SaleDate >= dateFrom && history.SaleDate <= dateTo && user.IdUser == idUser)
-                        select new HistoryQueryResult()
-                        {
-                            IdSale = history.IdSale,
-                            Username = user.Name,
-                            ProductName = product.Name,
-                            Quantity = history.Quantity,
-                            IdClient = history.IdClient,
-                            BuyingBDEName = buyingBDE.Name,
-                            SaleDate = history.SaleDate
-                        };
+                         from history in context.History
+                         join user in context.User on history.IdUtilisateur equals user.IdUtilisateur
+                         join product in context.Product on history.IdProduit equals product.IdProduit
+                         join buyingBDE in context.BDE on history.IdBDEAcheteur equals buyingBDE.Id
+                         where (idUser == null && history.DateVente >= dateFrom && history.DateVente <= dateTo) || (idUser != null && history.DateVente >= dateFrom && history.DateVente <= dateTo && user.IdUtilisateur == idUser)
+                         select new QueryHistory
+                         {
+                             IdVente = history.IdVente,
+                             Username = user.Nom,
+                             ProductName = product.Nom,
+                             Quantite = history.Quantite,
+                             IdClient = history.IdClient,
+                             BuyingBDEName = buyingBDE.Nom,
+                             DateVente = history.DateVente
+                         };
 
                     return query.ToList();
                 }
@@ -63,14 +62,14 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    var sellToDelete = context.History.FirstOrDefault(x => x.IdSale == idSale);
+                    var sellToDelete = context.History.FirstOrDefault(x => x.IdVente == idSale);
                     if (sellToDelete == null) return false;
 
-                    context.Products.FirstOrDefault(x => x.IDProduct == sellToDelete.IdProduct).Quantity += sellToDelete.Quantity;
+                    context.Product.FirstOrDefault(x => x.IdProduit == sellToDelete.IdProduit).Quantite += sellToDelete.Quantite;
 
                     if (sellToDelete.IdClient != null)
-                        context.Clients.FirstOrDefault(x => x.IdClient == sellToDelete.IdClient).Balance +=
-                            context.Products.FirstOrDefault(x => x.IDProduct == sellToDelete.IdProduct).Price * sellToDelete.Quantity;
+                        context.Client.FirstOrDefault(x => x.IdClient == sellToDelete.IdClient).Credit +=
+                            context.Product.FirstOrDefault(x => x.IdProduit == sellToDelete.IdProduit).Prix * sellToDelete.Quantite;
 
                     context.History.Remove(sellToDelete);
                     context.SaveChanges();
@@ -81,14 +80,6 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
-        }
-
-        public class HistoryQueryResult : History
-        {
-            public string Username { get; set; }
-            public string ProductName { get; set; }
-            public string BuyingBDEName { get; set; }
-            public string FormatedSaleDate => SaleDate.ToString("dd/MM/yyyy HH:MM:ss");
         }
     }
 }

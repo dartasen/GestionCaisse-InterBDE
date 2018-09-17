@@ -44,7 +44,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
         }
 
         #region Properties
-        public string Username => user.Name;
+        public string Username => user.Nom;
 
         private string _password;
 

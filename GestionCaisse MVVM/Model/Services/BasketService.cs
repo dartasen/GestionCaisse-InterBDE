@@ -32,21 +32,22 @@ namespace GestionCaisse_MVVM.Model.Services
                     {
                         context.History.Add(new History
                         {
-                            IdUser = loginService.User.IdUser,
-                            IdProduct = bp.Product.IDProduct,
-                            Quantity = bp.Quantity,
-                            IdBuyingBDE = loginService.BuyingBDE.idBDE,
+                            IdUtilisateur = loginService.User.IdUtilisateur,
+                            IdProduit = bp.Product.IdProduit,
+                            Quantite = bp.Quantite,
+                            IdBDEAcheteur = loginService.BuyingBDE.Id,
                             IdClient = clientId,
-                            SaleDate = DateTime.Now
+                            DateVente = DateTime.Now
                         });
 
-                        context.Products.FirstOrDefault(x => x.IDProduct == bp.Product.IDProduct).Quantity -= bp.Quantity;
+                        context.Product.FirstOrDefault(x => x.IdProduit == bp.Product.IdProduit).Quantite -= bp.Quantite;
                     }
+
                     context.SaveChanges();
                     return true;
                 }
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }

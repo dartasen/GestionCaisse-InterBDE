@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Linq;
+using System.Windows;
 using GestionCaisse_MVVM.Exceptions;
 
 namespace GestionCaisse_MVVM.Model.Services
 {
     public class UserService
     {
-        public static List<UserQueryResult> GetUsers()
+        public static List<QueryUser> GetUsers()
         {
             try
             {
                 using (var context = new DBConnection())
                 {
                     var query =
-                        from user in context.Users
-                        join bde in context.BDEs on user.IdBDE equals bde.idBDE
-                        orderby user.IdUser
-                        select new UserQueryResult()
+                        from user in context.User
+                        join bde in context.BDE on user.IdBDE equals bde.Id
+                        orderby user.IdUtilisateur
+                        select new QueryUser()
                         {
-                            IdUser = user.IdUser,
-                            Name = user.Name,
-                            PersonnalPassword = user.PersonnalPassword,
-                            BadgeID = user.BadgeID,
-                            BDEName = bde.Name,
+                            IdUtilisateur = user.IdUtilisateur,
+                            Nom = user.Nom,
+                            CodePersonnel = user.CodePersonnel,
+                            CodeBadge = user.CodeBadge,
+                            BDEName = bde.Nom,
                             IsAdmin = user.IsAdmin,
                             IsActive = user.IsActive
                         };
@@ -32,7 +33,7 @@ namespace GestionCaisse_MVVM.Model.Services
                     return query.ToList();
                 }
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
@@ -44,11 +45,11 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    context.Users.FirstOrDefault(x => x.IdUser == user.IdUser).IsActive = !user.IsActive;
+                    context.User.FirstOrDefault(x => x.IdUtilisateur == user.IdUtilisateur).IsActive = !user.IsActive;
                     context.SaveChanges();
                 }
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
@@ -62,20 +63,20 @@ namespace GestionCaisse_MVVM.Model.Services
                 {
                     var userToAdd = new User()
                     {
-                        Name = name,
-                        PersonnalPassword = clearTextPassword,
-                        IdBDE = bde.idBDE,
+                        Nom = name,
+                        CodePersonnel = clearTextPassword,
+                        IdBDE = bde.Id,
                         IsActive = isActive,
                         IsAdmin = isAdmin,
                     };
 
-                    context.Users.Add(userToAdd);
+                    context.User.Add(userToAdd);
                     context.SaveChanges();
 
                     return true;
                 }
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
@@ -88,12 +89,12 @@ namespace GestionCaisse_MVVM.Model.Services
                 using (var context = new DBConnection())
                 {
                     string hashedPassword = LoginService.CalculateMd5Hash(plaintextPassword);
-                    context.Users.FirstOrDefault(x => x.IdUser == user.IdUser).PersonnalPassword = hashedPassword;
+                    context.User.FirstOrDefault(x => x.IdUtilisateur == user.IdUtilisateur).CodePersonnel = hashedPassword;
 
                     context.SaveChanges();
                 }
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
@@ -105,11 +106,11 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    context.Users.Remove(context.Users.FirstOrDefault(x => x.IdUser == userId));
+                    context.User.Remove(context.User.FirstOrDefault(x => x.IdUtilisateur == userId));
                     context.SaveChanges();
                 }
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
@@ -121,12 +122,12 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    var user = context.Users.FirstOrDefault(x => x.IdUser == userId);
+                    var user = context.User.FirstOrDefault(x => x.IdUtilisateur == userId);
                     user.IsAdmin = !user.IsAdmin;
                     context.SaveChanges();
                 }
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
@@ -139,23 +140,24 @@ namespace GestionCaisse_MVVM.Model.Services
                 using (var context = new DBConnection())
                 {
                     var scores = new List<UserRankQueryResult>();
-                    List<User> users = context.Users.ToList();
+                    List<User> users = context.User.ToList();
 
                     foreach (var user in users)
                     {
-                        var query = context.History.Count(x => x.IdUser == user.IdUser
-                                                               && x.SaleDate.Month == month
-                                                               && x.SaleDate.Year == DateTime.Now.Year);
+                        var query = context.History.Count(x => x.IdUtilisateur == user.IdUtilisateur
+                                                               && x.DateVente.Month == month
+                                                               && x.DateVente.Year == DateTime.Now.Year);
+
                         scores.Add(new UserRankQueryResult()
                         {
-                            Username = user.Name,
+                            Username = user.Nom,
                             Quantity = query
                         });
                     }
                     return scores.OrderByDescending(x => x.Quantity);
                 }
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
@@ -167,16 +169,17 @@ namespace GestionCaisse_MVVM.Model.Services
             {
                 using (var context = new DBConnection())
                 {
-                    var query = context.History.Where(x => x.IdUser == user.IdUser
-                                                           && x.SaleDate.Day == DateTime.Now.Day
-                                                           && x.SaleDate.Month == DateTime.Now.Month
-                                                           && x.SaleDate.Year == DateTime.Now.Year)
-                        .GroupBy(x => x.SaleDate);
+
+                    var query = context.History.Where(x => x.IdUtilisateur == user.IdUtilisateur
+                                                           && x.DateVente.Day == DateTime.Now.Day
+                                                           && x.DateVente.Month == DateTime.Now.Month
+                                                           && x.DateVente.Year == DateTime.Now.Year)
+                        .GroupBy(x => x.DateVente);
 
                     return query.Count();
                 }
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
                 throw new ConnectionFailedException(ex.Message, ex);
             }
@@ -186,14 +189,6 @@ namespace GestionCaisse_MVVM.Model.Services
         {
             public string Username { get; set; }
             public int Quantity { get; set; }
-        }
-
-        public class UserQueryResult : User
-        {
-            public string BDEName { get; set; }
-
-            public string FormatedIsActive => IsActive ? "O" : "X";
-            public string FormatedIsAdmin => IsAdmin ? "O" : "X";
         }
     }
 }

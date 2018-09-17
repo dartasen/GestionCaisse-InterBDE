@@ -2,13 +2,13 @@
 {
     public class LoginResult
     {
+        public ConnectionResult ConnectionResult { get; }
+        public User User { get; }
+
         public LoginResult(ConnectionResult connectionResult, User user)
         {
             ConnectionResult = connectionResult;
             User = user;
         }
-
-        public User User { get; }
-        public ConnectionResult ConnectionResult { get; }
     }
 }

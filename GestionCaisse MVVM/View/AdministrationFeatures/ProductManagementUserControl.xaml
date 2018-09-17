@@ -35,27 +35,27 @@
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id Produit"
-                                    Binding="{Binding IDProduct}"
+                                    Binding="{Binding IdProduit}"
                                     IsReadOnly="False" />
 
                 <DataGridTextColumn Header="Nom"
-                                    Binding="{Binding Name}"
+                                    Binding="{Binding Nom}"
                                     IsReadOnly="False" />
 
                 <DataGridTextColumn Header="Prix de vente"
-                                    Binding="{Binding Price}" />
+                                    Binding="{Binding Prix}" />
 
                 <DataGridTextColumn Header="Prix d'achat"
-                                    Binding="{Binding BuyingPrice}" />
+                                    Binding="{Binding PrixAchat}" />
 
                 <DataGridTextColumn Header="Quantité en stock"
-                                    Binding="{Binding Quantity}" />
+                                    Binding="{Binding Quantite}" />
 
                 <DataGridTextColumn Header="Date de Péremption"
-                                    Binding="{Binding ExpiryDate, StringFormat='dd/MM/yy'}" />
+                                    Binding="{Binding DatePeremption, StringFormat='dd/MM/yy'}" />
 
                 <DataGridTextColumn Header="Catégorie"
-                                    Binding="{Binding Category}" />
+                                    Binding="{Binding Categorie}" />
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>
