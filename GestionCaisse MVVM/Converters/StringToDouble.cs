@@ -19,7 +19,7 @@ namespace GestionCaisse_MVVM.Converters
 
                 return convertedString;
             }
-            catch (ArgumentException)
+            catch (Exception)
             {
                 return 0.00;
             }
@@ -27,7 +27,16 @@ namespace GestionCaisse_MVVM.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            try
+            {
+                double? doubleToConvert = value as double?;
+
+                return (value as double?).ToString();
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
         }
     }
 }

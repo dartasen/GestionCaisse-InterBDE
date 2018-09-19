@@ -29,7 +29,8 @@ namespace GestionCaisse_MVVM.ViewModel
                 }
                 catch (IllegalProductInsertion e)
                 {
-                    dialogService.ShowInformationWindow(e.Message, "Erreur durant l'insertion du produit", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern(e.Message,
+                            "Erreur insertion produit");
                 }
                 finally
                 {
@@ -89,14 +90,13 @@ namespace GestionCaisse_MVVM.ViewModel
 
                 try
                 {
-                    products = ProductService.GetProducts();
+                    products = ProductService.GetProducts().OrderByDescending(p => p.Quantite);
                 }
                 catch (ConnectionFailedException ex)
                 {
                     var dialogService = new DialogService();
-                    dialogService.ShowInformationWindow(
-                        "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                        "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
                     Close();
                 }
 

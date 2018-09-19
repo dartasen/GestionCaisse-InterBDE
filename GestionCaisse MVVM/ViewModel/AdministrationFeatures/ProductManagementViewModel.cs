@@ -17,6 +17,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
             SaveChanges = new RelayCommand(() =>
             {
                 DialogService dialogService = new DialogService();
+
                 try
                 {
                     MessageBoxResult result = dialogService.ShowInformationWindow("Voulez-vous vraiment appliquer ces modifications ?",
@@ -30,8 +31,9 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                 }
                 catch (Exception e)
                 {
-                    dialogService.ShowInformationWindow("Erreur :\n" + e, "Mise à jour impossible !", MessageBoxButton.OK, MessageBoxImage.Hand);
+                    dialogService.ShowInformationModern("Erreur :\n" + e, "Mise à jour impossible !");
                 }
+
                 Refresh();
             }, o => true);
 

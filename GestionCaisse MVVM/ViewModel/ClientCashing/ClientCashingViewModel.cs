@@ -26,7 +26,7 @@ namespace GestionCaisse_MVVM.ViewModel.ClientCashing
 
             if (c == null)
             {
-                dialogService.ShowInformationWindow("Je ne connais pas ce client !", "Client inconnu", MessageBoxButton.OK, MessageBoxImage.Error);
+                dialogService.ShowInformationModern("Je ne connais pas ce client !", "Erreur de carte");
             }
             else
             {

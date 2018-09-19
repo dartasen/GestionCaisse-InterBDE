@@ -63,7 +63,7 @@
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id Vente"
-                                    Binding="{Binding IdSale}"
+                                    Binding="{Binding IdVente}"
                                     IsReadOnly="True" />
 
                 <DataGridTextColumn Header="Pseudo vendeur"
@@ -73,7 +73,7 @@
                                     Binding="{Binding ProductName}"/>
 
                 <DataGridTextColumn Header="Quantité"
-                                    Binding="{Binding Quantity}" />
+                                    Binding="{Binding Quantite}" />
 
                 <DataGridTextColumn Header="BDE de l'acheteur"
                                     Binding="{Binding BuyingBDEName}"/>

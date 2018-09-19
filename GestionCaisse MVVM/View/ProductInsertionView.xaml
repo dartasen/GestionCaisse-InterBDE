@@ -82,7 +82,7 @@
                     Padding="5"
                     ItemsSource="{Binding Products}"
                     SelectedItem="{Binding SelectedProduct.Product, Mode=TwoWay}"
-                    ValueMemberPath="Name"
+                    ValueMemberPath="Nom"
                     SelectionChanged="AutoCompleteBox_OnSelectionChanged"
                     ItemTemplate="{StaticResource SimpleItemTemplate}"
                     ItemFilter="{Binding PersonFilter}"/>

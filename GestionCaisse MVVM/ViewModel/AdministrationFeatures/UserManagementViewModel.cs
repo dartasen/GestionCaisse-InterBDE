@@ -20,19 +20,21 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
             {
                 if (SelectedUser == null)
                 {
-                    dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
-                        "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Vous devez sélectionner un utilisateur !",
+                        "Opération impossible !");
                     return;
                 }
 
                 if (SelectedUser.IdUtilisateur.Equals(LoginService.Instance.GetLoginContext().User.IdUtilisateur))
                 {
-                    dialogService.ShowInformationWindow("Vous ne pouvez-pas désactiver votre propre compte",
-                        "Opération interdite !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Vous ne pouvez-pas désactiver votre propre compte",
+                        "Opération interdite !");
                     return;
                 }
+
                 UserService.ToggleUserConnectionRights(SelectedUser);
                 Users = UserService.GetUsers();
+
                 OnPropertyChanged(nameof(Users));
             }, o => true);
 
@@ -40,21 +42,22 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
             {
                 if (SelectedUser == null)
                 {
-                    dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
-                        "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Vous devez sélectionner un utilisateur !",
+                        "Opération impossible !");
                     return;
                 }
 
                 if (SelectedUser.IdUtilisateur.Equals(LoginService.Instance.GetLoginContext().User.IdUtilisateur))
                 {
-                    dialogService.ShowInformationWindow(
+                    dialogService.ShowInformationModern(
                         "Vous ne pouvez-pas vous révoquer votre droit administrateur vous-même",
-                        "Opération interdite !", MessageBoxButton.OK, MessageBoxImage.Error);
+                        "Opération interdite !");
                     return;
                 }
 
                 UserService.ToggleIsAdminUser(SelectedUser.IdUtilisateur);
                 Users = UserService.GetUsers();
+
                 OnPropertyChanged(nameof(Users));
             }, o => true);
 
@@ -62,6 +65,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
             {
                 dialogService.ShowAddUserView();
                 Users = UserService.GetUsers();
+
                 OnPropertyChanged(nameof(Users));
             }, o => true);
 
@@ -71,15 +75,15 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                 {
                     if (SelectedUser == null)
                     {
-                        dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
-                            "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                        dialogService.ShowInformationModern("Vous devez sélectionner un utilisateur !",
+                            "Opération impossible !");
                         return;
                     }
 
                     if (SelectedUser.IdUtilisateur.Equals(LoginService.Instance.GetLoginContext().User.IdUtilisateur))
                     {
-                        dialogService.ShowInformationWindow("Vous ne pouvez-pas vous supprimer vous-même",
-                            "Opération interdite !", MessageBoxButton.OK, MessageBoxImage.Error);
+                        dialogService.ShowInformationModern("Vous ne pouvez-pas vous supprimer vous-même",
+                            "Opération interdite !");
                         return;
                     }
 
@@ -88,6 +92,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                         "Confirmation de l'opération",
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
+
                     if (result.Equals(MessageBoxResult.Yes))
                     {
                         UserService.DeleteUser(SelectedUser.IdUtilisateur);
@@ -97,8 +102,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                 }
                 catch (Exception e)
                 {
-                    dialogService.ShowInformationWindow("Erreur :\n" + e, "Suppression impossible !",
-                        MessageBoxButton.OK, MessageBoxImage.Hand);
+                    dialogService.ShowInformationModern("Erreur :\n" + e, "Suppression impossible !");
                 }
             }, o => true);
 
@@ -108,8 +112,8 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                 {
                     if (SelectedUser == null)
                     {
-                        dialogService.ShowInformationWindow("Vous devez sélectionner un utilisateur !",
-                            "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                        dialogService.ShowInformationModern("Vous devez sélectionner un utilisateur !",
+                            "Opération impossible !");
                         return;
                     }
 
@@ -117,18 +121,14 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                 }
                 catch (Exception e)
                 {
-                    dialogService.ShowInformationWindow("Erreur :\n" + e, "Modification impossible !",
-                        MessageBoxButton.OK, MessageBoxImage.Hand);
+                    dialogService.ShowInformationModern("Erreur :\n" + e, "Modification impossible !");
                 }
             }, o => true);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged([CallerMemberName] string p = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
-        }
+        private void OnPropertyChanged([CallerMemberName] string p = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
 
         #region Properties
 

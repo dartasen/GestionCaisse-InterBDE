@@ -35,8 +35,9 @@ namespace GestionCaisse_MVVM.ViewModel
                 {
                     if (SelectedHistoryQueryResult == null)
                     {
-                        dialogService.ShowInformationWindow("Vous devez sélectionner un item !", "Erreur de suppresion",
-                            MessageBoxButton.OK, MessageBoxImage.Error);
+                        dialogService.ShowInformationModern("Vous devez sélectionner un item !",
+                                "Erreur de suppression");
+
                         return;
                     }
 
@@ -44,24 +45,27 @@ namespace GestionCaisse_MVVM.ViewModel
                         "Confirmation de l'opération",
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
+
                     if (result.Equals(MessageBoxResult.Yes))
                     {
                         if (!ProductService.RollBackSell(SelectedHistoryQueryResult.IdVente))
                         {
-                            dialogService.ShowInformationWindow("Erreur lors de la suppression !", "Erreur de suppresion",
-                                MessageBoxButton.OK, MessageBoxImage.Error);
+                            dialogService.ShowInformationModern("Erreur lors de la suppression",
+                                "Erreur de suppression");
                             return;
                         }
 
-                        dialogService.ShowInformationWindow("Vous venez de supprimer la vente n°" + SelectedHistoryQueryResult.IdVente, "Vente supprimée !",
-                            MessageBoxButton.OK, MessageBoxImage.Information);
+                        dialogService.ShowInformationModern("Vous venez de supprimer la vente n°" + SelectedHistoryQueryResult.IdVente,
+                                 "Confirmation de suppression vente");
+
                         UpdateHistory();
                         OnPropertyChanged(nameof(History));
                     }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    dialogService.ShowInformationWindow("Erreur :\n" + e, "Mise à jour impossible !", MessageBoxButton.OK, MessageBoxImage.Hand);
+                    dialogService.ShowInformationModern("Erreur :\n" + ex.InnerException.Message,
+                    "Mise à jour impossible");
                 }
             }, o => true);
         }

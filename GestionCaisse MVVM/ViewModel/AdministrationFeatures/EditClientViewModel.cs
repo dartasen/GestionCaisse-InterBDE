@@ -53,9 +53,10 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
 
                 NewClient.IdBde = SelectedBde.Id;
                 ClientService.ValidateChanges(client, NewClient);
+
                 var dialogService = new DialogService();
-                dialogService.ShowInformationWindow("Le compte client a correctement été mis à jour !", "Modifications effectuées",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                dialogService.ShowInformationModern("Le compte client a correctement été mis à jour !", "Modifications effectuées");
+
                 Close();
             }, o => true);
         }
@@ -96,8 +97,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                 ClientService.AddClient(NewClient);
 
                 var dialogService = new DialogService();
-                dialogService.ShowInformationWindow("Le compte client a correctement été ajouté !", "Ajout effectué",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                dialogService.ShowInformationModern("Le compte client a correctement été ajouté !", "Ajout effectué");
 
                 Close();
             }, o => true);
@@ -182,8 +182,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
         private void FormNotValid()
         {
             var dialogService = new DialogService();
-            dialogService.ShowInformationWindow("Tous les champs doivent-êtres valides !", "Ajout impossible !",
-                MessageBoxButton.OK, MessageBoxImage.Error);
+            dialogService.ShowInformationModern("Tous les champs doivent-êtres valides !", "Ajout impossible");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

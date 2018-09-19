@@ -19,8 +19,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
             {
                 if (SelectedClient == null)
                 {
-                    dialogService.ShowInformationWindow("Vous devez sélectionner un client !",
-                        "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Merci de sélectionner un client", "Opération impossible");
                     return;
                 }
 
@@ -33,8 +32,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
             {
                 if (SelectedClient == null)
                 {
-                    dialogService.ShowInformationWindow("Vous devez sélectionner un client !",
-                        "Opération impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Merci de sélectionner un client", "Opération impossible");
                     return;
                 }
 
@@ -49,13 +47,11 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                 try
                 {
                     ClientService.RemoveClient(SelectedClient);
-                    dialogService.ShowInformationWindow("Ce client a bien été supprimé du système.",
-                        "Suppression réussie !", MessageBoxButton.OK, MessageBoxImage.Information);
+                    dialogService.ShowInformationModern("Le client a bien été supprimé du système", "Opération réussie");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    dialogService.ShowInformationWindow("Suppression impossible !",
-                        "Suppression impossible !", MessageBoxButton.OK, MessageBoxImage.Information);
+                    dialogService.ShowInformationModern("Erreur lors de la suppression " + ex.InnerException.Message, "Opération impossible");
                 }
                 OnPropertyChanged(nameof(Clients));
             }, o => true);

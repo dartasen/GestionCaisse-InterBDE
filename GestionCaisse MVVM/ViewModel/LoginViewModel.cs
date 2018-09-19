@@ -95,11 +95,10 @@ namespace GestionCaisse_MVVM.ViewModel
                             "Erreur de connexion");
                     }
                 }
-                catch (Exception erreur)
+                catch (Exception ex)
                 {
-                    dialogService.ShowInformationWindow(
-                        "Problème de connexion à la base de données !\n" + erreur.Message,
-                        "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
                 }
 
                 RandomedSentence = GetRandomASentence();

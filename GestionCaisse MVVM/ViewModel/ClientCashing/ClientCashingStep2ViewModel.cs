@@ -32,9 +32,9 @@ namespace GestionCaisse_MVVM.ViewModel.ClientCashing
 
                         if (client.Credit < totalPrice)
                         {
-                            dialogService.ShowInformationWindow(
-                                $"Ce compte ne possède pas assez de crédit ! ({client.Credit} sur le compte pour un total de {totalPrice}",
-                                "Achat impossible", MessageBoxButton.OK, MessageBoxImage.Error);
+                            dialogService.ShowInformationModern($"Ce compte ne possède pas assez de crédit ! ({client.Credit} sur le compte pour un total de {totalPrice}",
+                                "Achat impossible");
+
                             return;
                         }
                         
@@ -42,28 +42,19 @@ namespace GestionCaisse_MVVM.ViewModel.ClientCashing
                         {
                             ClientService.ChargeClient(_client, totalPrice);
                             basketService.GetBasket().ResetBasket();
-                            dialogService.ShowInformationWindow(
-                                "Vente effectuée !",
-                                "Confirmation",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Exclamation);
+                            dialogService.ShowInformationModern("Vente effectuée !", "Confirmation Vente");
+
                             _closeWindow.Invoke();
                         }
                         else
                         {
-                            dialogService.ShowInformationWindow(
-                                "Vente invalide ou impossible !",
-                                "Attention",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Hand);
+                            dialogService.ShowInformationModern("Vente invalide ou impossible !", "Erreur Vente");
                         }
                     }
                     catch (ConnectionFailedException ex)
                     {
-                        if (ex.InnerException != null)
-                            dialogService.ShowInformationWindow(
-                                "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                                "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                            dialogService.ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                                    "Erreur de connexion");
                     }
 
                 },

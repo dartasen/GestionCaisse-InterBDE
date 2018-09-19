@@ -18,8 +18,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
 
                 if (string.IsNullOrEmpty(Login) || string.IsNullOrEmpty(Password) || SelectedBde == null)
                 {
-                    dialogService.ShowInformationWindow("Vérifier qu'aucun champ n'est vide !", "Formulaire invalide !",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Vérifier qu'aucun champ n'est vide !", "Formulaire invalide !");
                     return;
                 }
 

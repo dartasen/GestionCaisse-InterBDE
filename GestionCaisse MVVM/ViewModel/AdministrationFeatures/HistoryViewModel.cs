@@ -44,9 +44,6 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
         }
         #endregion
 
-        private void OnPropertyChanged([CallerMemberName] string p = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
-        }
+        private void OnPropertyChanged([CallerMemberName] string p = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
     }
 }

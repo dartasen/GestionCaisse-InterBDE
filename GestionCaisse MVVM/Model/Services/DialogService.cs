@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using GestionCaisse_MVVM.View;
 using GestionCaisse_MVVM.View.AdministrationFeatures;
@@ -22,9 +23,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -40,9 +40,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -58,9 +57,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -76,9 +74,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -94,9 +91,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -112,9 +108,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -130,9 +125,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -149,9 +143,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -167,9 +160,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -186,9 +178,8 @@ namespace GestionCaisse_MVVM.Model.Services
             }
             catch (Exception ex)
             {
-                ShowInformationWindow(
-                    "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                    "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
             }
         }
 
@@ -210,8 +201,13 @@ namespace GestionCaisse_MVVM.Model.Services
 
         public void ShowInformationModern(string message, string title = null, MessageDialogStyle style = MessageDialogStyle.Affirmative)
         {
-            var window = (Application.Current.MainWindow as MetroWindow);
-            window.ShowMessageAsync(title, message, style);
+            try
+            {
+                var window = (Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive) as MetroWindow);
+                window.ShowMessageAsync(title, message, style);
+            } catch {
+                ShowInformationWindow(title, message);
+            }
         }
     }
 }

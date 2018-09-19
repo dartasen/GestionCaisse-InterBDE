@@ -66,14 +66,12 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
             }
             catch (InvalidCastException)
             {
-                var s = new DialogService();
-                s.ShowInformationWindow("Votre nombre est invalide !", "Calcul impossible !", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                var dialogService = new DialogService();
+                dialogService.ShowInformationModern("Votre nombre est invalide !", "Calcul impossible !");
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string p = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
+        private void OnPropertyChanged([CallerMemberName] string p = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
     }
 }

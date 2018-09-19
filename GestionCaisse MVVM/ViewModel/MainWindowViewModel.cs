@@ -68,23 +68,22 @@ namespace GestionCaisse_MVVM.ViewModel
                             MessageBoxButton.OK,
                             MessageBoxImage.Exclamation);
 
+                        dialogService.ShowInformationModern("Vente effectuée !",
+                            "Confirmation de vente");
+
                         UpdateUserSellsSmiley();
                     }
                     else
                     {
-                        dialogService.ShowInformationWindow(
-                            "Vente invalide ou impossible !",
-                            "Attention",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Hand);
+                        dialogService.ShowInformationModern("Vente invalide ou impossible ! ",
+                            "Erreur de vente");
                     }
                 }
                 catch (ConnectionFailedException ex)
                 {
                     if (ex.InnerException != null)
-                        dialogService.ShowInformationWindow(
-                            "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                            "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                        dialogService.ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
                 }
             }, o => true);
 
@@ -167,9 +166,8 @@ namespace GestionCaisse_MVVM.ViewModel
                 catch (ConnectionFailedException ex)
                 {
                     var dialogService = new DialogService();
-                    dialogService.ShowInformationWindow(
-                        "Problème de connexion à la base de données !\n" + ex.InnerException.Message,
-                        "Connexion impossible !", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Problème de connexion à la base de données ! " + ex.InnerException.Message,
+                            "Erreur de connexion");
                 }
 
                 return bdes;

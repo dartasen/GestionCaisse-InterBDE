@@ -22,8 +22,8 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
             {
                 if (string.IsNullOrEmpty(Password))
                 {
-                    dialogService.ShowInformationWindow("Le mot de passe ne peut pas être nul !", "Changement impossible ! !",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Merci de renseigner un mot de passe correct !", "Changement impossible");
+
                     return;
                 }
 
@@ -36,8 +36,7 @@ namespace GestionCaisse_MVVM.ViewModel.AdministrationFeatures
                     return;
                 }
 
-                dialogService.ShowInformationWindow("Mot de passe changé !", "Modifications enregistrées",
-                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                dialogService.ShowInformationModern("Le mot de passe a bien été modifié !", "Modifications enregistrées");
 
                 Close();
             }, o => true);

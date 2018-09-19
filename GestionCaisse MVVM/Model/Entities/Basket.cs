@@ -88,21 +88,35 @@ namespace GestionCaisse_MVVM.Model.Entities
 
         public void RemoveProduct(BasketProduct basketProduct)
         {
-            if (basketProduct == null) return;
+            if (basketProduct == null)
+                return;
+
             _products.Remove(basketProduct);
             NotifyProperties();
         }
 
         public void IncreaseQuantity(BasketProduct basketProduct)
         {
-            if (basketProduct.Quantite + 1 > basketProduct.Product.Quantite) return;
+            if ((basketProduct.Quantite + 1) > basketProduct.Product.Quantite)
+                return;
+
             basketProduct.Quantite++;
             NotifyProperties();
         }
 
         public void DecreaseQuantity(BasketProduct basketProduct)
         {
-            if (basketProduct.Quantite -1 < 0) return;
+            int tmp = basketProduct.Quantite - 1;
+
+            if (tmp == 0)
+            {
+                RemoveProduct(basketProduct);
+                return;
+            } else if (tmp < 0)
+            {
+                return;
+            }
+
             basketProduct.Quantite--;
             NotifyProperties();
         }

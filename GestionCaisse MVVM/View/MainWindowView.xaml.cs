@@ -38,13 +38,13 @@ namespace GestionCaisse_MVVM.View
             switch (bde)
             {
                 case "Informatique":
-                    Background = (Brush)bc.ConvertFrom("#D3D3D3");
+                    Background = bc.ConvertFrom("#D3D3D3") as Brush;
                     break;
                 case "Biologie":
-                    Background = (Brush)bc.ConvertFrom("#74FFA6"); 
+                    Background = bc.ConvertFrom("#74FFA6") as Brush; 
                     break; 
                 case "RT":
-                    Background = (Brush)bc.ConvertFrom("#FFA8E0"); 
+                    Background = bc.ConvertFrom("#FFA8E0") as Brush; 
                     break;
                 default:
                     Background = Brushes.White;

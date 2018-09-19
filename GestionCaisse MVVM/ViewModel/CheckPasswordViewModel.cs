@@ -34,10 +34,7 @@ namespace GestionCaisse_MVVM.ViewModel
                 }
                 else
                 {
-                    dialogService.ShowInformationWindow("Mot de passe incorrect !",
-                        "Erreur de connexion",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
+                    dialogService.ShowInformationModern("Mot de passe incorrect !", "Erreur de connexion");
                     Password = null;
                 }
 

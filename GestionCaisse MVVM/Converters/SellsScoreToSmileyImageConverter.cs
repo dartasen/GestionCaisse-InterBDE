@@ -21,9 +21,7 @@ namespace GestionCaisse_MVVM.Converters
                 else if (convertedValue == 0) return new BitmapImage();
                 else smiley = "happy";
 
-                var image = new BitmapImage(new Uri($"pack://application:,,,/Assets/smileys/{smiley}.png"));
-
-                return image;
+                return new BitmapImage(new Uri($"pack://application:,,,/Assets/smileys/{smiley}.png"));
             } catch { }
 
             return new BitmapImage();
